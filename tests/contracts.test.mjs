@@ -13,6 +13,16 @@ test('complete canonical manual and unique examples', () => {
 test('viewer and demos use Core without custom style rules', () => {
  const html=read('manual/index.html','utf8');
  assert.doesNotMatch(html,/<style(?:\s|>)/i);
+ const known=json('manual/reference/classes.json').classes;
+ const shell=html.split('<script id="manual-data"')[0];
+ const ids=[...shell.matchAll(/\sid="([^"]+)"/g)].map(m=>m[1]);
+ assert.equal(new Set(ids).size,ids.length,'HTML IDs must be unique for routing and focus');
+ for(const match of shell.matchAll(/class="([^"]*)"/g))for(const name of match[1].split(/\s+/))
+  if(/^(?:m-|t-)?core-/.test(name))assert.ok(known[name],`Unknown Core class: ${name}`);
+ const tokens=json('manual/reference/tokens.json').tokens;
+ for(const match of shell.matchAll(/style="([^"]*)"/g))for(const declaration of match[1].split(';').filter(Boolean))
+  assert.ok(tokens[declaration.split(':')[0].trim()],`Non-Core style: ${declaration}`);
+
  for (const e of json('manual/reference/examples.json').examples) assert.equal(e.css,'',e.id);
 });
 test('source snapshot is verifiable and versioned', () => {
