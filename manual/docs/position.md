@@ -24,7 +24,7 @@
 
 ## Адаптивные позиции требуют особой проверки
 
-В tablet-секции опубликованного CSS есть декларации с отсутствующими `;`, например несколько `--t/--b/--l/--r` в одном значении. Также у адаптивного absolute встречается некорректная запись временного `--x`. Не копируйте base → t/m механически и не считайте все угловые варианты равнозначно проверенными. Простую стабильную композицию лучше начать с base и минимально нужного собственного media-rule, явно помеченного расширением.
+В v185 разделители координат tablet-секции исправлены, но часть коротких и обратных алиасов названа `m-core-*` внутри `(max-width: 997px)`. Например, `m-core-fix-t` включается уже на 997 px, а ожидаемого `t-core-fix-t` нет. Длинный `t-core-fix-top` существует. В адаптивных угловых правилах остаются подозрительные формулы `--x`; проверяйте конкретный селектор и computed style. Не выводите поддержку варианта только из префикса.
 
 ## Sticky
 
@@ -55,11 +55,11 @@
 Inline-переменные явно задают внутренний отступ от угла. Вращение не перезаписывает transform позиционирующего узла.
 
 ```html
-<article class="core-card core-col core-p-12x" style="min-height: 160px">
+<article class="core-card core-col core-h-unset core-p-12x" style="--h: 160px">
   <h3 class="core-text core-text-l core-text-bold">Состояние синхронизации</h3>
   <p class="core-text">Координаты и вращение находятся на разных узлах.</p>
   <span class="core-abs core-abs-top-right" style="--t: 12px; --r: 12px">
-    <span class="core-icon-spinner core-icon-m core-spin core-animate-time-4x" role="img" aria-label="Синхронизация"></span>
+    <span class="core-icon-spinner core-icon-m core-animate:spin core-animate-time-4x" role="img" aria-label="Синхронизация"></span>
   </span>
 </article>
 ```
@@ -67,4 +67,3 @@ Inline-переменные явно задают внутренний отст�
 <!-- demo:E55 -->
 
 **Источник:** [Исходный Core CSS](https://cdn.sdelal.tech/core/latest/core.css).
-

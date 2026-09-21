@@ -56,4 +56,3 @@ SVG-заглушка создана специально для этого пр�
 <!-- demo:E53 -->
 
 **Источник:** [Исходный Core CSS](https://cdn.sdelal.tech/core/latest/core.css).
-

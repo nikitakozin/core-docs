@@ -1,0 +1,88 @@
+/* CORE Theme: Telegram bridge
+   Подключите этот файл после core.css и добавьте класс .core-theme-tg на корневой контейнер вашего интерфейса внутри Telegram Mini App.
+   Он переназначает дизайн-токены CORE на CSS-переменные Telegram (ThemeParams),
+   чтобы внешний вид автоматически соответствовал текущей теме Telegram (light/dark и кастомные темы).
+*/
+
+.tg-webapp,
+.core-theme-tg {
+  /* База */
+  --color-background: var(--tg-theme-bg-color);
+  --color-surface: var(--tg-theme-secondary-bg-color);
+  --color-foreground: var(--tg-theme-text-color);
+  --color-accent: var(--tg-theme-button-color);
+  --color-accent-2: var(--tg-theme-button-color);
+  --color-link: var(--tg-theme-link-color);
+  --color-focus: var(--tg-theme-link-color);
+  --color-overlay: color-mix(in srgb, var(--tg-theme-text-color), transparent 30%);
+
+  /* Системные состояния (если телеграм не отдаёт — остаются дефолты из core.css) */
+  --color-success: var(--color-success);
+  --color-warning: var(--color-warning);
+  --color-info: var(--color-info);
+  --color-danger: var(--tg-theme-destructive-text-color, var(--color-danger));
+
+  /* Текст */
+  --color-text-primary: var(--tg-theme-text-color);
+  --color-text-on-accent: var(--tg-theme-button-text-color);
+  /* На primary-кнопках в CORE используется color-text-inverse → делаем его как в TG */
+  --color-text-inverse: var(--tg-theme-button-text-color);
+
+  /* Поверхности и границы */
+  --color-block: var(--tg-theme-secondary-bg-color);
+  /* Чуть повысим заметность разделителей для разных кастомных тем */
+  --color-border: color-mix(in srgb, var(--tg-theme-text-color), transparent 82%);
+
+  /* Ссылки */
+  --color-link-hover: var(--tg-theme-link-color);
+
+  /* Кнопки */
+  --color-button-primary: var(--tg-theme-button-color);
+  --color-button-primary-hover: color-mix(in srgb, var(--tg-theme-button-color), var(--tg-theme-bg-color) 15%);
+  /* Гарантируем контраст к фону даже если secondary_bg близок к bg */
+  --color-button-secondary: color-mix(in srgb, var(--tg-theme-bg-color), var(--tg-theme-text-color) 7%);
+  --color-button-secondary-hover: color-mix(in srgb, var(--color-button-secondary), var(--tg-theme-text-color) 10%);
+  --color-button-accent: var(--tg-theme-button-color);
+  --color-button-accent-hover: color-mix(in srgb, var(--tg-theme-button-color), var(--tg-theme-text-color) 10%);
+
+  /* Поля ввода */
+  --color-field-text: var(--tg-theme-text-color);
+  /* Используем section_bg (если есть), но добавим немного контраста к bg через текстовый цвет */
+  --color-field-background: color-mix(
+    in srgb,
+    var(--tg-theme-section-bg-color, var(--tg-theme-secondary-bg-color)),
+    var(--tg-theme-text-color) 5%
+  );
+  --color-field-background-hover: color-mix(in srgb, var(--color-field-background), var(--tg-theme-text-color) 6%);
+  --color-field-background-focus: var(--tg-theme-bg-color);
+  /* Разделитель может быть очень бледным в кастомных темах, усилим видимость */
+  --color-field-border: color-mix(in srgb, var(--tg-theme-text-color), transparent 85%);
+  --color-field-border-hover: color-mix(in srgb, var(--color-field-border), var(--tg-theme-text-color) 10%);
+  --color-field-placeholder: var(--tg-theme-hint-color);
+  --color-field-disabled-background: color-mix(in srgb, var(--color-field-background), transparent 80%);
+  --color-field-disabled-border: var(--color-field-border);
+  --color-field-disabled-text: color-mix(in srgb, var(--color-field-text), transparent 70%);
+}
+
+/* Дополнительно: можно навесить тему на body, если весь интерфейс — CORE */
+/* body.core-theme-tg { background-color: var(--color-background); } */
+
+/* Авто-режим (опционально): если TG уже выставил CSS-переменные на :root,
+   применим мост без необходимости добавлять класс .core-theme-tg */
+/*
+:root[style*="--tg-theme-bg-color"] {
+  --color-background: var(--tg-theme-bg-color);
+  --color-surface: var(--tg-theme-secondary-bg-color);
+  --color-foreground: var(--tg-theme-text-color);
+  --color-link: var(--tg-theme-link-color);
+
+  --color-text-primary: var(--tg-theme-text-color);
+  --color-text-on-accent: var(--tg-theme-button-text-color);
+  --color-text-inverse: var(--tg-theme-button-text-color);
+
+  --color-button-primary: var(--tg-theme-button-color);
+  --color-button-secondary: color-mix(in srgb, var(--tg-theme-bg-color), var(--tg-theme-text-color) 7%);
+  --color-field-background: color-mix(in srgb, var(--tg-theme-section-bg-color, var(--tg-theme-secondary-bg-color)), var(--tg-theme-text-color) 5%);
+  --color-field-border: color-mix(in srgb, var(--tg-theme-text-color), transparent 85%);
+}
+*/

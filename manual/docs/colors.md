@@ -128,4 +128,3 @@
 <!-- demo:E81 -->
 
 **Источник:** [Исходный Core CSS](https://cdn.sdelal.tech/core/latest/core.css).
-

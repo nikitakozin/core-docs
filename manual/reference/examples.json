@@ -1,6 +1,6 @@
 {
-  "source_basis": "core.zip",
-  "coverage": "code matches chapters; archive-browser smoke validated",
+  "source_basis": "CDN latest/v185, 2026-09-21",
+  "coverage": "code matches chapters; all 82 examples initialize against the saved snapshot; selected browser interactions validated",
   "examples": [
     {
       "id": "E01",
@@ -10,14 +10,14 @@
       "note": "Карточка, поток, отступ и кнопка — четыре независимые роли. JavaScript приложения здесь не подключён: кнопка демонстрирует оформление, а не добавление материала.",
       "height": 230,
       "chapter": "start",
-      "status": "archive-browser-smoke-passed",
+      "status": "snapshot-browser-smoke-passed",
       "implementation": "Core HTML/CSS",
       "runtime": {
         "css": "https://cdn.sdelal.tech/core/latest/core.css",
         "theme": "https://cdn.sdelal.tech/core/latest/theme-nk.css"
       },
       "js": "",
-      "validation": "CSS loaded; JS initialized where present; not exhaustive interaction coverage"
+      "validation": "Chromium 151.0.7922.34: Core CSS and script initialization passed against the saved v185/latest snapshot; selected interactions are described in docs/verification.md"
     },
     {
       "id": "E02",
@@ -27,14 +27,14 @@
       "note": "У каждой сетки собственный --grid-cols. Inline-переменная справа — явная настройка, а не несуществующий класс core-grid-1c.",
       "height": 230,
       "chapter": "inheritance",
-      "status": "archive-browser-smoke-passed",
+      "status": "snapshot-browser-smoke-passed",
       "implementation": "Core HTML/CSS",
       "runtime": {
         "css": "https://cdn.sdelal.tech/core/latest/core.css",
         "theme": "https://cdn.sdelal.tech/core/latest/theme-nk.css"
       },
       "js": "",
-      "validation": "CSS loaded; JS initialized where present; not exhaustive interaction coverage"
+      "validation": "Chromium 151.0.7922.34: Core CSS and script initialization passed against the saved v185/latest snapshot; selected interactions are described in docs/verification.md"
     },
     {
       "id": "E03",
@@ -44,14 +44,14 @@
       "note": "Параметры состояний указаны вместе: смена только базового фона оставила бы hover/active от предыдущей темы.",
       "height": 230,
       "chapter": "inheritance",
-      "status": "archive-browser-smoke-passed",
+      "status": "snapshot-browser-smoke-passed",
       "implementation": "Core HTML/CSS",
       "runtime": {
         "css": "https://cdn.sdelal.tech/core/latest/core.css",
         "theme": "https://cdn.sdelal.tech/core/latest/theme-nk.css"
       },
       "js": "",
-      "validation": "CSS loaded; JS initialized where present; not exhaustive interaction coverage"
+      "validation": "Chromium 151.0.7922.34: Core CSS and script initialization passed against the saved v185/latest snapshot; selected interactions are described in docs/verification.md"
     },
     {
       "id": "E04",
@@ -61,14 +61,14 @@
       "note": "Высота изменена компонентными токенами, а не глобальным масштабом текста или отступов.",
       "height": 230,
       "chapter": "tokens",
-      "status": "archive-browser-smoke-passed",
+      "status": "snapshot-browser-smoke-passed",
       "implementation": "Core HTML/CSS",
       "runtime": {
         "css": "https://cdn.sdelal.tech/core/latest/core.css",
         "theme": "https://cdn.sdelal.tech/core/latest/theme-nk.css"
       },
       "js": "",
-      "validation": "CSS loaded; JS initialized where present; not exhaustive interaction coverage"
+      "validation": "Chromium 151.0.7922.34: Core CSS and script initialization passed against the saved v185/latest snapshot; selected interactions are described in docs/verification.md"
     },
     {
       "id": "E05",
@@ -78,14 +78,14 @@
       "note": "core-grow и core-shrink расположены на текстовой колонке. Кнопка не сжимается; порядок DOM соответствует порядку чтения.",
       "height": 230,
       "chapter": "layout",
-      "status": "archive-browser-smoke-passed",
+      "status": "snapshot-browser-smoke-passed",
       "implementation": "Core HTML/CSS",
       "runtime": {
         "css": "https://cdn.sdelal.tech/core/latest/core.css",
         "theme": "https://cdn.sdelal.tech/core/latest/theme-nk.css"
       },
       "js": "",
-      "validation": "CSS loaded; JS initialized where present; not exhaustive interaction coverage"
+      "validation": "Chromium 151.0.7922.34: Core CSS and script initialization passed against the saved v185/latest snapshot; selected interactions are described in docs/verification.md"
     },
     {
       "id": "E06",
@@ -95,14 +95,14 @@
       "note": "1200/998 px — три колонки; 997/721 px — две; 720/390 px — одна. Меняется число колонок, а не масштаб карточек. `core-grow` в описании выравнивает действия в пределах ряда. Кнопки демонстрационные.",
       "height": 230,
       "chapter": "layout",
-      "status": "archive-browser-smoke-passed",
+      "status": "snapshot-browser-smoke-passed",
       "implementation": "Core HTML/CSS",
       "runtime": {
         "css": "https://cdn.sdelal.tech/core/latest/core.css",
         "theme": "https://cdn.sdelal.tech/core/latest/theme-nk.css"
       },
       "js": "",
-      "validation": "CSS loaded; JS initialized where present; not exhaustive interaction coverage"
+      "validation": "Chromium 151.0.7922.34: Core CSS and script initialization passed against the saved v185/latest snapshot; selected interactions are described in docs/verification.md"
     },
     {
       "id": "E07",
@@ -112,14 +112,14 @@
       "note": "Ссылки демонстрационные; внутри iframe переход к ним не загружает приложение.",
       "height": 300,
       "chapter": "layout",
-      "status": "archive-browser-smoke-passed",
+      "status": "snapshot-browser-smoke-passed",
       "implementation": "Core HTML/CSS",
       "runtime": {
         "css": "https://cdn.sdelal.tech/core/latest/core.css",
         "theme": "https://cdn.sdelal.tech/core/latest/theme-nk.css"
       },
       "js": "",
-      "validation": "CSS loaded; JS initialized where present; not exhaustive interaction coverage"
+      "validation": "Chromium 151.0.7922.34: Core CSS and script initialization passed against the saved v185/latest snapshot; selected interactions are described in docs/verification.md"
     },
     {
       "id": "E08",
@@ -129,14 +129,14 @@
       "note": "Адаптивное основание сбрасывает рабочие настройки осей; нужные мобильные значения повторены явно. Высота 160 px задана только для демонстрации.",
       "height": 230,
       "chapter": "layout",
-      "status": "archive-browser-smoke-passed",
+      "status": "snapshot-browser-smoke-passed",
       "implementation": "Core HTML/CSS",
       "runtime": {
         "css": "https://cdn.sdelal.tech/core/latest/core.css",
         "theme": "https://cdn.sdelal.tech/core/latest/theme-nk.css"
       },
       "js": "",
-      "validation": "CSS loaded; JS initialized where present; not exhaustive interaction coverage"
+      "validation": "Chromium 151.0.7922.34: Core CSS and script initialization passed against the saved v185/latest snapshot; selected interactions are described in docs/verification.md"
     },
     {
       "id": "E09",
@@ -146,14 +146,14 @@
       "note": "Так изменение одной стороны не зависит от отсутствующего --p и не стирает остальные отступы.",
       "height": 230,
       "chapter": "spacing",
-      "status": "archive-browser-smoke-passed",
+      "status": "snapshot-browser-smoke-passed",
       "implementation": "Core HTML/CSS",
       "runtime": {
         "css": "https://cdn.sdelal.tech/core/latest/core.css",
         "theme": "https://cdn.sdelal.tech/core/latest/theme-nk.css"
       },
       "js": "",
-      "validation": "CSS loaded; JS initialized where present; not exhaustive interaction coverage"
+      "validation": "Chromium 151.0.7922.34: Core CSS and script initialization passed against the saved v185/latest snapshot; selected interactions are described in docs/verification.md"
     },
     {
       "id": "E10",
@@ -163,14 +163,14 @@
       "note": "Широкий режим: padding 48 px и gap 24 px. Мобильный: 16 и 8 px.",
       "height": 330,
       "chapter": "spacing",
-      "status": "archive-browser-smoke-passed",
+      "status": "snapshot-browser-smoke-passed",
       "implementation": "Core HTML/CSS",
       "runtime": {
         "css": "https://cdn.sdelal.tech/core/latest/core.css",
         "theme": "https://cdn.sdelal.tech/core/latest/theme-nk.css"
       },
       "js": "",
-      "validation": "CSS loaded; JS initialized where present; not exhaustive interaction coverage"
+      "validation": "Chromium 151.0.7922.34: Core CSS and script initialization passed against the saved v185/latest snapshot; selected interactions are described in docs/verification.md"
     },
     {
       "id": "E11",
@@ -180,14 +180,14 @@
       "note": "Результат corner-shape зависит от поддержки браузером; это не три жёстко заданных пиксельных радиуса.",
       "height": 230,
       "chapter": "spacing",
-      "status": "archive-browser-smoke-passed",
+      "status": "snapshot-browser-smoke-passed",
       "implementation": "Core HTML/CSS",
       "runtime": {
         "css": "https://cdn.sdelal.tech/core/latest/core.css",
         "theme": "https://cdn.sdelal.tech/core/latest/theme-nk.css"
       },
       "js": "",
-      "validation": "CSS loaded; JS initialized where present; not exhaustive interaction coverage"
+      "validation": "Chromium 151.0.7922.34: Core CSS and script initialization passed against the saved v185/latest snapshot; selected interactions are described in docs/verification.md"
     },
     {
       "id": "E12",
@@ -197,14 +197,14 @@
       "note": "Один пробел HTML между тегами не создаёт gap: его задаёт core-g-8x и согласует с расчётом долей.",
       "height": 230,
       "chapter": "dimensions",
-      "status": "archive-browser-smoke-passed",
+      "status": "snapshot-browser-smoke-passed",
       "implementation": "Core HTML/CSS",
       "runtime": {
         "css": "https://cdn.sdelal.tech/core/latest/core.css",
         "theme": "https://cdn.sdelal.tech/core/latest/theme-nk.css"
       },
       "js": "",
-      "validation": "CSS loaded; JS initialized where present; not exhaustive interaction coverage"
+      "validation": "Chromium 151.0.7922.34: Core CSS and script initialization passed against the saved v185/latest snapshot; selected interactions are described in docs/verification.md"
     },
     {
       "id": "E13",
@@ -214,14 +214,14 @@
       "note": "core-g-6x указан явно даже при таком же default gap у строки: он передаёт --parent-g каждому прямому ребёнку.",
       "height": 230,
       "chapter": "dimensions",
-      "status": "archive-browser-smoke-passed",
+      "status": "snapshot-browser-smoke-passed",
       "implementation": "Core HTML/CSS",
       "runtime": {
         "css": "https://cdn.sdelal.tech/core/latest/core.css",
         "theme": "https://cdn.sdelal.tech/core/latest/theme-nk.css"
       },
       "js": "",
-      "validation": "CSS loaded; JS initialized where present; not exhaustive interaction coverage"
+      "validation": "Chromium 151.0.7922.34: Core CSS and script initialization passed against the saved v185/latest snapshot; selected interactions are described in docs/verification.md"
     },
     {
       "id": "E14",
@@ -231,14 +231,14 @@
       "note": "Это нативная прокрутка без SliderManager. Регион получает имя и возможность фокусировки.",
       "height": 230,
       "chapter": "dimensions",
-      "status": "archive-browser-smoke-passed",
+      "status": "snapshot-browser-smoke-passed",
       "implementation": "Core HTML/CSS",
       "runtime": {
         "css": "https://cdn.sdelal.tech/core/latest/core.css",
         "theme": "https://cdn.sdelal.tech/core/latest/theme-nk.css"
       },
       "js": "",
-      "validation": "CSS loaded; JS initialized where present; not exhaustive interaction coverage"
+      "validation": "Chromium 151.0.7922.34: Core CSS and script initialization passed against the saved v185/latest snapshot; selected interactions are described in docs/verification.md"
     },
     {
       "id": "E15",
@@ -248,14 +248,14 @@
       "note": "Максимум ограничивает чтение на широком экране; содержимое остаётся подвижным на узком.",
       "height": 230,
       "chapter": "dimensions",
-      "status": "archive-browser-smoke-passed",
+      "status": "snapshot-browser-smoke-passed",
       "implementation": "Core HTML/CSS",
       "runtime": {
         "css": "https://cdn.sdelal.tech/core/latest/core.css",
         "theme": "https://cdn.sdelal.tech/core/latest/theme-nk.css"
       },
       "js": "",
-      "validation": "CSS loaded; JS initialized where present; not exhaustive interaction coverage"
+      "validation": "Chromium 151.0.7922.34: Core CSS and script initialization passed against the saved v185/latest snapshot; selected interactions are described in docs/verification.md"
     },
     {
       "id": "E16",
@@ -265,14 +265,14 @@
       "note": "У иконки числовая, а не именованная основа: --i-s наследуется псевдоэлементом и может меняться по media query.",
       "height": 230,
       "chapter": "responsive",
-      "status": "archive-browser-smoke-passed",
+      "status": "snapshot-browser-smoke-passed",
       "implementation": "Core HTML/CSS",
       "runtime": {
         "css": "https://cdn.sdelal.tech/core/latest/core.css",
         "theme": "https://cdn.sdelal.tech/core/latest/theme-nk.css"
       },
       "js": "",
-      "validation": "CSS loaded; JS initialized where present; not exhaustive interaction coverage"
+      "validation": "Chromium 151.0.7922.34: Core CSS and script initialization passed against the saved v185/latest snapshot; selected interactions are described in docs/verification.md"
     },
     {
       "id": "E17",
@@ -282,14 +282,14 @@
       "note": "Текст скрывается только визуально через display, но кнопка сохраняет явное accessible name. Размер кликабельной области нужно проверять отдельно.",
       "height": 230,
       "chapter": "responsive",
-      "status": "archive-browser-smoke-passed",
+      "status": "snapshot-browser-smoke-passed",
       "implementation": "Core HTML/CSS",
       "runtime": {
         "css": "https://cdn.sdelal.tech/core/latest/core.css",
         "theme": "https://cdn.sdelal.tech/core/latest/theme-nk.css"
       },
       "js": "",
-      "validation": "CSS loaded; JS initialized where present; not exhaustive interaction coverage"
+      "validation": "Chromium 151.0.7922.34: Core CSS and script initialization passed against the saved v185/latest snapshot; selected interactions are described in docs/verification.md"
     },
     {
       "id": "E18",
@@ -299,14 +299,14 @@
       "note": "При переключении темы первый блок следует семантике; выбранный синий оттенок остаётся цветовым решением автора.",
       "height": 230,
       "chapter": "colors",
-      "status": "archive-browser-smoke-passed",
+      "status": "snapshot-browser-smoke-passed",
       "implementation": "Core HTML/CSS",
       "runtime": {
         "css": "https://cdn.sdelal.tech/core/latest/core.css",
         "theme": "https://cdn.sdelal.tech/core/latest/theme-nk.css"
       },
       "js": "",
-      "validation": "CSS loaded; JS initialized where present; not exhaustive interaction coverage"
+      "validation": "Chromium 151.0.7922.34: Core CSS and script initialization passed against the saved v185/latest snapshot; selected interactions are described in docs/verification.md"
     },
     {
       "id": "E19",
@@ -316,14 +316,14 @@
       "note": "Наведение и нажатие обрабатывает адаптер Core, а не дополнительный CSS мануала.",
       "height": 230,
       "chapter": "colors",
-      "status": "archive-browser-smoke-passed",
+      "status": "snapshot-browser-smoke-passed",
       "implementation": "Core HTML/CSS",
       "runtime": {
         "css": "https://cdn.sdelal.tech/core/latest/core.css",
         "theme": "https://cdn.sdelal.tech/core/latest/theme-nk.css"
       },
       "js": "",
-      "validation": "CSS loaded; JS initialized where present; not exhaustive interaction coverage"
+      "validation": "Chromium 151.0.7922.34: Core CSS and script initialization passed against the saved v185/latest snapshot; selected interactions are described in docs/verification.md"
     },
     {
       "id": "E20",
@@ -333,14 +333,14 @@
       "note": "У правого блока opacity действует на всю отрисованную группу.",
       "height": 230,
       "chapter": "colors",
-      "status": "archive-browser-smoke-passed",
+      "status": "snapshot-browser-smoke-passed",
       "implementation": "Core HTML/CSS",
       "runtime": {
         "css": "https://cdn.sdelal.tech/core/latest/core.css",
         "theme": "https://cdn.sdelal.tech/core/latest/theme-nk.css"
       },
       "js": "",
-      "validation": "CSS loaded; JS initialized where present; not exhaustive interaction coverage"
+      "validation": "Chromium 151.0.7922.34: Core CSS and script initialization passed against the saved v185/latest snapshot; selected interactions are described in docs/verification.md"
     },
     {
       "id": "E21",
@@ -350,14 +350,14 @@
       "note": "Последняя карточка явно задаёт и цвет, и толщину, и стиль границы.",
       "height": 230,
       "chapter": "colors",
-      "status": "archive-browser-smoke-passed",
+      "status": "snapshot-browser-smoke-passed",
       "implementation": "Core HTML/CSS",
       "runtime": {
         "css": "https://cdn.sdelal.tech/core/latest/core.css",
         "theme": "https://cdn.sdelal.tech/core/latest/theme-nk.css"
       },
       "js": "",
-      "validation": "CSS loaded; JS initialized where present; not exhaustive interaction coverage"
+      "validation": "Chromium 151.0.7922.34: Core CSS and script initialization passed against the saved v185/latest snapshot; selected interactions are described in docs/verification.md"
     },
     {
       "id": "E22",
@@ -367,14 +367,14 @@
       "note": "В каждом scope явно задана поверхность; переключатель токенов не рассматривается как самостоятельная заливка.",
       "height": 330,
       "chapter": "themes",
-      "status": "archive-browser-smoke-passed",
+      "status": "snapshot-browser-smoke-passed",
       "implementation": "Core HTML/CSS",
       "runtime": {
         "css": "https://cdn.sdelal.tech/core/latest/core.css",
         "theme": "https://cdn.sdelal.tech/core/latest/theme-nk.css"
       },
       "js": "",
-      "validation": "CSS loaded; JS initialized where present; not exhaustive interaction coverage"
+      "validation": "Chromium 151.0.7922.34: Core CSS and script initialization passed against the saved v185/latest snapshot; selected interactions are described in docs/verification.md"
     },
     {
       "id": "E23",
@@ -384,14 +384,14 @@
       "note": "Семантические уровни задаются тегами, визуальные размеры — текстовыми классами.",
       "height": 280,
       "chapter": "typography",
-      "status": "archive-browser-smoke-passed",
+      "status": "snapshot-browser-smoke-passed",
       "implementation": "Core HTML/CSS",
       "runtime": {
         "css": "https://cdn.sdelal.tech/core/latest/core.css",
         "theme": "https://cdn.sdelal.tech/core/latest/theme-nk.css"
       },
       "js": "",
-      "validation": "CSS loaded; JS initialized where present; not exhaustive interaction coverage"
+      "validation": "Chromium 151.0.7922.34: Core CSS and script initialization passed against the saved v185/latest snapshot; selected interactions are described in docs/verification.md"
     },
     {
       "id": "E24",
@@ -401,14 +401,14 @@
       "note": "Сверху только геометрический центр, снизу — sxHeight-компенсация. Сравнение корректно при загруженном шрифте и соответствующих метриках.",
       "height": 260,
       "chapter": "typography",
-      "status": "archive-browser-smoke-passed",
+      "status": "snapshot-browser-smoke-passed",
       "implementation": "Core HTML/CSS",
       "runtime": {
         "css": "https://cdn.sdelal.tech/core/latest/core.css",
         "theme": "https://cdn.sdelal.tech/core/latest/theme-nk.css"
       },
       "js": "",
-      "validation": "CSS loaded; JS initialized where present; not exhaustive interaction coverage"
+      "validation": "Chromium 151.0.7922.34: Core CSS and script initialization passed against the saved v185/latest snapshot; selected interactions are described in docs/verification.md"
     },
     {
       "id": "E25",
@@ -418,14 +418,14 @@
       "note": "Кнопка здесь показывает оформление; реальное раскрытие полного имени — действие приложения. title не считается полноценной заменой доступного раскрытия на touch.",
       "height": 230,
       "chapter": "typography",
-      "status": "archive-browser-smoke-passed",
+      "status": "snapshot-browser-smoke-passed",
       "implementation": "Core HTML/CSS",
       "runtime": {
         "css": "https://cdn.sdelal.tech/core/latest/core.css",
         "theme": "https://cdn.sdelal.tech/core/latest/theme-nk.css"
       },
       "js": "",
-      "validation": "CSS loaded; JS initialized where present; not exhaustive interaction coverage"
+      "validation": "Chromium 151.0.7922.34: Core CSS and script initialization passed against the saved v185/latest snapshot; selected interactions are described in docs/verification.md"
     },
     {
       "id": "E26",
@@ -435,14 +435,14 @@
       "note": "Это только представление подсказки: обработчик сочетания клавиш в примере отсутствует.",
       "height": 230,
       "chapter": "typography",
-      "status": "archive-browser-smoke-passed",
+      "status": "snapshot-browser-smoke-passed",
       "implementation": "Core HTML/CSS",
       "runtime": {
         "css": "https://cdn.sdelal.tech/core/latest/core.css",
         "theme": "https://cdn.sdelal.tech/core/latest/theme-nk.css"
       },
       "js": "",
-      "validation": "CSS loaded; JS initialized where present; not exhaustive interaction coverage"
+      "validation": "Chromium 151.0.7922.34: Core CSS and script initialization passed against the saved v185/latest snapshot; selected interactions are described in docs/verification.md"
     },
     {
       "id": "E27",
@@ -452,14 +452,14 @@
       "note": "Текст форматируется контекстом, панель действий — явными UI-классами. Исходный CSS может менять margin потомков панели.",
       "height": 580,
       "chapter": "content",
-      "status": "archive-browser-smoke-passed",
+      "status": "snapshot-browser-smoke-passed",
       "implementation": "Core HTML/CSS",
       "runtime": {
         "css": "https://cdn.sdelal.tech/core/latest/core.css",
         "theme": "https://cdn.sdelal.tech/core/latest/theme-nk.css"
       },
       "js": "",
-      "validation": "CSS loaded; JS initialized where present; not exhaustive interaction coverage"
+      "validation": "Chromium 151.0.7922.34: Core CSS and script initialization passed against the saved v185/latest snapshot; selected interactions are described in docs/verification.md"
     },
     {
       "id": "E28",
@@ -469,14 +469,14 @@
       "note": "Сравнивается локальное em-масштабирование content, а не изменение всего root-размера.",
       "height": 300,
       "chapter": "content",
-      "status": "archive-browser-smoke-passed",
+      "status": "snapshot-browser-smoke-passed",
       "implementation": "Core HTML/CSS",
       "runtime": {
         "css": "https://cdn.sdelal.tech/core/latest/core.css",
         "theme": "https://cdn.sdelal.tech/core/latest/theme-nk.css"
       },
       "js": "",
-      "validation": "CSS loaded; JS initialized where present; not exhaustive interaction coverage"
+      "validation": "Chromium 151.0.7922.34: Core CSS and script initialization passed against the saved v185/latest snapshot; selected interactions are described in docs/verification.md"
     },
     {
       "id": "E29",
@@ -486,14 +486,14 @@
       "note": "Все элементы — реальные button с указанным type. Посмотрите также focus клавишей Tab.",
       "height": 250,
       "chapter": "buttons",
-      "status": "archive-browser-smoke-passed",
+      "status": "snapshot-browser-smoke-passed",
       "implementation": "Core HTML/CSS",
       "runtime": {
         "css": "https://cdn.sdelal.tech/core/latest/core.css",
         "theme": "https://cdn.sdelal.tech/core/latest/theme-nk.css"
       },
       "js": "",
-      "validation": "CSS loaded; JS initialized where present; not exhaustive interaction coverage"
+      "validation": "Chromium 151.0.7922.34: Core CSS and script initialization passed against the saved v185/latest snapshot; selected interactions are described in docs/verification.md"
     },
     {
       "id": "E30",
@@ -503,14 +503,14 @@
       "note": "Буквы — имена профилей, не единая линейная шкала.",
       "height": 230,
       "chapter": "buttons",
-      "status": "archive-browser-smoke-passed",
+      "status": "snapshot-browser-smoke-passed",
       "implementation": "Core HTML/CSS",
       "runtime": {
         "css": "https://cdn.sdelal.tech/core/latest/core.css",
         "theme": "https://cdn.sdelal.tech/core/latest/theme-nk.css"
       },
       "js": "",
-      "validation": "CSS loaded; JS initialized where present; not exhaustive interaction coverage"
+      "validation": "Chromium 151.0.7922.34: Core CSS and script initialization passed against the saved v185/latest snapshot; selected interactions are described in docs/verification.md"
     },
     {
       "id": "E31",
@@ -520,14 +520,14 @@
       "note": "В реальном продукте удаление требует соответствующей логики подтверждения; пример её не реализует.",
       "height": 230,
       "chapter": "buttons",
-      "status": "archive-browser-smoke-passed",
+      "status": "snapshot-browser-smoke-passed",
       "implementation": "Core HTML/CSS",
       "runtime": {
         "css": "https://cdn.sdelal.tech/core/latest/core.css",
         "theme": "https://cdn.sdelal.tech/core/latest/theme-nk.css"
       },
       "js": "",
-      "validation": "CSS loaded; JS initialized where present; not exhaustive interaction coverage"
+      "validation": "Chromium 151.0.7922.34: Core CSS and script initialization passed against the saved v185/latest snapshot; selected interactions are described in docs/verification.md"
     },
     {
       "id": "E32",
@@ -537,14 +537,14 @@
       "note": "Кнопки — непосредственные дети группы: так работают правила внешних углов.",
       "height": 230,
       "chapter": "buttons",
-      "status": "archive-browser-smoke-passed",
+      "status": "snapshot-browser-smoke-passed",
       "implementation": "Core HTML/CSS",
       "runtime": {
         "css": "https://cdn.sdelal.tech/core/latest/core.css",
         "theme": "https://cdn.sdelal.tech/core/latest/theme-nk.css"
       },
       "js": "",
-      "validation": "CSS loaded; JS initialized where present; not exhaustive interaction coverage"
+      "validation": "Chromium 151.0.7922.34: Core CSS and script initialization passed against the saved v185/latest snapshot; selected interactions are described in docs/verification.md"
     },
     {
       "id": "E33",
@@ -554,14 +554,14 @@
       "note": "«Готово» — композиция бирки и цвета; она не предполагает существование отдельного встроенного status-компонента.",
       "height": 230,
       "chapter": "badges",
-      "status": "archive-browser-smoke-passed",
+      "status": "snapshot-browser-smoke-passed",
       "implementation": "Core HTML/CSS",
       "runtime": {
         "css": "https://cdn.sdelal.tech/core/latest/core.css",
         "theme": "https://cdn.sdelal.tech/core/latest/theme-nk.css"
       },
       "js": "",
-      "validation": "CSS loaded; JS initialized where present; not exhaustive interaction coverage"
+      "validation": "Chromium 151.0.7922.34: Core CSS and script initialization passed against the saved v185/latest snapshot; selected interactions are described in docs/verification.md"
     },
     {
       "id": "E34",
@@ -571,14 +571,14 @@
       "note": "Копирование не выполняется: это демонстрация CSS, не неподтверждённого field.js.",
       "height": 230,
       "chapter": "badges",
-      "status": "archive-browser-smoke-passed",
+      "status": "snapshot-browser-smoke-passed",
       "implementation": "Core HTML/CSS",
       "runtime": {
         "css": "https://cdn.sdelal.tech/core/latest/core.css",
         "theme": "https://cdn.sdelal.tech/core/latest/theme-nk.css"
       },
       "js": "",
-      "validation": "CSS loaded; JS initialized where present; not exhaustive interaction coverage"
+      "validation": "Chromium 151.0.7922.34: Core CSS and script initialization passed against the saved v185/latest snapshot; selected interactions are described in docs/verification.md"
     },
     {
       "id": "E35",
@@ -588,14 +588,14 @@
       "note": "Для отдельной демонстрации каждая форма получила имя; внутри подписанной кнопки такие иконки обычно декоративны.",
       "height": 230,
       "chapter": "icons",
-      "status": "archive-browser-smoke-passed",
+      "status": "snapshot-browser-smoke-passed",
       "implementation": "Core HTML/CSS",
       "runtime": {
         "css": "https://cdn.sdelal.tech/core/latest/core.css",
         "theme": "https://cdn.sdelal.tech/core/latest/theme-nk.css"
       },
       "js": "",
-      "validation": "CSS loaded; JS initialized where present; not exhaustive interaction coverage"
+      "validation": "Chromium 151.0.7922.34: Core CSS and script initialization passed against the saved v185/latest snapshot; selected interactions are described in docs/verification.md"
     },
     {
       "id": "E36",
@@ -605,14 +605,14 @@
       "note": "Оба элемента доступны по имени. Их кликабельные области различаются; вторая явно оформлена как кнопка.",
       "height": 230,
       "chapter": "icons",
-      "status": "archive-browser-smoke-passed",
+      "status": "snapshot-browser-smoke-passed",
       "implementation": "Core HTML/CSS",
       "runtime": {
         "css": "https://cdn.sdelal.tech/core/latest/core.css",
         "theme": "https://cdn.sdelal.tech/core/latest/theme-nk.css"
       },
       "js": "",
-      "validation": "CSS loaded; JS initialized where present; not exhaustive interaction coverage"
+      "validation": "Chromium 151.0.7922.34: Core CSS and script initialization passed against the saved v185/latest snapshot; selected interactions are described in docs/verification.md"
     },
     {
       "id": "E37",
@@ -622,14 +622,14 @@
       "note": "id уникален внутри своего документа. Подпись и подсказка связаны с контролом, а не просто расположены рядом.",
       "height": 240,
       "chapter": "forms",
-      "status": "archive-browser-smoke-passed",
+      "status": "snapshot-browser-smoke-passed",
       "implementation": "Core HTML/CSS",
       "runtime": {
         "css": "https://cdn.sdelal.tech/core/latest/core.css",
         "theme": "https://cdn.sdelal.tech/core/latest/theme-nk.css"
       },
       "js": "",
-      "validation": "CSS loaded; JS initialized where present; not exhaustive interaction coverage"
+      "validation": "Chromium 151.0.7922.34: Core CSS and script initialization passed against the saved v185/latest snapshot; selected interactions are described in docs/verification.md"
     },
     {
       "id": "E38",
@@ -639,14 +639,14 @@
       "note": "Нативные элементы остаются управляемыми браузером. Код не использует form.js или field.js.",
       "height": 360,
       "chapter": "forms",
-      "status": "archive-browser-smoke-passed",
+      "status": "snapshot-browser-smoke-passed",
       "implementation": "Core HTML/CSS",
       "runtime": {
         "css": "https://cdn.sdelal.tech/core/latest/core.css",
         "theme": "https://cdn.sdelal.tech/core/latest/theme-nk.css"
       },
       "js": "",
-      "validation": "CSS loaded; JS initialized where present; not exhaustive interaction coverage"
+      "validation": "Chromium 151.0.7922.34: Core CSS and script initialization passed against the saved v185/latest snapshot; selected interactions are described in docs/verification.md"
     },
     {
       "id": "E39",
@@ -656,14 +656,14 @@
       "note": "readonly и disabled имеют разную HTML-семантику. Внешний вид readonly не объявлен отдельным Core-состоянием.",
       "height": 360,
       "chapter": "forms",
-      "status": "archive-browser-smoke-passed",
+      "status": "snapshot-browser-smoke-passed",
       "implementation": "Core HTML/CSS",
       "runtime": {
         "css": "https://cdn.sdelal.tech/core/latest/core.css",
         "theme": "https://cdn.sdelal.tech/core/latest/theme-nk.css"
       },
       "js": "",
-      "validation": "CSS loaded; JS initialized where present; not exhaustive interaction coverage"
+      "validation": "Chromium 151.0.7922.34: Core CSS and script initialization passed against the saved v185/latest snapshot; selected interactions are described in docs/verification.md"
     },
     {
       "id": "E40",
@@ -673,14 +673,14 @@
       "note": "Это рецепт, не встроенная validation-тема. Состояния контура заданы вместе; текст ошибки не зависит только от цвета.",
       "height": 250,
       "chapter": "forms",
-      "status": "archive-browser-smoke-passed",
+      "status": "snapshot-browser-smoke-passed",
       "implementation": "Core HTML/CSS",
       "runtime": {
         "css": "https://cdn.sdelal.tech/core/latest/core.css",
         "theme": "https://cdn.sdelal.tech/core/latest/theme-nk.css"
       },
       "js": "",
-      "validation": "CSS loaded; JS initialized where present; not exhaustive interaction coverage"
+      "validation": "Chromium 151.0.7922.34: Core CSS and script initialization passed against the saved v185/latest snapshot; selected interactions are described in docs/verification.md"
     },
     {
       "id": "E41",
@@ -690,14 +690,14 @@
       "note": "Файл выбирается нативно, но никуда не отправляется. accept — подсказка выбора, не серверная проверка содержимого.",
       "height": 230,
       "chapter": "forms",
-      "status": "archive-browser-smoke-passed",
+      "status": "snapshot-browser-smoke-passed",
       "implementation": "Core HTML/CSS",
       "runtime": {
         "css": "https://cdn.sdelal.tech/core/latest/core.css",
         "theme": "https://cdn.sdelal.tech/core/latest/theme-nk.css"
       },
       "js": "",
-      "validation": "CSS loaded; JS initialized where present; not exhaustive interaction coverage"
+      "validation": "Chromium 151.0.7922.34: Core CSS and script initialization passed against the saved v185/latest snapshot; selected interactions are described in docs/verification.md"
     },
     {
       "id": "E42",
@@ -707,14 +707,14 @@
       "note": "Разница в оформлении кнопки вызвана контекстом input-box. Поиск не выполняется: обработчик приложения отсутствует.",
       "height": 280,
       "chapter": "input-box",
-      "status": "archive-browser-smoke-passed",
+      "status": "snapshot-browser-smoke-passed",
       "implementation": "Core HTML/CSS",
       "runtime": {
         "css": "https://cdn.sdelal.tech/core/latest/core.css",
         "theme": "https://cdn.sdelal.tech/core/latest/theme-nk.css"
       },
       "js": "",
-      "validation": "CSS loaded; JS initialized where present; not exhaustive interaction coverage"
+      "validation": "Chromium 151.0.7922.34: Core CSS and script initialization passed against the saved v185/latest snapshot; selected interactions are described in docs/verification.md"
     },
     {
       "id": "E43",
@@ -724,31 +724,31 @@
       "note": "Иконка и input — прямые дети; это важно для селекторов внутренних отступов.",
       "height": 230,
       "chapter": "input-box",
-      "status": "archive-browser-smoke-passed",
+      "status": "snapshot-browser-smoke-passed",
       "implementation": "Core HTML/CSS",
       "runtime": {
         "css": "https://cdn.sdelal.tech/core/latest/core.css",
         "theme": "https://cdn.sdelal.tech/core/latest/theme-nk.css"
       },
       "js": "",
-      "validation": "CSS loaded; JS initialized where present; not exhaustive interaction coverage"
+      "validation": "Chromium 151.0.7922.34: Core CSS and script initialization passed against the saved v185/latest snapshot; selected interactions are described in docs/verification.md"
     },
     {
       "id": "E44",
       "title": "Select в единой оболочке с иконкой",
-      "html": "<div class=\"core-form-item\">\n  <label for=\"project-stage\">Этап проекта</label>\n  <div class=\"core-input-box\">\n    <select id=\"project-stage\" class=\"core-select\">\n      <option>Исследование</option><option>Проектирование</option><option>Дизайн</option>\n    </select>\n    <span class=\"core-icon-shevron-bottom core-icon-m\" aria-hidden=\"true\"></span>\n  </div>\n</div>",
+      "html": "<div class=\"core-form-item\">\n  <label for=\"project-stage\">Этап проекта</label>\n  <div class=\"core-input-box\">\n    <select id=\"project-stage\" class=\"core-select\">\n      <option>Исследование</option><option>Проектирование</option><option>Дизайн</option>\n    </select>\n    <span class=\"core-icon-chevron-bottom core-icon-m\" aria-hidden=\"true\"></span>\n  </div>\n</div>",
       "css": "",
       "note": "Выбор остаётся нативным select. Здесь используется фактическое написание shevron.",
       "height": 230,
       "chapter": "input-box",
-      "status": "archive-browser-smoke-passed",
+      "status": "snapshot-browser-smoke-passed",
       "implementation": "Core HTML/CSS",
       "runtime": {
         "css": "https://cdn.sdelal.tech/core/latest/core.css",
         "theme": "https://cdn.sdelal.tech/core/latest/theme-nk.css"
       },
       "js": "",
-      "validation": "CSS loaded; JS initialized where present; not exhaustive interaction coverage"
+      "validation": "Chromium 151.0.7922.34: Core CSS and script initialization passed against the saved v185/latest snapshot; selected interactions are described in docs/verification.md"
     },
     {
       "id": "E45",
@@ -758,14 +758,14 @@
       "note": "Размер явно задан оболочке и самому контролу. Underline-модификатор стоит на input-box.",
       "height": 230,
       "chapter": "input-box",
-      "status": "archive-browser-smoke-passed",
+      "status": "snapshot-browser-smoke-passed",
       "implementation": "Core HTML/CSS",
       "runtime": {
         "css": "https://cdn.sdelal.tech/core/latest/core.css",
         "theme": "https://cdn.sdelal.tech/core/latest/theme-nk.css"
       },
       "js": "",
-      "validation": "CSS loaded; JS initialized where present; not exhaustive interaction coverage"
+      "validation": "Chromium 151.0.7922.34: Core CSS and script initialization passed against the saved v185/latest snapshot; selected interactions are described in docs/verification.md"
     },
     {
       "id": "E46",
@@ -775,14 +775,14 @@
       "note": "Ввод и подпись идут непосредственно друг за другом; label оборачивает оба.",
       "height": 230,
       "chapter": "choices",
-      "status": "archive-browser-smoke-passed",
+      "status": "snapshot-browser-smoke-passed",
       "implementation": "Core HTML/CSS",
       "runtime": {
         "css": "https://cdn.sdelal.tech/core/latest/core.css",
         "theme": "https://cdn.sdelal.tech/core/latest/theme-nk.css"
       },
       "js": "",
-      "validation": "CSS loaded; JS initialized where present; not exhaustive interaction coverage"
+      "validation": "Chromium 151.0.7922.34: Core CSS and script initialization passed against the saved v185/latest snapshot; selected interactions are described in docs/verification.md"
     },
     {
       "id": "E47",
@@ -792,14 +792,14 @@
       "note": "Одинаковое имя access даёт взаимоисключающий выбор без Core JS.",
       "height": 250,
       "chapter": "choices",
-      "status": "archive-browser-smoke-passed",
+      "status": "snapshot-browser-smoke-passed",
       "implementation": "Core HTML/CSS",
       "runtime": {
         "css": "https://cdn.sdelal.tech/core/latest/core.css",
         "theme": "https://cdn.sdelal.tech/core/latest/theme-nk.css"
       },
       "js": "",
-      "validation": "CSS loaded; JS initialized where present; not exhaustive interaction coverage"
+      "validation": "Chromium 151.0.7922.34: Core CSS and script initialization passed against the saved v185/latest snapshot; selected interactions are described in docs/verification.md"
     },
     {
       "id": "E48",
@@ -809,14 +809,14 @@
       "note": "Выбор radio работает; переключение настоящего списка/доски должно реализовать приложение.",
       "height": 230,
       "chapter": "choices",
-      "status": "archive-browser-smoke-passed",
+      "status": "snapshot-browser-smoke-passed",
       "implementation": "Core HTML/CSS",
       "runtime": {
         "css": "https://cdn.sdelal.tech/core/latest/core.css",
         "theme": "https://cdn.sdelal.tech/core/latest/theme-nk.css"
       },
       "js": "",
-      "validation": "CSS loaded; JS initialized where present; not exhaustive interaction coverage"
+      "validation": "Chromium 151.0.7922.34: Core CSS and script initialization passed against the saved v185/latest snapshot; selected interactions are described in docs/verification.md"
     },
     {
       "id": "E49",
@@ -826,14 +826,14 @@
       "note": "Это переключаемое состояние формы, не обычная push-button.",
       "height": 230,
       "chapter": "choices",
-      "status": "archive-browser-smoke-passed",
+      "status": "snapshot-browser-smoke-passed",
       "implementation": "Core HTML/CSS",
       "runtime": {
         "css": "https://cdn.sdelal.tech/core/latest/core.css",
         "theme": "https://cdn.sdelal.tech/core/latest/theme-nk.css"
       },
       "js": "",
-      "validation": "CSS loaded; JS initialized where present; not exhaustive interaction coverage"
+      "validation": "Chromium 151.0.7922.34: Core CSS and script initialization passed against the saved v185/latest snapshot; selected interactions are described in docs/verification.md"
     },
     {
       "id": "E50",
@@ -843,31 +843,31 @@
       "note": "Нумерация создаётся CSS-счётчиками, но порядок и вложенность заданы корректными ol/li.",
       "height": 350,
       "chapter": "lists-tables",
-      "status": "archive-browser-smoke-passed",
+      "status": "snapshot-browser-smoke-passed",
       "implementation": "Core HTML/CSS",
       "runtime": {
         "css": "https://cdn.sdelal.tech/core/latest/core.css",
         "theme": "https://cdn.sdelal.tech/core/latest/theme-nk.css"
       },
       "js": "",
-      "validation": "CSS loaded; JS initialized where present; not exhaustive interaction coverage"
+      "validation": "Chromium 151.0.7922.34: Core CSS and script initialization passed against the saved v185/latest snapshot; selected interactions are described in docs/verification.md"
     },
     {
       "id": "E51",
       "title": "Широкая таблица: контролируемая прокрутка",
-      "html": "<div class=\"core-col core-g-6x\">\n  <h3 class=\"core-text core-text-bold\">План выпуска</h3>\n  <p class=\"core-text core-text-s\">Пять этапов, ответственные и сроки. Суммы условные.</p>\n  <div class=\"core-x-scroll\" tabindex=\"0\" role=\"region\" aria-label=\"План выпуска; таблицу можно прокручивать\">\n    <table class=\"core-table core-table-noscroll core-table-bordered-h core-heading-underline\" style=\"min-width: 680px\">\n      <caption>Согласованный объём работ</caption>\n      <thead><tr><th scope=\"col\">Этап</th><th scope=\"col\">Ответственный</th><th scope=\"col\">Срок</th><th scope=\"col\">Часы</th><th scope=\"col\">Статус</th></tr></thead>\n      <tbody>\n        <tr><th scope=\"row\">Исследование</th><td>Арт-директор</td><td>18 сентября</td><td>24</td><td><span class=\"core-badge\">Готово</span></td></tr>\n        <tr><th scope=\"row\">Прототип</th><td>UX-дизайнер</td><td>23 сентября</td><td>40</td><td><span class=\"core-badge core-badge-primary\">В работе</span></td></tr>\n        <tr><th scope=\"row\">Визуальная система</th><td>Дизайнер</td><td>28 сентября</td><td>56</td><td>На проверке</td></tr>\n        <tr><th scope=\"row\">Разработка</th><td>Разработчик</td><td>12 октября</td><td>80</td><td>План</td></tr>\n        <tr><th scope=\"row\">Приёмка</th><td>Команда</td><td>16 октября</td><td>16</td><td>План</td></tr>\n      </tbody>\n      <tfoot><tr><th scope=\"row\" colspan=\"3\">Всего</th><td>216</td><td>5 этапов</td></tr></tfoot>\n    </table>\n  </div>\n</div>",
+      "html": "<div class=\"core-col core-g-6x\">\n  <h3 class=\"core-text core-text-bold\">План выпуска</h3>\n  <p class=\"core-text core-text-s\">Пять этапов, ответственные и сроки. Суммы условные.</p>\n  <div class=\"core-x-scroll\" tabindex=\"0\" role=\"region\" aria-label=\"План выпуска; таблицу можно прокручивать\">\n    <table class=\"core-table core-w-128x core-table-bordered-h core-table-head-underline\" style=\"--w: 680px\">\n      <caption>Согласованный объём работ</caption>\n      <thead><tr><th scope=\"col\">Этап</th><th scope=\"col\">Ответственный</th><th scope=\"col\">Срок</th><th scope=\"col\">Часы</th><th scope=\"col\">Статус</th></tr></thead>\n      <tbody>\n        <tr><th scope=\"row\">Исследование</th><td>Арт-директор</td><td>18 сентября</td><td>24</td><td><span class=\"core-badge\">Готово</span></td></tr>\n        <tr><th scope=\"row\">Прототип</th><td>UX-дизайнер</td><td>23 сентября</td><td>40</td><td><span class=\"core-badge core-badge-primary\">В работе</span></td></tr>\n        <tr><th scope=\"row\">Визуальная система</th><td>Дизайнер</td><td>28 сентября</td><td>56</td><td>На проверке</td></tr>\n        <tr><th scope=\"row\">Разработка</th><td>Разработчик</td><td>12 октября</td><td>80</td><td>План</td></tr>\n        <tr><th scope=\"row\">Приёмка</th><td>Команда</td><td>16 октября</td><td>16</td><td>План</td></tr>\n      </tbody>\n      <tfoot><tr><th scope=\"row\" colspan=\"3\">Всего</th><td>216</td><td>5 этапов</td></tr></tfoot>\n    </table>\n  </div>\n</div>",
       "css": "",
       "note": "Сравните 1200 и 390 px. При нехватке места таблица прокручивается внутри своей области; страница не расширяется. `min-width: 680px` — открытое ограничение этого рецепта. Перестройка без прокрутки показана ниже, в E67 и E68.",
       "height": 230,
       "chapter": "lists-tables",
-      "status": "archive-browser-smoke-passed",
+      "status": "snapshot-browser-smoke-passed",
       "implementation": "Core HTML/CSS",
       "runtime": {
         "css": "https://cdn.sdelal.tech/core/latest/core.css",
         "theme": "https://cdn.sdelal.tech/core/latest/theme-nk.css"
       },
       "js": "",
-      "validation": "CSS loaded; JS initialized where present; not exhaustive interaction coverage"
+      "validation": "Chromium 151.0.7922.34: Core CSS and script initialization passed against the saved v185/latest snapshot; selected interactions are described in docs/verification.md"
     },
     {
       "id": "E52",
@@ -877,14 +877,14 @@
       "note": "Это геометрический стенд, не проверка всех intrinsic-особенностей img.",
       "height": 480,
       "chapter": "media",
-      "status": "archive-browser-smoke-passed",
+      "status": "snapshot-browser-smoke-passed",
       "implementation": "Core HTML/CSS",
       "runtime": {
         "css": "https://cdn.sdelal.tech/core/latest/core.css",
         "theme": "https://cdn.sdelal.tech/core/latest/theme-nk.css"
       },
       "js": "",
-      "validation": "CSS loaded; JS initialized where present; not exhaustive interaction coverage"
+      "validation": "Chromium 151.0.7922.34: Core CSS and script initialization passed against the saved v185/latest snapshot; selected interactions are described in docs/verification.md"
     },
     {
       "id": "E53",
@@ -894,14 +894,14 @@
       "note": "SVG-заглушка создана специально для этого примера; внешняя загрузка картинки не требуется.",
       "height": 350,
       "chapter": "media",
-      "status": "archive-browser-smoke-passed",
+      "status": "snapshot-browser-smoke-passed",
       "implementation": "Core HTML/CSS",
       "runtime": {
         "css": "https://cdn.sdelal.tech/core/latest/core.css",
         "theme": "https://cdn.sdelal.tech/core/latest/theme-nk.css"
       },
       "js": "",
-      "validation": "CSS loaded; JS initialized where present; not exhaustive interaction coverage"
+      "validation": "Chromium 151.0.7922.34: Core CSS and script initialization passed against the saved v185/latest snapshot; selected interactions are described in docs/verification.md"
     },
     {
       "id": "E54",
@@ -911,31 +911,31 @@
       "note": "Метка — прямой ребёнок карточки. Дополнительное внешнее пространство выделено padding-классом, чтобы край был виден.",
       "height": 300,
       "chapter": "position",
-      "status": "archive-browser-smoke-passed",
+      "status": "snapshot-browser-smoke-passed",
       "implementation": "Core HTML/CSS",
       "runtime": {
         "css": "https://cdn.sdelal.tech/core/latest/core.css",
         "theme": "https://cdn.sdelal.tech/core/latest/theme-nk.css"
       },
       "js": "",
-      "validation": "CSS loaded; JS initialized where present; not exhaustive interaction coverage"
+      "validation": "Chromium 151.0.7922.34: Core CSS and script initialization passed against the saved v185/latest snapshot; selected interactions are described in docs/verification.md"
     },
     {
       "id": "E55",
       "title": "Кнопка в углу и отдельный анимируемый потомок",
-      "html": "<article class=\"core-card core-col core-p-12x\" style=\"min-height: 160px\">\n  <h3 class=\"core-text core-text-l core-text-bold\">Состояние синхронизации</h3>\n  <p class=\"core-text\">Координаты и вращение находятся на разных узлах.</p>\n  <span class=\"core-abs core-abs-top-right\" style=\"--t: 12px; --r: 12px\">\n    <span class=\"core-icon-spinner core-icon-m core-spin core-animate-time-4x\" role=\"img\" aria-label=\"Синхронизация\"></span>\n  </span>\n</article>",
+      "html": "<article class=\"core-card core-col core-h-unset core-p-12x\" style=\"--h: 160px\">\n  <h3 class=\"core-text core-text-l core-text-bold\">Состояние синхронизации</h3>\n  <p class=\"core-text\">Координаты и вращение находятся на разных узлах.</p>\n  <span class=\"core-abs core-abs-top-right\" style=\"--t: 12px; --r: 12px\">\n    <span class=\"core-icon-spinner core-icon-m core-animate:spin core-animate-time-4x\" role=\"img\" aria-label=\"Синхронизация\"></span>\n  </span>\n</article>",
       "css": "",
       "note": "Inline-переменные явно задают внутренний отступ от угла. Вращение не перезаписывает transform позиционирующего узла.",
       "height": 260,
       "chapter": "position",
-      "status": "archive-browser-smoke-passed",
+      "status": "snapshot-browser-smoke-passed",
       "implementation": "Core HTML/CSS",
       "runtime": {
         "css": "https://cdn.sdelal.tech/core/latest/core.css",
         "theme": "https://cdn.sdelal.tech/core/latest/theme-nk.css"
       },
       "js": "",
-      "validation": "CSS loaded; JS initialized where present; not exhaustive interaction coverage"
+      "validation": "Chromium 151.0.7922.34: Core CSS and script initialization passed against the saved v185/latest snapshot; selected interactions are described in docs/verification.md"
     },
     {
       "id": "E56",
@@ -945,14 +945,14 @@
       "note": "В примере появляется только поясняющий текст; критичное действие не спрятано за hover.",
       "height": 270,
       "chapter": "interaction",
-      "status": "archive-browser-smoke-passed",
+      "status": "snapshot-browser-smoke-passed",
       "implementation": "Core HTML/CSS",
       "runtime": {
         "css": "https://cdn.sdelal.tech/core/latest/core.css",
         "theme": "https://cdn.sdelal.tech/core/latest/theme-nk.css"
       },
       "js": "",
-      "validation": "CSS loaded; JS initialized where present; not exhaustive interaction coverage"
+      "validation": "Chromium 151.0.7922.34: Core CSS and script initialization passed against the saved v185/latest snapshot; selected interactions are described in docs/verification.md"
     },
     {
       "id": "E57",
@@ -962,31 +962,31 @@
       "note": "Это два уровня из трёх явно описанных в CSS. Четвёртый уровень не входит в подтверждённый контракт.",
       "height": 320,
       "chapter": "interaction",
-      "status": "archive-browser-smoke-passed",
+      "status": "snapshot-browser-smoke-passed",
       "implementation": "Core HTML/CSS",
       "runtime": {
         "css": "https://cdn.sdelal.tech/core/latest/core.css",
         "theme": "https://cdn.sdelal.tech/core/latest/theme-nk.css"
       },
       "js": "",
-      "validation": "CSS loaded; JS initialized where present; not exhaustive interaction coverage"
+      "validation": "Chromium 151.0.7922.34: Core CSS and script initialization passed against the saved v185/latest snapshot; selected interactions are described in docs/verification.md"
     },
     {
       "id": "E58",
-      "title": "Анимация с локальной поддержкой reduced motion",
-      "html": "<div class=\"core-row core-y-center\">\n  <span class=\"core-icon-spinner core-icon-l core-spin core-animate-time-4x app-progress-icon\" aria-hidden=\"true\"></span>\n  <span class=\"core-text\" role=\"status\">Идёт синхронизация</span>\n</div>",
-      "css": "@media (prefers-reduced-motion: reduce) {\n  .app-progress-icon { animation: none !important; }\n}",
-      "note": "Ниже — отдельное проектное правило только для данного индикатора. Оно не модифицирует все Core-анимации в странице.",
+      "title": "Анимация с учётом reduced motion без собственного CSS",
+      "html": "<div class=\"core-row core-y-center\">\n  <span class=\"core-icon-spinner core-icon-l core-animate-time-4x\" id=\"progress-icon\" aria-hidden=\"true\"></span>\n  <span class=\"core-text\" role=\"status\">Идёт синхронизация</span>\n</div>",
+      "css": "",
+      "note": "Приложение добавляет штатную анимацию Core, только когда пользователь разрешает движение. Изменение системной настройки учитывается без перезагрузки. Собственных CSS-правил нет.",
       "height": 230,
       "chapter": "interaction",
-      "status": "archive-browser-smoke-passed",
-      "implementation": "core + application CSS",
+      "status": "snapshot-browser-smoke-passed",
+      "implementation": "Core classes + application JavaScript",
       "runtime": {
         "css": "https://cdn.sdelal.tech/core/latest/core.css",
         "theme": "https://cdn.sdelal.tech/core/latest/theme-nk.css"
       },
-      "js": "",
-      "validation": "CSS loaded; JS initialized where present; not exhaustive interaction coverage"
+      "js": "const preference = matchMedia('(prefers-reduced-motion: reduce)');\nconst icon = document.getElementById('progress-icon');\nconst update = () => icon.classList.toggle('core-animate:spin', !preference.matches);\npreference.addEventListener('change', update);\nupdate();",
+      "validation": "Chromium 151.0.7922.34: Core CSS and script initialization passed against the saved v185/latest snapshot; selected interactions are described in docs/verification.md"
     },
     {
       "id": "E59",
@@ -996,14 +996,14 @@
       "note": "Статический открытый блок. Рабочий диалог с кнопками и обработчиком приведён в разделе PopupManager.",
       "height": 380,
       "chapter": "popups",
-      "status": "archive-browser-smoke-passed",
+      "status": "snapshot-browser-smoke-passed",
       "implementation": "Core HTML/CSS",
       "runtime": {
         "css": "https://cdn.sdelal.tech/core/latest/core.css",
         "theme": "https://cdn.sdelal.tech/core/latest/theme-nk.css"
       },
       "js": "",
-      "validation": "CSS loaded; JS initialized where present; not exhaustive interaction coverage"
+      "validation": "Chromium 151.0.7922.34: Core CSS and script initialization passed against the saved v185/latest snapshot; selected interactions are described in docs/verification.md"
     },
     {
       "id": "E60",
@@ -1013,14 +1013,14 @@
       "note": "На широком экране метаданные стоят в три колонки, действия — в строку. При ≤720 px обе области переходят в вертикальный поток. Оформление и перестройка — только классы Core; значения демонстрационные.",
       "height": 230,
       "chapter": "recipes",
-      "status": "archive-browser-smoke-passed",
+      "status": "snapshot-browser-smoke-passed",
       "implementation": "Core HTML/CSS",
       "runtime": {
         "css": "https://cdn.sdelal.tech/core/latest/core.css",
         "theme": "https://cdn.sdelal.tech/core/latest/theme-nk.css"
       },
       "js": "",
-      "validation": "CSS loaded; JS initialized where present; not exhaustive interaction coverage"
+      "validation": "Chromium 151.0.7922.34: Core CSS and script initialization passed against the saved v185/latest snapshot; selected interactions are described in docs/verification.md"
     },
     {
       "id": "E61",
@@ -1030,14 +1030,14 @@
       "note": "Внешняя кнопка сохраняет самостоятельное оформление. Перенос её внутрь input-box изменил бы фон, границу, размер и отступы.",
       "height": 280,
       "chapter": "recipes",
-      "status": "archive-browser-smoke-passed",
+      "status": "snapshot-browser-smoke-passed",
       "implementation": "Core HTML/CSS",
       "runtime": {
         "css": "https://cdn.sdelal.tech/core/latest/core.css",
         "theme": "https://cdn.sdelal.tech/core/latest/theme-nk.css"
       },
       "js": "",
-      "validation": "CSS loaded; JS initialized where present; not exhaustive interaction coverage"
+      "validation": "Chromium 151.0.7922.34: Core CSS and script initialization passed against the saved v185/latest snapshot; selected interactions are described in docs/verification.md"
     },
     {
       "id": "E62",
@@ -1047,14 +1047,14 @@
       "note": "Выбор и редактирование работают нативно. Сохранение/отмена — не подключённые в данном примере прикладные действия.",
       "height": 520,
       "chapter": "recipes",
-      "status": "archive-browser-smoke-passed",
+      "status": "snapshot-browser-smoke-passed",
       "implementation": "Core HTML/CSS",
       "runtime": {
         "css": "https://cdn.sdelal.tech/core/latest/core.css",
         "theme": "https://cdn.sdelal.tech/core/latest/theme-nk.css"
       },
       "js": "",
-      "validation": "CSS loaded; JS initialized where present; not exhaustive interaction coverage"
+      "validation": "Chromium 151.0.7922.34: Core CSS and script initialization passed against the saved v185/latest snapshot; selected interactions are described in docs/verification.md"
     },
     {
       "id": "E63",
@@ -1064,14 +1064,14 @@
       "note": "Нативный details, не collapse.js. Клавиатурное раскрытие предоставляет браузер; оформление маркера и фокус нужно проверять в целевых браузерах.",
       "height": 300,
       "chapter": "recipes",
-      "status": "archive-browser-smoke-passed",
+      "status": "snapshot-browser-smoke-passed",
       "implementation": "Core HTML/CSS",
       "runtime": {
         "css": "https://cdn.sdelal.tech/core/latest/core.css",
         "theme": "https://cdn.sdelal.tech/core/latest/theme-nk.css"
       },
       "js": "",
-      "validation": "CSS loaded; JS initialized where present; not exhaustive interaction coverage"
+      "validation": "Chromium 151.0.7922.34: Core CSS and script initialization passed against the saved v185/latest snapshot; selected interactions are described in docs/verification.md"
     },
     {
       "id": "E64",
@@ -1081,14 +1081,14 @@
       "note": "Иконка декоративная, действие названо текстом. Здесь центрирование относится к элементам колонки, а не автоматически к строкам многострочного текста.",
       "height": 400,
       "chapter": "recipes",
-      "status": "archive-browser-smoke-passed",
+      "status": "snapshot-browser-smoke-passed",
       "implementation": "Core HTML/CSS",
       "runtime": {
         "css": "https://cdn.sdelal.tech/core/latest/core.css",
         "theme": "https://cdn.sdelal.tech/core/latest/theme-nk.css"
       },
       "js": "",
-      "validation": "CSS loaded; JS initialized where present; not exhaustive interaction coverage"
+      "validation": "Chromium 151.0.7922.34: Core CSS and script initialization passed against the saved v185/latest snapshot; selected interactions are described in docs/verification.md"
     },
     {
       "id": "E65",
@@ -1098,14 +1098,14 @@
       "note": "Выберите 721 и 720 px: парные поля переходят в одну колонку, кнопки — в вертикальный стек. `required` и `type=\"email\"` проверяет браузер; серверной отправки нет. Введите текст и смените ширину или тему — значения сохранятся.",
       "css": "",
       "height": 570,
-      "status": "archive-browser-smoke-passed",
+      "status": "snapshot-browser-smoke-passed",
       "implementation": "Core HTML/CSS",
       "runtime": {
         "css": "https://cdn.sdelal.tech/core/latest/core.css",
         "theme": "https://cdn.sdelal.tech/core/latest/theme-nk.css"
       },
       "js": "",
-      "validation": "CSS loaded; JS initialized where present; not exhaustive interaction coverage"
+      "validation": "Chromium 151.0.7922.34: Core CSS and script initialization passed against the saved v185/latest snapshot; selected interactions are described in docs/verification.md"
     },
     {
       "id": "E66",
@@ -1115,14 +1115,14 @@
       "note": "`core-form-item-inline` уже содержит media query ≤720 px: row становится column, ширина label — auto. Сравните 721 и 720 px. Это встроенная адаптивность самого компонента, не CSS мануала.",
       "css": "",
       "height": 300,
-      "status": "archive-browser-smoke-passed",
+      "status": "snapshot-browser-smoke-passed",
       "implementation": "Core HTML/CSS",
       "runtime": {
         "css": "https://cdn.sdelal.tech/core/latest/core.css",
         "theme": "https://cdn.sdelal.tech/core/latest/theme-nk.css"
       },
       "js": "",
-      "validation": "CSS loaded; JS initialized where present; not exhaustive interaction coverage"
+      "validation": "Chromium 151.0.7922.34: Core CSS and script initialization passed against the saved v185/latest snapshot; selected interactions are described in docs/verification.md"
     },
     {
       "id": "E67",
@@ -1132,31 +1132,31 @@
       "note": "При >720 px каждая запись — grid 3:1:1; при ≤720 px — одна колонка. Это семантический список, визуально похожий на таблицу: `ul/li`, а не поддельные роли table. Подписи полей остаются видимыми, все данные сохраняются.",
       "css": "",
       "height": 340,
-      "status": "archive-browser-smoke-passed",
+      "status": "snapshot-browser-smoke-passed",
       "implementation": "Core HTML/CSS",
       "runtime": {
         "css": "https://cdn.sdelal.tech/core/latest/core.css",
         "theme": "https://cdn.sdelal.tech/core/latest/theme-nk.css"
       },
       "js": "",
-      "validation": "CSS loaded; JS initialized where present; not exhaustive interaction coverage"
+      "validation": "Chromium 151.0.7922.34: Core CSS and script initialization passed against the saved v185/latest snapshot; selected interactions are described in docs/verification.md"
     },
     {
       "id": "E68",
       "chapter": "lists-tables",
-      "title": "Настоящая таблица → карточки: Core + CSS приложения",
-      "html": "<table class=\"core-table core-table-noscroll core-table-bordered-h app-stack-table\" role=\"table\">\n  <caption>Документы для согласования</caption>\n  <thead role=\"rowgroup\"><tr role=\"row\">\n    <th id=\"docs-name\" scope=\"col\" role=\"columnheader\">Документ</th>\n    <th id=\"docs-owner\" scope=\"col\" role=\"columnheader\">Автор</th>\n    <th id=\"docs-state\" scope=\"col\" role=\"columnheader\">Статус</th>\n  </tr></thead>\n  <tbody role=\"rowgroup\">\n    <tr role=\"row\">\n      <th id=\"docs-brief\" headers=\"docs-name\" scope=\"row\" role=\"rowheader\"><span class=\"app-cell-label\" aria-hidden=\"true\">Документ</span><span>Бриф проекта</span></th>\n      <td headers=\"docs-owner docs-brief\" role=\"cell\"><span class=\"app-cell-label\" aria-hidden=\"true\">Автор</span><span>Анна</span></td>\n      <td headers=\"docs-state docs-brief\" role=\"cell\"><span class=\"app-cell-label\" aria-hidden=\"true\">Статус</span><span>Согласовано</span></td>\n    </tr>\n    <tr role=\"row\">\n      <th id=\"docs-structure\" headers=\"docs-name\" scope=\"row\" role=\"rowheader\"><span class=\"app-cell-label\" aria-hidden=\"true\">Документ</span><span>Структура и сценарии</span></th>\n      <td headers=\"docs-owner docs-structure\" role=\"cell\"><span class=\"app-cell-label\" aria-hidden=\"true\">Автор</span><span>Илья</span></td>\n      <td headers=\"docs-state docs-structure\" role=\"cell\"><span class=\"app-cell-label\" aria-hidden=\"true\">Статус</span><span>На проверке</span></td>\n    </tr>\n    <tr role=\"row\">\n      <th id=\"docs-components\" headers=\"docs-name\" scope=\"row\" role=\"rowheader\"><span class=\"app-cell-label\" aria-hidden=\"true\">Документ</span><span>Описание компонентов</span></th>\n      <td headers=\"docs-owner docs-components\" role=\"cell\"><span class=\"app-cell-label\" aria-hidden=\"true\">Автор</span><span>Мария</span></td>\n      <td headers=\"docs-state docs-components\" role=\"cell\"><span class=\"app-cell-label\" aria-hidden=\"true\">Статус</span><span>В работе</span></td>\n    </tr>\n  </tbody>\n</table>",
-      "note": "До 720 px строки становятся отдельными карточками с подписями. Перестройку обеспечивает CSS `app-stack-table`, приведённый вместе с HTML; у Core нет заявленного универсального table-to-card класса. Сохранены caption, headers и роли; работу со скринридерами нужно проверять отдельно.",
-      "css": "/* Расширение приложения; подключается после Core. */\n.app-stack-table .app-cell-label { display: none; }\n@media (max-width: 720px) {\n  .core-table.app-stack-table { display: block; }\n  .app-stack-table > thead {\n    position: absolute; width: 1px; height: 1px;\n    padding: 0; margin: -1px; overflow: hidden;\n    clip-path: inset(50%); white-space: nowrap;\n  }\n  .app-stack-table > tbody { display: grid; gap: var(--s-8x); }\n  .app-stack-table > tbody > tr {\n    display: block; padding: var(--s-8x);\n    background: var(--color-surface); border-radius: var(--theme-card-radius);\n  }\n  .app-stack-table > tbody > tr > :is(th, td) {\n    display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr);\n    gap: var(--s-6x); padding: var(--s-4x) 0; border: 0;\n    overflow-wrap: anywhere;\n  }\n  .app-stack-table .app-cell-label { display: block; font-weight: 400; }\n}",
+      "title": "Реестр с подписями: строки на широком экране, карточки на мобильном",
+      "html": "<section class=\"core-col core-g-8x\" aria-label=\"Документы для согласования\">\n  <article class=\"core-card core-grid core-grid-3c m-core-grid-1c core-g-8x\">\n    <div class=\"core-col core-g-2x\"><span class=\"core-text core-text-xs\">Документ</span><span class=\"core-text\">Бриф проекта</span></div>\n    <div class=\"core-col core-g-2x\"><span class=\"core-text core-text-xs\">Автор</span><span class=\"core-text\">Анна</span></div>\n    <div class=\"core-col core-g-2x\"><span class=\"core-text core-text-xs\">Статус</span><span class=\"core-text\">Согласовано</span></div>\n  </article>\n  <article class=\"core-card core-grid core-grid-3c m-core-grid-1c core-g-8x\">\n    <div class=\"core-col core-g-2x\"><span class=\"core-text core-text-xs\">Документ</span><span class=\"core-text\">Структура и сценарии</span></div>\n    <div class=\"core-col core-g-2x\"><span class=\"core-text core-text-xs\">Автор</span><span class=\"core-text\">Илья</span></div>\n    <div class=\"core-col core-g-2x\"><span class=\"core-text core-text-xs\">Статус</span><span class=\"core-text\">На проверке</span></div>\n  </article>\n  <article class=\"core-card core-grid core-grid-3c m-core-grid-1c core-g-8x\">\n    <div class=\"core-col core-g-2x\"><span class=\"core-text core-text-xs\">Документ</span><span class=\"core-text\">Описание компонентов</span></div>\n    <div class=\"core-col core-g-2x\"><span class=\"core-text core-text-xs\">Автор</span><span class=\"core-text\">Мария</span></div>\n    <div class=\"core-col core-g-2x\"><span class=\"core-text core-text-xs\">Статус</span><span class=\"core-text\">В работе</span></div>\n  </article>\n</section>",
+      "note": "Подписи остаются видимыми на всех ширинах. До 720 px три колонки каждой записи становятся одной благодаря m-core-grid-1c. Это семантический список записей, не HTML-таблица; для сравнения табличных данных используйте E51 с горизонтальной прокруткой.",
+      "css": "",
       "height": 320,
-      "status": "archive-browser-smoke-passed",
-      "implementation": "core + application CSS",
+      "status": "snapshot-browser-smoke-passed",
+      "implementation": "Core HTML/CSS",
       "runtime": {
         "css": "https://cdn.sdelal.tech/core/latest/core.css",
         "theme": "https://cdn.sdelal.tech/core/latest/theme-nk.css"
       },
       "js": "",
-      "validation": "CSS loaded; JS initialized where present; not exhaustive interaction coverage"
+      "validation": "Chromium 151.0.7922.34: Core CSS and script initialization passed against the saved v185/latest snapshot; selected interactions are described in docs/verification.md"
     },
     {
       "id": "E69",
@@ -1166,14 +1166,14 @@
       "note": "При ≤720 px `m-core-col` переводит поиск, фильтр и кнопку в вертикальный поток. Поиск растёт через `core-grow`, длинный placeholder не задаёт минимальную ширину благодаря `core-shrink`. Это компоновка формы; фильтрация данных не реализована.",
       "css": "",
       "height": 250,
-      "status": "archive-browser-smoke-passed",
+      "status": "snapshot-browser-smoke-passed",
       "implementation": "Core HTML/CSS",
       "runtime": {
         "css": "https://cdn.sdelal.tech/core/latest/core.css",
         "theme": "https://cdn.sdelal.tech/core/latest/theme-nk.css"
       },
       "js": "",
-      "validation": "CSS loaded; JS initialized where present; not exhaustive interaction coverage"
+      "validation": "Chromium 151.0.7922.34: Core CSS and script initialization passed against the saved v185/latest snapshot; selected interactions are described in docs/verification.md"
     },
     {
       "id": "E70",
@@ -1183,14 +1183,14 @@
       "note": "1200 px: четыре показателя и две рабочие области. 997 px: два показателя в ряд, боковая область уходит вниз. 720 px: по одной колонке. Вложенные grid получают собственные треки, поэтому не наследуют конфигурацию внешней сетки. Только Core, без CSS приложения.",
       "css": "",
       "height": 530,
-      "status": "archive-browser-smoke-passed",
+      "status": "snapshot-browser-smoke-passed",
       "implementation": "Core HTML/CSS",
       "runtime": {
         "css": "https://cdn.sdelal.tech/core/latest/core.css",
         "theme": "https://cdn.sdelal.tech/core/latest/theme-nk.css"
       },
       "js": "",
-      "validation": "CSS loaded; JS initialized where present; not exhaustive interaction coverage"
+      "validation": "Chromium 151.0.7922.34: Core CSS and script initialization passed against the saved v185/latest snapshot; selected interactions are described in docs/verification.md"
     },
     {
       "id": "E71",
@@ -1200,14 +1200,14 @@
       "note": "Сравните 1200/997/390 px: три, две и одна колонка. Карточки растягиваются по высоте строки grid, а `core-grow` у списка отодвигает кнопку вниз. Это демонстрационные варианты, не тарифы реального продукта.",
       "css": "",
       "height": 390,
-      "status": "archive-browser-smoke-passed",
+      "status": "snapshot-browser-smoke-passed",
       "implementation": "Core HTML/CSS",
       "runtime": {
         "css": "https://cdn.sdelal.tech/core/latest/core.css",
         "theme": "https://cdn.sdelal.tech/core/latest/theme-nk.css"
       },
       "js": "",
-      "validation": "CSS loaded; JS initialized where present; not exhaustive interaction coverage"
+      "validation": "Chromium 151.0.7922.34: Core CSS and script initialization passed against the saved v185/latest snapshot; selected interactions are described in docs/verification.md"
     },
     {
       "id": "E72",
@@ -1217,14 +1217,14 @@
       "note": "На широком экране — две самостоятельные группы, на телефоне — одна колонка. Checkbox независимы, radio с одинаковым `name` взаимоисключающие. Выбор, ввод и сброс нативные; сохранения на сервере нет.",
       "css": "",
       "height": 460,
-      "status": "archive-browser-smoke-passed",
+      "status": "snapshot-browser-smoke-passed",
       "implementation": "Core HTML/CSS",
       "runtime": {
         "css": "https://cdn.sdelal.tech/core/latest/core.css",
         "theme": "https://cdn.sdelal.tech/core/latest/theme-nk.css"
       },
       "js": "",
-      "validation": "CSS loaded; JS initialized where present; not exhaustive interaction coverage"
+      "validation": "Chromium 151.0.7922.34: Core CSS and script initialization passed against the saved v185/latest snapshot; selected interactions are described in docs/verification.md"
     },
     {
       "id": "E73",
@@ -1237,12 +1237,12 @@
       "height": 280,
       "implementation": "Core + код приложения",
       "styles": [],
-      "status": "archive-browser-smoke-passed",
+      "status": "snapshot-browser-smoke-passed",
       "runtime": {
         "css": "https://cdn.sdelal.tech/core/latest/core.css",
         "theme": "https://cdn.sdelal.tech/core/latest/theme-nk.css"
       },
-      "validation": "CSS loaded; JS initialized where present; not exhaustive interaction coverage"
+      "validation": "Chromium 151.0.7922.34: Core CSS and script initialization passed against the saved v185/latest snapshot; selected interactions are described in docs/verification.md"
     },
     {
       "id": "E74",
@@ -1255,12 +1255,12 @@
       "height": 280,
       "implementation": "Core + код приложения",
       "styles": [],
-      "status": "archive-browser-smoke-passed",
+      "status": "snapshot-browser-smoke-passed",
       "runtime": {
         "css": "https://cdn.sdelal.tech/core/latest/core.css",
         "theme": "https://cdn.sdelal.tech/core/latest/theme-nk.css"
       },
-      "validation": "CSS loaded; JS initialized where present; not exhaustive interaction coverage"
+      "validation": "Chromium 151.0.7922.34: Core CSS and script initialization passed against the saved v185/latest snapshot; selected interactions are described in docs/verification.md"
     },
     {
       "id": "E75",
@@ -1273,12 +1273,12 @@
       "height": 280,
       "implementation": "Core + код приложения",
       "styles": [],
-      "status": "archive-browser-smoke-passed",
+      "status": "snapshot-browser-smoke-passed",
       "runtime": {
         "css": "https://cdn.sdelal.tech/core/latest/core.css",
         "theme": "https://cdn.sdelal.tech/core/latest/theme-nk.css"
       },
-      "validation": "CSS loaded; JS initialized where present; not exhaustive interaction coverage"
+      "validation": "Chromium 151.0.7922.34: Core CSS and script initialization passed against the saved v185/latest snapshot; selected interactions are described in docs/verification.md"
     },
     {
       "id": "E76",
@@ -1291,12 +1291,12 @@
       "height": 280,
       "implementation": "Core + код приложения",
       "styles": [],
-      "status": "archive-browser-smoke-passed",
+      "status": "snapshot-browser-smoke-passed",
       "runtime": {
         "css": "https://cdn.sdelal.tech/core/latest/core.css",
         "theme": "https://cdn.sdelal.tech/core/latest/theme-nk.css"
       },
-      "validation": "CSS loaded; JS initialized where present; not exhaustive interaction coverage"
+      "validation": "Chromium 151.0.7922.34: Core CSS and script initialization passed against the saved v185/latest snapshot; selected interactions are described in docs/verification.md"
     },
     {
       "id": "E77",
@@ -1309,12 +1309,12 @@
       "height": 280,
       "implementation": "Core + код приложения",
       "styles": [],
-      "status": "archive-browser-smoke-passed",
+      "status": "snapshot-browser-smoke-passed",
       "runtime": {
         "css": "https://cdn.sdelal.tech/core/latest/core.css",
         "theme": "https://cdn.sdelal.tech/core/latest/theme-nk.css"
       },
-      "validation": "CSS loaded; JS initialized where present; not exhaustive interaction coverage"
+      "validation": "Chromium 151.0.7922.34: Core CSS and script initialization passed against the saved v185/latest snapshot; selected interactions are described in docs/verification.md"
     },
     {
       "id": "E78",
@@ -1327,12 +1327,12 @@
       "height": 280,
       "implementation": "Core + код приложения",
       "styles": [],
-      "status": "archive-browser-smoke-passed",
+      "status": "snapshot-browser-smoke-passed",
       "runtime": {
         "css": "https://cdn.sdelal.tech/core/latest/core.css",
         "theme": "https://cdn.sdelal.tech/core/latest/theme-nk.css"
       },
-      "validation": "CSS loaded; JS initialized where present; not exhaustive interaction coverage"
+      "validation": "Chromium 151.0.7922.34: Core CSS and script initialization passed against the saved v185/latest snapshot; selected interactions are described in docs/verification.md"
     },
     {
       "id": "E79",
@@ -1345,12 +1345,12 @@
       "height": 280,
       "implementation": "Core + код приложения",
       "styles": [],
-      "status": "archive-browser-smoke-passed",
+      "status": "snapshot-browser-smoke-passed",
       "runtime": {
         "css": "https://cdn.sdelal.tech/core/latest/core.css",
         "theme": "https://cdn.sdelal.tech/core/latest/theme-nk.css"
       },
-      "validation": "CSS loaded; JS initialized where present; not exhaustive interaction coverage"
+      "validation": "Chromium 151.0.7922.34: Core CSS and script initialization passed against the saved v185/latest snapshot; selected interactions are described in docs/verification.md"
     },
     {
       "id": "E80",
@@ -1364,12 +1364,12 @@
       "implementation": "Core + код приложения",
       "styles": [],
       "fixedHeight": 420,
-      "status": "archive-browser-smoke-passed",
+      "status": "snapshot-browser-smoke-passed",
       "runtime": {
         "css": "https://cdn.sdelal.tech/core/latest/core.css",
         "theme": "https://cdn.sdelal.tech/core/latest/theme-nk.css"
       },
-      "validation": "CSS loaded; JS initialized where present; not exhaustive interaction coverage"
+      "validation": "Chromium 151.0.7922.34: Core CSS and script initialization passed against the saved v185/latest snapshot; selected interactions are described in docs/verification.md"
     },
     {
       "id": "E81",
@@ -1382,12 +1382,12 @@
       "height": 280,
       "implementation": "Core HTML/CSS",
       "styles": [],
-      "status": "archive-browser-smoke-passed",
+      "status": "snapshot-browser-smoke-passed",
       "runtime": {
         "css": "https://cdn.sdelal.tech/core/latest/core.css",
         "theme": "https://cdn.sdelal.tech/core/latest/theme-nk.css"
       },
-      "validation": "CSS loaded; JS initialized where present; not exhaustive interaction coverage"
+      "validation": "Chromium 151.0.7922.34: Core CSS and script initialization passed against the saved v185/latest snapshot; selected interactions are described in docs/verification.md"
     },
     {
       "id": "E82",
@@ -1402,12 +1402,12 @@
       "styles": [
         "https://cdn.sdelal.tech/core/latest/theme-ss.css"
       ],
-      "status": "archive-browser-smoke-passed",
+      "status": "snapshot-browser-smoke-passed",
       "runtime": {
         "css": "https://cdn.sdelal.tech/core/latest/core.css",
         "theme": "https://cdn.sdelal.tech/core/latest/theme-nk.css"
       },
-      "validation": "CSS loaded; JS initialized where present; not exhaustive interaction coverage"
+      "validation": "Chromium 151.0.7922.34: Core CSS and script initialization passed against the saved v185/latest snapshot; selected interactions are described in docs/verification.md"
     }
   ]
 }

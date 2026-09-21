@@ -71,4 +71,4 @@ unregister();
 navigation.destroy();
 ```
 
-**Источник:** [navigation.js](https://cdn.sdelal.tech/core/latest/navigation.js), архив `core.zip` от 20.09.2026.
+**Источник:** [navigation.js](https://cdn.sdelal.tech/core/latest/navigation.js), снимок v185 от 21.09.2026; файл совпадает с проверенным v182.

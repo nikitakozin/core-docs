@@ -88,4 +88,4 @@ document.getElementById('settings').addEventListener('popup:activate', () => {
 
 <!-- demo:E80 -->
 
-**Источник:** [popup.js](https://cdn.sdelal.tech/core/latest/popup.js), архив `core.zip` от 20.09.2026.
+**Источник:** [popup.js](https://cdn.sdelal.tech/core/latest/popup.js), снимок v185 от 21.09.2026; файл совпадает с проверенным v182.

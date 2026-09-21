@@ -11,3 +11,6 @@ work/
 tmp/
 __pycache__/
 *.pyc
+
+node_modules/
+test-results/

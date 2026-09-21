@@ -1,0 +1,254 @@
+[
+  {
+    "id": "overview",
+    "title": "Что такое Core и где он применим",
+    "group": "Начало",
+    "navTitle": "О фреймворке"
+  },
+  {
+    "id": "start",
+    "title": "Подключение и первый интерфейс",
+    "group": "Начало",
+    "navTitle": "Быстрый старт"
+  },
+  {
+    "id": "architecture",
+    "title": "Архитектура: пять типов правил",
+    "group": "Система",
+    "navTitle": "Архитектура"
+  },
+  {
+    "id": "inheritance",
+    "title": "Наследование, вложенность и каскад",
+    "group": "Система",
+    "navTitle": "Наследование и контекст"
+  },
+  {
+    "id": "tokens",
+    "title": "Токены и шкалы размеров",
+    "group": "Система",
+    "navTitle": "Токены и размеры"
+  },
+  {
+    "id": "layout",
+    "title": "Компоновки: секция, строка, колонка, сетка",
+    "group": "Компоновка",
+    "navTitle": "Строка, колонка, сетка"
+  },
+  {
+    "id": "spacing",
+    "title": "Отступы, gap и радиусы",
+    "group": "Компоновка",
+    "navTitle": "Отступы и радиусы"
+  },
+  {
+    "id": "dimensions",
+    "title": "Ширины, высоты и дробные колонки",
+    "group": "Компоновка",
+    "navTitle": "Ширина и высота"
+  },
+  {
+    "id": "responsive",
+    "title": "Адаптивность и точные префиксы",
+    "group": "Компоновка",
+    "navTitle": "Адаптивность"
+  },
+  {
+    "id": "position",
+    "title": "Позиционирование, края и скруглённые углы",
+    "group": "Компоновка",
+    "navTitle": "Позиционирование"
+  },
+  {
+    "id": "colors",
+    "title": "Цвет, прозрачность, границы и тени",
+    "group": "Оформление",
+    "navTitle": "Цвета и поверхности"
+  },
+  {
+    "id": "themes",
+    "title": "Светлая, тёмная и проектные темы",
+    "group": "Оформление",
+    "navTitle": "Темы"
+  },
+  {
+    "id": "typography",
+    "title": "Текст, заголовки и оптическое выравнивание",
+    "group": "Компоненты",
+    "navTitle": "Типографика"
+  },
+  {
+    "id": "content",
+    "title": "Контентная область: статьи и HTML из редактора",
+    "group": "Компоненты",
+    "navTitle": "Контентная область"
+  },
+  {
+    "id": "buttons",
+    "title": "Кнопки и группы действий",
+    "group": "Компоненты",
+    "navTitle": "Кнопки"
+  },
+  {
+    "id": "badges",
+    "title": "Бирки, метки и компактные действия",
+    "group": "Компоненты",
+    "navTitle": "Бирки и метки"
+  },
+  {
+    "id": "icons",
+    "title": "Иконки: маски, размеры и адаптивность",
+    "group": "Компоненты",
+    "navTitle": "Иконки"
+  },
+  {
+    "id": "forms",
+    "title": "Поля, подписи и базовая форма",
+    "group": "Компоненты",
+    "navTitle": "Формы и поля"
+  },
+  {
+    "id": "input-box",
+    "title": "Составное поле: core-input-box",
+    "group": "Компоненты",
+    "navTitle": "Составное поле"
+  },
+  {
+    "id": "choices",
+    "title": "Checkbox, radio и сегментированный выбор",
+    "group": "Компоненты",
+    "navTitle": "Checkbox и radio"
+  },
+  {
+    "id": "lists-tables",
+    "title": "Списки и таблицы",
+    "group": "Компоненты",
+    "navTitle": "Списки и таблицы"
+  },
+  {
+    "id": "media",
+    "title": "Изображения, пропорции и обрезка",
+    "group": "Компоненты",
+    "navTitle": "Изображения"
+  },
+  {
+    "id": "interaction",
+    "title": "CSS-взаимодействия, видимость и анимации",
+    "group": "Поведение",
+    "navTitle": "CSS-взаимодействия"
+  },
+  {
+    "id": "popups",
+    "title": "Всплывающие окна: CSS-анатомия",
+    "group": "Поведение",
+    "navTitle": "Всплывающие окна"
+  },
+  {
+    "id": "javascript",
+    "title": "JavaScript: подключение и выбор модуля",
+    "group": "Поведение",
+    "navTitle": "Подключение JavaScript"
+  },
+  {
+    "id": "js-state",
+    "title": "Состояние: StateManager",
+    "navTitle": "Состояние",
+    "group": "JavaScript"
+  },
+  {
+    "id": "js-event",
+    "title": "События: EventEmitter",
+    "navTitle": "События",
+    "group": "JavaScript"
+  },
+  {
+    "id": "js-resource",
+    "title": "Асинхронные данные: resource",
+    "navTitle": "Ресурсы",
+    "group": "JavaScript"
+  },
+  {
+    "id": "js-navigation",
+    "title": "Навигация: NavigationManager",
+    "navTitle": "Навигация URL",
+    "group": "JavaScript"
+  },
+  {
+    "id": "js-collapse",
+    "title": "Раскрывающиеся блоки: CollapseManager",
+    "navTitle": "Коллапсы",
+    "group": "JavaScript"
+  },
+  {
+    "id": "js-field",
+    "title": "Поведение полей: FieldManager",
+    "navTitle": "Действия полей",
+    "group": "JavaScript"
+  },
+  {
+    "id": "js-form",
+    "title": "Формы: FormManager",
+    "navTitle": "Отправка форм",
+    "group": "JavaScript"
+  },
+  {
+    "id": "js-motion",
+    "title": "Анимации: MotionManager",
+    "navTitle": "Анимации",
+    "group": "JavaScript"
+  },
+  {
+    "id": "js-popup",
+    "title": "Всплывающие окна: PopupManager",
+    "navTitle": "Управление окнами",
+    "group": "JavaScript"
+  },
+  {
+    "id": "js-slider",
+    "title": "Прокручиваемые ленты: SliderManager",
+    "navTitle": "Управление лентами",
+    "group": "JavaScript"
+  },
+  {
+    "id": "recipes",
+    "title": "Рецепты составных интерфейсов",
+    "group": "Практика",
+    "navTitle": "Готовые композиции"
+  },
+  {
+    "id": "accessibility",
+    "title": "Доступность, совместимость и интеграция",
+    "group": "Практика",
+    "navTitle": "Доступность"
+  },
+  {
+    "id": "pitfalls",
+    "title": "Ограничения и реестр рисков",
+    "group": "Практика",
+    "navTitle": "Ограничения"
+  },
+  {
+    "id": "agent-workflow",
+    "title": "Порядок работы агента и Harness",
+    "group": "Практика",
+    "navTitle": "Работа с агентом"
+  },
+  {
+    "id": "class-index",
+    "title": "Индекс классов и примеров",
+    "group": "Справочник",
+    "navTitle": "Индекс классов"
+  },
+  {
+    "id": "token-reference",
+    "title": "Справочник токенов",
+    "group": "Справочник",
+    "navTitle": "Справочник токенов"
+  },
+  {
+    "id": "verification",
+    "title": "Источники и проверки",
+    "navTitle": "Источники и проверки",
+    "group": "Справочник"
+  }
+]

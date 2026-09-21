@@ -1,5 +1,5 @@
 {
-  "source_basis": "core.zip",
+  "source_basis": "CDN v185; all 10 modules byte-identical to reviewed v182",
   "modules": [
     {
       "module": "collapse",

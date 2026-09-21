@@ -88,4 +88,8 @@ sync();
 
 <!-- demo:E76 -->
 
-**Источник:** [collapse.js](https://cdn.sdelal.tech/core/latest/collapse.js), архив `core.zip` от 20.09.2026.
+**Источник:** [collapse.js](https://cdn.sdelal.tech/core/latest/collapse.js), снимок v185 от 21.09.2026; файл совпадает с проверенным v182.
+
+## Совместимость с CSS v185
+
+JS сохранил значение по умолчанию `core-pulse-in`, но этот анимационный класс удалён из CSS v185. Для анимации задайте `data-collapse-animate="core-animate:pulse-in"` на триггере или полный объект `anim` с этим классом. Пустой атрибут по-прежнему выберет старое имя и не запустит CSS-анимацию.

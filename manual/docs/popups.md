@@ -44,4 +44,3 @@ CSS задаёт позицию и видимость. [PopupManager](js-popup.m
 <!-- demo:E59 -->
 
 **Источник:** [Core CSS](https://cdn.sdelal.tech/core/latest/core.css), [PopupManager](https://cdn.sdelal.tech/core/latest/popup.js).
-

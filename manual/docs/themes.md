@@ -99,4 +99,3 @@ function setTheme(mode) {
 <!-- demo:E82 -->
 
 **Источник:** [Исходный Core CSS](https://cdn.sdelal.tech/core/latest/core.css). [Тема NK](https://cdn.sdelal.tech/core/latest/theme-nk.css), [SS](https://cdn.sdelal.tech/core/latest/theme-ss.css), [TG](https://cdn.sdelal.tech/core/latest/theme-tg.css).
-

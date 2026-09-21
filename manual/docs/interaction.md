@@ -32,11 +32,11 @@ Show/hide используют opacity: место сохраняется. Add/r
 
 `core-animate-time-0.5x/1x/2x/3x/4x/5x/6x/7x/8x/9x/10x` соответствуют 0,15 / 0,3 / 0,475 / 0,754 / 1,195 / 1,893 / 3 / 4,5 / 6 / 8 / 10 s. Это специально заданная нелинейная шкала.
 
-В исходнике короткий `.core-fade-pulsing` повторно перечислен в правиле size-pulsing. Для прозрачностной пульсации используйте точное `core-animate:fade-pulsing`, не неоднозначный короткий алиас. Height-grow анимирует max-height до большой viewport-величины; это не точный замер высоты контента.
+В v185 короткие анимационные алиасы удалены. Используйте `core-animate:spin`, `:pulse`, `:pulse-in`, `:shake`, `:slide-shake-left/right`, `:fade-pulsing`, `:size-pulsing`, `:mirror-x/y`. Классы `core-mirror-x/y` остаются статическими отражениями, а не анимациями. Height-grow анимирует max-height до большой viewport-величины; это не точный замер высоты контента.
 
 ## Загрузка и reduced motion
 
-`core-loading` добавляет spinner, обрезает переполнение и отключает pointer-events. `core-loading-overlay` — отдельное оформление загрузочного перекрытия с уменьшенной непрозрачностью; не считайте его автоматически создаваемым первым классом. Для настоящего процесса также нужны `aria-busy`, доступный текст состояния, блокировка повторной операции и сообщение результата. В опубликованном CSS не найдено правило `prefers-reduced-motion`. Ниже показан **код приложения** для конкретной анимации, а не существующая функция Core.
+`core-loading` добавляет spinner, обрезает переполнение и отключает pointer-events. `core-loading-overlay` — отдельное оформление перекрытия. Для процесса нужны также `aria-busy`, доступный статус и защита от повторного запуска. Правило `prefers-reduced-motion` в CSS есть только у scroll-hint и не отключает все анимации. В E58 приложение учитывает настройку через matchMedia и переключает штатный класс, без собственного CSS.
 
 ### E56. Появление пояснения при hover и клавиатурном фокусе
 
@@ -68,26 +68,25 @@ Show/hide используют opacity: место сохраняется. Add/r
 
 <!-- demo:E57 -->
 
-### E58. Анимация с локальной поддержкой reduced motion
+### E58. Анимация с учётом reduced motion без собственного CSS
 
-Ниже — отдельное проектное правило только для данного индикатора. Оно не модифицирует все Core-анимации в странице.
+Приложение добавляет штатную анимацию Core, только когда пользователь разрешает движение. Изменение системной настройки учитывается без перезагрузки. Собственных CSS-правил нет.
 
 ```html
 <div class="core-row core-y-center">
-  <span class="core-icon-spinner core-icon-l core-spin core-animate-time-4x app-progress-icon" aria-hidden="true"></span>
+  <span class="core-icon-spinner core-icon-l core-animate-time-4x" id="progress-icon" aria-hidden="true"></span>
   <span class="core-text" role="status">Идёт синхронизация</span>
 </div>
 ```
 
-**Дополнительный CSS примера — не встроенный API Core:**
-
-```css
-@media (prefers-reduced-motion: reduce) {
-  .app-progress-icon { animation: none !important; }
-}
+```js
+const preference = matchMedia('(prefers-reduced-motion: reduce)');
+const icon = document.getElementById('progress-icon');
+const update = () => icon.classList.toggle('core-animate:spin', !preference.matches);
+preference.addEventListener('change', update);
+update();
 ```
 
 <!-- demo:E58 -->
 
 **Источник:** [Исходный Core CSS](https://cdn.sdelal.tech/core/latest/core.css).
-

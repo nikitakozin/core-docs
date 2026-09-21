@@ -64,7 +64,7 @@ Underline-вариант меняет нижнюю границу, внутре�
 
 ### E44. Select в единой оболочке с иконкой
 
-Выбор остаётся нативным select. Здесь используется фактическое написание shevron.
+Выбор остаётся нативным select. В v185 используется написание chevron.
 
 ```html
 <div class="core-form-item">
@@ -73,7 +73,7 @@ Underline-вариант меняет нижнюю границу, внутре�
     <select id="project-stage" class="core-select">
       <option>Исследование</option><option>Проектирование</option><option>Дизайн</option>
     </select>
-    <span class="core-icon-shevron-bottom core-icon-m" aria-hidden="true"></span>
+    <span class="core-icon-chevron-bottom core-icon-m" aria-hidden="true"></span>
   </div>
 </div>
 ```
@@ -94,4 +94,3 @@ Underline-вариант меняет нижнюю границу, внутре�
 <!-- demo:E45 -->
 
 **Источник:** [Исходный Core CSS](https://cdn.sdelal.tech/core/latest/core.css).
-

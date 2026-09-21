@@ -60,4 +60,3 @@ Inline code и pre имеют собственные фон, размер и ove
 <!-- demo:E28 -->
 
 **Источник:** [Исходный Core CSS](https://cdn.sdelal.tech/core/latest/core.css).
-

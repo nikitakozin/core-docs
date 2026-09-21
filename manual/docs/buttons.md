@@ -92,4 +92,3 @@ Hover применяется в media `(hover: hover)`, есть active, focus-v
 <!-- demo:E32 -->
 
 **Источник:** [Исходный Core CSS](https://cdn.sdelal.tech/core/latest/core.css).
-

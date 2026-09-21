@@ -98,4 +98,4 @@ document.getElementById('cancel').onclick = () => motion.cancel(tile);
 
 <!-- demo:E78 -->
 
-**Источник:** [motion.js](https://cdn.sdelal.tech/core/latest/motion.js), архив `core.zip` от 20.09.2026.
+**Источник:** [motion.js](https://cdn.sdelal.tech/core/latest/motion.js), снимок v185 от 21.09.2026; файл совпадает с проверенным v182.

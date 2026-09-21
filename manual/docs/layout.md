@@ -151,4 +151,3 @@ core-grow и core-shrink расположены на текстовой коло
 <!-- demo:E08 -->
 
 **Источник:** [Исходный Core CSS](https://cdn.sdelal.tech/core/latest/core.css).
-

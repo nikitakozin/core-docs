@@ -94,4 +94,17 @@ const sliders = new SliderManager();
 
 <!-- demo:E79 -->
 
-**Источник:** [slider.js](https://cdn.sdelal.tech/core/latest/slider.js), архив `core.zip` от 20.09.2026.
+**Источник:** [slider.js](https://cdn.sdelal.tech/core/latest/slider.js), снимок v185 от 21.09.2026; файл совпадает с проверенным v182.
+
+## Совместимость с CSS v185
+
+JS по умолчанию использует удалённые классы `core-slide-shake-left/right`. Для обратной связи на краях задайте актуальные имена при первом создании singleton:
+
+```js
+const sliders = new SliderManager({
+  endLeftAnimation: 'core-animate:slide-shake-left',
+  endRightAnimation: 'core-animate:slide-shake-right'
+});
+```
+
+Прокрутка не зависит от наличия этих анимаций. Не добавляйте старые CSS-алиасы в приложение ради компенсации несовпадения версий.

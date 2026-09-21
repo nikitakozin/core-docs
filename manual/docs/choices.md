@@ -118,4 +118,3 @@ CSS скрывает сами input через прозрачность/пози
 <!-- demo:E72 -->
 
 **Источник:** [Исходный Core CSS](https://cdn.sdelal.tech/core/latest/core.css).
-

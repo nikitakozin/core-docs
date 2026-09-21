@@ -192,4 +192,3 @@ readonly и disabled имеют разную HTML-семантику. Внешн
 <!-- demo:E66 -->
 
 **Источник:** [Исходный Core CSS](https://cdn.sdelal.tech/core/latest/core.css). [Примеры полей showcase](https://cdn.sdelal.tech/core-dev/showcase.php).
-

@@ -14,13 +14,13 @@
 
 `core-table` задаёт табличное отображение, схлопывание границ и оформление ячеек. Базовые внутренние отступы — 8 px по вертикали и 16 px по горизонтали, но крайние ячейки могут иметь обрезанные внешние отступы. Точная логика зависит от присутствия thead/tbody/tfoot и первого/последнего элемента.
 
-`core-table-bordered-v` добавляет внутренние вертикальные границы, `core-table-bordered-h` — горизонтальные, `core-heading-underline` — нижнюю линию заголовка. `core-table-noscroll` устанавливает table и width 100%; сам он не создаёт прокрутку.
+`core-table-bordered-v` добавляет внутренние вертикальные границы, `core-table-bordered-h` — горизонтальные, `core-table-head-underline` — нижнюю линию заголовка. `core-table-noscroll` устанавливает table и width 100%; сам он не создаёт прокрутку.
 
 ## Широкие данные
 
 Для горизонтальной прокрутки есть `core-table-container`: flex-контейнер с max-width 100%, overflow-x auto и overflow-y hidden. Его вариант `core-table-container-masked` добавляет крайние градиентные маски, padding, scroll-padding и отрицательные margins по 20 px. Более универсальная обёртка — `core-x-scroll`. Не путайте с `core-h-scroll`: тот в исследованном CSS управляет **overflow-y**. Чтобы данные не сжимались до нечитаемого состояния, можно явно задать минимальную ширину таблицы как проектное решение.
 
-Используйте caption, scope у заголовков и настоящую структуру таблицы. Два сценария перестройки ниже: E67 — список с grid, целиком на Core; E68 — настоящая таблица с отдельным CSS приложения. Один `m-core-col` на table не создаёт корректную карточную раскладку.
+Core не превращает произвольную HTML-таблицу в карточки одним классом. Для табличной семантики используйте `<table>` с прокруткой (E51). Если данные допускают список записей, используйте адаптивные grid-композиции E67/E68: они целиком на Core и не притворяются таблицей.
 
 ### E50. Вложенный нумерованный список
 
@@ -47,7 +47,7 @@
   <h3 class="core-text core-text-bold">План выпуска</h3>
   <p class="core-text core-text-s">Пять этапов, ответственные и сроки. Суммы условные.</p>
   <div class="core-x-scroll" tabindex="0" role="region" aria-label="План выпуска; таблицу можно прокручивать">
-    <table class="core-table core-table-noscroll core-table-bordered-h core-heading-underline" style="min-width: 680px">
+    <table class="core-table core-w-128x core-table-bordered-h core-table-head-underline" style="--w: 680px">
       <caption>Согласованный объём работ</caption>
       <thead><tr><th scope="col">Этап</th><th scope="col">Ответственный</th><th scope="col">Срок</th><th scope="col">Часы</th><th scope="col">Статус</th></tr></thead>
       <tbody>
@@ -92,65 +92,30 @@
 <!-- demo:E67 -->
 
 
-### E68. Настоящая таблица → карточки: Core + CSS приложения
+### E68. Реестр с подписями: строки на широком экране, карточки на мобильном
 
-До 720 px строки становятся отдельными карточками с подписями. Перестройку обеспечивает CSS `app-stack-table`, приведённый вместе с HTML; у Core нет заявленного универсального table-to-card класса. Сохранены caption, headers и роли; работу со скринридерами нужно проверять отдельно.
+Подписи остаются видимыми на всех ширинах. До 720 px три колонки каждой записи становятся одной благодаря m-core-grid-1c. Это семантический список записей, не HTML-таблица; для сравнения табличных данных используйте E51 с горизонтальной прокруткой.
 
 ```html
-<table class="core-table core-table-noscroll core-table-bordered-h app-stack-table" role="table">
-  <caption>Документы для согласования</caption>
-  <thead role="rowgroup"><tr role="row">
-    <th id="docs-name" scope="col" role="columnheader">Документ</th>
-    <th id="docs-owner" scope="col" role="columnheader">Автор</th>
-    <th id="docs-state" scope="col" role="columnheader">Статус</th>
-  </tr></thead>
-  <tbody role="rowgroup">
-    <tr role="row">
-      <th id="docs-brief" headers="docs-name" scope="row" role="rowheader"><span class="app-cell-label" aria-hidden="true">Документ</span><span>Бриф проекта</span></th>
-      <td headers="docs-owner docs-brief" role="cell"><span class="app-cell-label" aria-hidden="true">Автор</span><span>Анна</span></td>
-      <td headers="docs-state docs-brief" role="cell"><span class="app-cell-label" aria-hidden="true">Статус</span><span>Согласовано</span></td>
-    </tr>
-    <tr role="row">
-      <th id="docs-structure" headers="docs-name" scope="row" role="rowheader"><span class="app-cell-label" aria-hidden="true">Документ</span><span>Структура и сценарии</span></th>
-      <td headers="docs-owner docs-structure" role="cell"><span class="app-cell-label" aria-hidden="true">Автор</span><span>Илья</span></td>
-      <td headers="docs-state docs-structure" role="cell"><span class="app-cell-label" aria-hidden="true">Статус</span><span>На проверке</span></td>
-    </tr>
-    <tr role="row">
-      <th id="docs-components" headers="docs-name" scope="row" role="rowheader"><span class="app-cell-label" aria-hidden="true">Документ</span><span>Описание компонентов</span></th>
-      <td headers="docs-owner docs-components" role="cell"><span class="app-cell-label" aria-hidden="true">Автор</span><span>Мария</span></td>
-      <td headers="docs-state docs-components" role="cell"><span class="app-cell-label" aria-hidden="true">Статус</span><span>В работе</span></td>
-    </tr>
-  </tbody>
-</table>
-```
-
-**CSS приложения — не встроенный API Core:**
-
-```css
-/* Расширение приложения; подключается после Core. */
-.app-stack-table .app-cell-label { display: none; }
-@media (max-width: 720px) {
-  .core-table.app-stack-table { display: block; }
-  .app-stack-table > thead {
-    position: absolute; width: 1px; height: 1px;
-    padding: 0; margin: -1px; overflow: hidden;
-    clip-path: inset(50%); white-space: nowrap;
-  }
-  .app-stack-table > tbody { display: grid; gap: var(--s-8x); }
-  .app-stack-table > tbody > tr {
-    display: block; padding: var(--s-8x);
-    background: var(--color-surface); border-radius: var(--theme-card-radius);
-  }
-  .app-stack-table > tbody > tr > :is(th, td) {
-    display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr);
-    gap: var(--s-6x); padding: var(--s-4x) 0; border: 0;
-    overflow-wrap: anywhere;
-  }
-  .app-stack-table .app-cell-label { display: block; font-weight: 400; }
-}
+<section class="core-col core-g-8x" aria-label="Документы для согласования">
+  <article class="core-card core-grid core-grid-3c m-core-grid-1c core-g-8x">
+    <div class="core-col core-g-2x"><span class="core-text core-text-xs">Документ</span><span class="core-text">Бриф проекта</span></div>
+    <div class="core-col core-g-2x"><span class="core-text core-text-xs">Автор</span><span class="core-text">Анна</span></div>
+    <div class="core-col core-g-2x"><span class="core-text core-text-xs">Статус</span><span class="core-text">Согласовано</span></div>
+  </article>
+  <article class="core-card core-grid core-grid-3c m-core-grid-1c core-g-8x">
+    <div class="core-col core-g-2x"><span class="core-text core-text-xs">Документ</span><span class="core-text">Структура и сценарии</span></div>
+    <div class="core-col core-g-2x"><span class="core-text core-text-xs">Автор</span><span class="core-text">Илья</span></div>
+    <div class="core-col core-g-2x"><span class="core-text core-text-xs">Статус</span><span class="core-text">На проверке</span></div>
+  </article>
+  <article class="core-card core-grid core-grid-3c m-core-grid-1c core-g-8x">
+    <div class="core-col core-g-2x"><span class="core-text core-text-xs">Документ</span><span class="core-text">Описание компонентов</span></div>
+    <div class="core-col core-g-2x"><span class="core-text core-text-xs">Автор</span><span class="core-text">Мария</span></div>
+    <div class="core-col core-g-2x"><span class="core-text core-text-xs">Статус</span><span class="core-text">В работе</span></div>
+  </article>
+</section>
 ```
 
 <!-- demo:E68 -->
 
 **Источник:** [Исходный Core CSS](https://cdn.sdelal.tech/core/latest/core.css).
-

@@ -1,12 +1,13 @@
 {
   "runtime_base": "https://cdn.sdelal.tech/core/latest/",
-  "source_basis": "core.zip",
+  "source_basis": "CDN latest/v185 snapshot, 2026-09-21",
   "manifest": "source-manifest.json",
   "all_js_sources_read": true,
-  "minified_files": "not present in archive; equivalence not verified",
+  "minified_files": "downloaded and hashed; semantic equivalence to unminified files is not claimed",
   "importmap": {
-    "archive_maps_to": "https://cdn.sdelal.tech/core/v182/",
-    "policy": "use explicit latest map from docs/javascript.md"
+    "latest_maps_to": "https://cdn.sdelal.tech/core/latest/",
+    "v185_maps_to": "https://cdn.sdelal.tech/core/v185/",
+    "policy": "explicit latest map or stock latest loader before ESM"
   },
   "modules": [
     {
@@ -84,7 +85,7 @@
       "source_review": "complete"
     }
   ],
-  "browser_test_basis": "uploaded bytes served at original URLs by test harness; no live CDN verification",
+  "browser_test_basis": "See docs/verification.md for current evidence",
   "browser_test_modules": 10,
   "storage_persistence_tested": false,
   "external_fonts_tested": false

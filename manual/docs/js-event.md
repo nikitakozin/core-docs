@@ -74,4 +74,4 @@ document.getElementById('send').onclick = () => {
 
 <!-- demo:E74 -->
 
-**Источник:** [event.js](https://cdn.sdelal.tech/core/latest/event.js), архив `core.zip` от 20.09.2026.
+**Источник:** [event.js](https://cdn.sdelal.tech/core/latest/event.js), снимок v185 от 21.09.2026; файл совпадает с проверенным v182.

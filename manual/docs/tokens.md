@@ -74,4 +74,3 @@
 <!-- demo:E04 -->
 
 **Источник:** [Исходный Core CSS](https://cdn.sdelal.tech/core/latest/core.css).
-

@@ -103,4 +103,4 @@ document.getElementById('fail').onclick = () => load(true);
 
 <!-- demo:E75 -->
 
-**Источник:** [resource.js](https://cdn.sdelal.tech/core/latest/resource.js), архив `core.zip` от 20.09.2026.
+**Источник:** [resource.js](https://cdn.sdelal.tech/core/latest/resource.js), снимок v185 от 21.09.2026; файл совпадает с проверенным v182.
