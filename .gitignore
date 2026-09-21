@@ -1,0 +1,13 @@
+# Local system and editor files
+.DS_Store
+.idea/
+.vscode/
+
+# Local configuration and working files
+.env
+.env.*
+!.env.example
+work/
+tmp/
+__pycache__/
+*.pyc
