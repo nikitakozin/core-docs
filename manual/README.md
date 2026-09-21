@@ -1,0 +1,110 @@
+# Core — руководство
+
+Документация по архиву `core.zip` от 20.09.2026. Внутри исходного пакета указан v182; подключения примеров — только CDN latest.
+
+## Открыть
+
+Откройте `index.html`. Текст и код встроены в файл; для демонстраций нужен доступ к CDN. Примеры загружаются при открытии раздела, ширина переключается кнопками, тема — без пересоздания DOM.
+
+## Подключить к проекту
+
+Поместите комплект в `docs/core/`. В корневом AGENTS.md добавьте:
+
+```markdown
+Для задач интерфейса сначала прочитай docs/core/AGENTS.md.
+Пути в этом руководстве относительны docs/core/.
+```
+
+Не заменяйте существующие проектные инструкции. Сам фреймворк и шрифты в архив документации не входят.
+
+## Разделы
+
+- [Что такое Core и где он применим](docs/overview.md)
+
+- [Подключение и первый интерфейс](docs/start.md)
+
+- [Архитектура: пять типов правил](docs/architecture.md)
+
+- [Наследование, вложенность и каскад](docs/inheritance.md)
+
+- [Токены и шкалы размеров](docs/tokens.md)
+
+- [Компоновки: секция, строка, колонка, сетка](docs/layout.md)
+
+- [Отступы, gap и радиусы](docs/spacing.md)
+
+- [Ширины, высоты и дробные колонки](docs/dimensions.md)
+
+- [Адаптивность и точные префиксы](docs/responsive.md)
+
+- [Позиционирование, края и скруглённые углы](docs/position.md)
+
+- [Цвет, прозрачность, границы и тени](docs/colors.md)
+
+- [Светлая, тёмная и проектные темы](docs/themes.md)
+
+- [Текст, заголовки и оптическое выравнивание](docs/typography.md)
+
+- [Контентная область: статьи и HTML из редактора](docs/content.md)
+
+- [Кнопки и группы действий](docs/buttons.md)
+
+- [Бирки, метки и компактные действия](docs/badges.md)
+
+- [Иконки: маски, размеры и адаптивность](docs/icons.md)
+
+- [Поля, подписи и базовая форма](docs/forms.md)
+
+- [Составное поле: core-input-box](docs/input-box.md)
+
+- [Checkbox, radio и сегментированный выбор](docs/choices.md)
+
+- [Списки и таблицы](docs/lists-tables.md)
+
+- [Изображения, пропорции и обрезка](docs/media.md)
+
+- [CSS-взаимодействия, видимость и анимации](docs/interaction.md)
+
+- [Всплывающие окна: CSS-анатомия](docs/popups.md)
+
+- [JavaScript: подключение и выбор модуля](docs/javascript.md)
+
+- [Состояние: StateManager](docs/js-state.md)
+
+- [События: EventEmitter](docs/js-event.md)
+
+- [Асинхронные данные: resource](docs/js-resource.md)
+
+- [Навигация: NavigationManager](docs/js-navigation.md)
+
+- [Раскрывающиеся блоки: CollapseManager](docs/js-collapse.md)
+
+- [Поведение полей: FieldManager](docs/js-field.md)
+
+- [Формы: FormManager](docs/js-form.md)
+
+- [Анимации: MotionManager](docs/js-motion.md)
+
+- [Всплывающие окна: PopupManager](docs/js-popup.md)
+
+- [Прокручиваемые ленты: SliderManager](docs/js-slider.md)
+
+- [Рецепты составных интерфейсов](docs/recipes.md)
+
+- [Доступность, совместимость и интеграция](docs/accessibility.md)
+
+- [Ограничения и реестр рисков](docs/pitfalls.md)
+
+- [Порядок работы агента и Harness](docs/agent-workflow.md)
+
+- [Индекс классов и примеров](docs/class-index.md)
+
+- [Справочник токенов](docs/token-reference.md)
+
+- [Источники и проверки](docs/verification.md)
+
+## Справочники
+
+[Классы](reference/classes.json) · [Токены](reference/tokens.json) · [Примеры](reference/examples.json) · [JS](reference/javascript.json) · [Манифест исходников](reference/source-manifest.json)
+
+[Проверки и ограничения](docs/verification.md). Минифицированные варианты не входили в исходный архив и не проверялись. Факт загрузки CDN не означает, что он не изменился после архива.

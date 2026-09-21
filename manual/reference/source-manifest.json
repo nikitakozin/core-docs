@@ -1,0 +1,129 @@
+{
+  "archive": "core.zip",
+  "archive_sha256": "b2069b81e84a9feed49ea73d332243456840c87f1c50865a0d280d64ea55769b",
+  "reviewed_on": "2026-09-20",
+  "version_hint": "v182 (readme and importmap, not live CDN verification)",
+  "runtime_base": "https://cdn.sdelal.tech/core/latest/",
+  "live_cdn_matches_archive": "not-verified",
+  "files": [
+    {
+      "name": ".readme.html",
+      "bytes": 2791,
+      "sha256": "0107240e29c925e6c7df291c394e58e5d703dbb34de94c54f9fb219b935916e2",
+      "source_url": "https://cdn.sdelal.tech/core/latest/.readme.html",
+      "review": "source-read"
+    },
+    {
+      "name": "collapse.js",
+      "bytes": 39625,
+      "sha256": "2bf3996d7fdb6c1ce5262395584f7ccf2a756565850369db681cc97ad3c44ffc",
+      "source_url": "https://cdn.sdelal.tech/core/latest/collapse.js",
+      "review": "source-read"
+    },
+    {
+      "name": "core.css",
+      "bytes": 301669,
+      "sha256": "d4d50001e29570a42a49dad6ac520ee973e26da2ea405951fe2e6f7f5a0b2150",
+      "source_url": "https://cdn.sdelal.tech/core/latest/core.css",
+      "review": "source-read"
+    },
+    {
+      "name": "event.js",
+      "bytes": 10742,
+      "sha256": "cce66a15ca02483304057d750d867ca55254234480c68ee5c299c197d558f658",
+      "source_url": "https://cdn.sdelal.tech/core/latest/event.js",
+      "review": "source-read"
+    },
+    {
+      "name": "field.js",
+      "bytes": 14782,
+      "sha256": "4f77dec2631d8890251719546331e696b9d80cd34e0f86f03b0c067f8af29ab1",
+      "source_url": "https://cdn.sdelal.tech/core/latest/field.js",
+      "review": "source-read"
+    },
+    {
+      "name": "form.js",
+      "bytes": 45762,
+      "sha256": "c573b31a8168b24a9390287d5f38a4aceb30d3435ac692df7d3d7101d9148139",
+      "source_url": "https://cdn.sdelal.tech/core/latest/form.js",
+      "review": "source-read"
+    },
+    {
+      "name": "importmap.js",
+      "bytes": 841,
+      "sha256": "5165351581964bac59d0fcdbb6a6a7c57c8586a10beb9e052a4516f6a55078c4",
+      "source_url": "https://cdn.sdelal.tech/core/latest/importmap.js",
+      "review": "source-read"
+    },
+    {
+      "name": "motion.js",
+      "bytes": 13044,
+      "sha256": "b2d186b4ae499289f8b59349e2d040e3456e61b1992a0fdd840e9c034a6019c4",
+      "source_url": "https://cdn.sdelal.tech/core/latest/motion.js",
+      "review": "source-read"
+    },
+    {
+      "name": "navigation.js",
+      "bytes": 16109,
+      "sha256": "3466d5ce794aadd61bc940587d149406ca6016562e0afd366418ec3f58c400f4",
+      "source_url": "https://cdn.sdelal.tech/core/latest/navigation.js",
+      "review": "source-read"
+    },
+    {
+      "name": "popup.js",
+      "bytes": 38239,
+      "sha256": "50d59c2b2f86f62577d8d02636293397784e5b9e446f2d03a07f8fa017041440",
+      "source_url": "https://cdn.sdelal.tech/core/latest/popup.js",
+      "review": "source-read"
+    },
+    {
+      "name": "resource.js",
+      "bytes": 14453,
+      "sha256": "752dec196a4012bdb7f5589501515468b9d559e5c11ae3d1000eb61f69737871",
+      "source_url": "https://cdn.sdelal.tech/core/latest/resource.js",
+      "review": "source-read"
+    },
+    {
+      "name": "slider.js",
+      "bytes": 31022,
+      "sha256": "4e8030f285bc561e3593e9c8645cce2728ff5ef506e9d37e8897197039f565e5",
+      "source_url": "https://cdn.sdelal.tech/core/latest/slider.js",
+      "review": "source-read"
+    },
+    {
+      "name": "state.js",
+      "bytes": 13518,
+      "sha256": "0c2a7825ae5ef91b25cad35f1dc2308023bc126625b840b5b8ecd4dc16ad0e90",
+      "source_url": "https://cdn.sdelal.tech/core/latest/state.js",
+      "review": "source-read"
+    },
+    {
+      "name": "template.html",
+      "bytes": 44096,
+      "sha256": "f645c7a93e531ab7b6c35e8d1fd452cc3a3a8e0733e5a30679ee442602fc17a1",
+      "source_url": "https://cdn.sdelal.tech/core/latest/template.html",
+      "review": "source-read"
+    },
+    {
+      "name": "theme-nk.css",
+      "bytes": 3651,
+      "sha256": "7dd5c9043ecf5d7b09cc94c3b57da1895ba9f8a6cd2bb27a159dc5a521962e8b",
+      "source_url": "https://cdn.sdelal.tech/core/latest/theme-nk.css",
+      "review": "source-read"
+    },
+    {
+      "name": "theme-ss.css",
+      "bytes": 29630,
+      "sha256": "daed937a68ec4b7204c4b29dac98d14090a4081cc65f2c5ea3f01f3857bf792c",
+      "source_url": "https://cdn.sdelal.tech/core/latest/theme-ss.css",
+      "review": "source-read"
+    },
+    {
+      "name": "theme-tg.css",
+      "bytes": 5227,
+      "sha256": "454a9583de38f9ae1909849ebc4a6bbfa29fbe3c9e5c26570df4ec7633f47130",
+      "source_url": "https://cdn.sdelal.tech/core/latest/theme-tg.css",
+      "review": "source-read"
+    }
+  ]
+}
