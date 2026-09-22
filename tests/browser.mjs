@@ -3,11 +3,11 @@ import {readFileSync as read,writeFileSync as write,mkdirSync} from 'node:fs';
 import {createServer} from 'node:http';
 import {resolve,extname,sep} from 'node:path';
 import assert from 'node:assert/strict';
-const live=process.argv.includes('--live'),failuresOnly=process.argv.includes('--failures'),root=resolve('manual'),out=resolve('test-results');mkdirSync(out,{recursive:true});
-const data=JSON.parse(read('manual/reference/examples.json','utf8')).examples;
-const chapters=JSON.parse(read('manual/chapters.json','utf8'));
+const live=process.argv.includes('--live'),failuresOnly=process.argv.includes('--failures'),root=resolve('docs'),out=resolve('test-results');mkdirSync(out,{recursive:true});
+const data=JSON.parse(read('docs/reference/examples.json','utf8')).examples;
+const chapters=JSON.parse(read('docs/chapters.json','utf8'));
 const checks=[],errors=[],intercepted={shell:0,iframe:0,modules:0};let browser;
-const server=createServer((req,res)=>{try{const path=resolve(root,'.'+decodeURIComponent(new URL(req.url,'http://localhost').pathname));if(!path.startsWith(root+sep))throw new Error('outside manual');res.setHeader('Content-Type',({'.html':'text/html; charset=utf-8','.json':'application/json','.md':'text/plain; charset=utf-8'})[extname(path)]||'text/plain');res.end(read(path));}catch{res.writeHead(404).end();}});
+const server=createServer((req,res)=>{try{const path=resolve(root,'.'+decodeURIComponent(new URL(req.url,'http://localhost').pathname));if(!path.startsWith(root+sep))throw new Error('outside docs');res.setHeader('Content-Type',({'.html':'text/html; charset=utf-8','.json':'application/json','.md':'text/plain; charset=utf-8'})[extname(path)]||'text/plain');res.end(read(path));}catch{res.writeHead(404).end();}});
 await new Promise(done=>server.listen(0,'127.0.0.1',done));const url=`http://127.0.0.1:${server.address().port}/index.html`;
 try {
  browser=await chromium.launch({headless:true});
@@ -55,7 +55,7 @@ try {
   // Verify changed upstream contracts in a real CSS engine, including the known mixed prefix.
   await go('start');const probe=await frame('E01');await probe.evaluate(()=>{document.getElementById('demo-root').innerHTML='<span id="icon" class="core-icon-plus core-icon-m m-core-icon-6x"></span><h2 id="heading" class="core-h core-h2">Заголовок</h2><div id="size" class="core-h-170x"></div><div id="position" class="core-fix m-core-fix-t">Позиция</div>';});
   for(const width of [720,721,997,998]){await page.locator(`[data-example="E01"] .demo-width[data-width="${width}"]`).click();await waitFrame(probe,w=>innerWidth===w,width);const values=await probe.evaluate(()=>({icon:getComputedStyle(document.getElementById('icon'),'::before').width,height:getComputedStyle(document.getElementById('size')).height,top:getComputedStyle(document.getElementById('position')).top,t:getComputedStyle(document.getElementById('position')).getPropertyValue('--t').trim(),heading:getComputedStyle(document.getElementById('heading')).fontSize}));check(`icon cascade ${width}`,values.icon===(width<=720?'12px':'16px'));check(`170x resolves ${width}`,values.height==='340px');check(`mixed mobile alias ${width}`,width<=997?values.top==='0px':values.t==='');}
-  await page.goto('file://'+resolve('manual/index.html'),{waitUntil:'networkidle'});check('standalone file opens',await page.locator('#shell-status').isHidden());
+  await page.goto('file://'+resolve('docs/index.html'),{waitUntil:'networkidle'});check('standalone file opens',await page.locator('#shell-status').isHidden());
  }
  if(!live) {
   // Fresh contexts avoid Chromium's already-loaded stylesheet memory cache.

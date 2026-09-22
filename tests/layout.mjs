@@ -16,7 +16,7 @@ try {
  });
  await context.route(/https:\/\/(fonts\.googleapis\.com|fonts\.gstatic\.com)\//,route=>route.abort());
  const page=await context.newPage();
- await page.goto('file://'+resolve('manual/index.html'),{waitUntil:'networkidle'});
+ await page.goto('file://'+resolve('docs/index.html'),{waitUntil:'networkidle'});
  await page.keyboard.press('Tab');
  check('mobile first Tab offers skip link',await page.locator('#skip-link').evaluate(e=>e===document.activeElement));
  check('mobile skip link is visible above header',await page.locator('#skip-link').evaluate(e=>{const r=e.getBoundingClientRect();return e.contains(document.elementFromPoint(r.x+r.width/2,r.y+r.height/2));}));
@@ -75,7 +75,7 @@ try {
   if(width>=998)check(`sidebar stays fixed at ${width}`,Math.abs((await page.locator('#sidebar').boundingBox()).y)<=1);
   check(`no document overflow at ${width}`,await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1));
  }
- await page.goto('file://'+resolve('manual/index.html'),{waitUntil:'networkidle'});
+ await page.goto('file://'+resolve('docs/index.html'),{waitUntil:'networkidle'});
  await page.keyboard.press('Tab');
  check('desktop first Tab offers skip link',await page.locator('#skip-link').evaluate(e=>e===document.activeElement));
  check('desktop skip link is visible above sidebar',await page.locator('#skip-link').evaluate(e=>{const r=e.getBoundingClientRect();return e.contains(document.elementFromPoint(r.x+r.width/2,r.y+r.height/2));}));

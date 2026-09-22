@@ -16,11 +16,11 @@ for (const file of ['core.css','theme-nk.css','theme-ss.css','theme-tg.css']) {
  tree.walkDecls(decl=>{if(decl.prop.startsWith('--')) (tokens[decl.prop] ||= []).push({file,line:decl.source.start.line,scope:context(decl),value:decl.value,important:Boolean(decl.important)});});
  tree.walkAtRules('property',rule=>{const entry={file,line:rule.source.start.line};rule.walkDecls(d=>entry[d.prop]=d.value);registrations[rule.params]=entry;});
 }
-output('manual/reference/classes.json',{source:'upstream/latest/core.css',coverage:'explicit class selectors, including nested rules; attribute patterns and JS-created names excluded',count:Object.keys(classes).length,classes});
-output('manual/reference/tokens.json',{coverage:'all declared custom-property names in four snapshot CSS files; declarations, not computed defaults',count:Object.keys(tokens).length,registrations,tokens});
-const examples=JSON.parse(read('manual/reference/examples.json','utf8')).examples,used={};
+output('docs/reference/classes.json',{source:'upstream/latest/core.css',coverage:'explicit class selectors, including nested rules; attribute patterns and JS-created names excluded',count:Object.keys(classes).length,classes});
+output('docs/reference/tokens.json',{coverage:'all declared custom-property names in four snapshot CSS files; declarations, not computed defaults',count:Object.keys(tokens).length,registrations,tokens});
+const examples=JSON.parse(read('docs/reference/examples.json','utf8')).examples,used={};
 for(const e of examples) for(const match of e.html.matchAll(/class="([^"]+)"/g)) for(const name of match[1].split(/\s+/)) if(name.includes('core-')) {const ids=used[name] ||= new Set();ids.add(e.id);}
 let index=`# Индекс классов и примеров\n\n[Оглавление](../README.md) · [Правила агента](../AGENTS.md)\n\nВ CSS снимка v185 найдено **${Object.keys(classes).length} явных имён классов**. Полный каталог с селекторами, контекстом и строками — [classes.json](../reference/classes.json). Атрибутные шаблоны и классы, создаваемые JS, не входят в этот счётчик.\n\nНиже — **${Object.keys(used).length} классов из примеров**. Это навигация по мануалу, не полный список возможностей.\n\n## Классы из примеров\n\n`;
 for(const [name,ids] of Object.entries(used).sort(([a],[b])=>a.localeCompare(b))) index+='`'+name+'` — '+[...ids].map(id=>`[${id}](${examples.find(e=>e.id===id).chapter}.md)`).join(', ')+'.\n\n';
-write('manual/docs/class-index.md',index.trimEnd()+'\n');
+write('docs/docs/class-index.md',index.trimEnd()+'\n');
 console.log(`Indexed ${Object.keys(classes).length} classes, ${Object.keys(tokens).length} tokens, ${Object.keys(registrations).length} registrations`);
