@@ -45,6 +45,10 @@ test('local Markdown links resolve',()=>{
  const files=['README.md','AGENTS.md','docs/README.md','docs/AGENTS.md',...readdirSync('docs/docs').map(n=>'docs/docs/'+n)];
  for(const file of files){const body=read(file,'utf8').replace(/```[\s\S]*?```/g,'');for(const match of body.matchAll(/\[[^\]]*\]\(([^\s)]+)(?:\s+"[^"]*")?\)/g)){const href=match[1];if(/^(https?:|#|mailto:)/.test(href))continue;const target=new URL(href,new URL(file,'file://'+process.cwd()+'/'));assert.doesNotThrow(()=>read(target),`${file}: ${href}`);}}
 });
+test('published Markdown links stay inside the Pages artifact',()=>{
+ const files=['docs/README.md','docs/AGENTS.md',...readdirSync('docs/docs').map(n=>'docs/docs/'+n)];
+ for(const file of files){const body=read(file,'utf8').replace(/```[\s\S]*?```/g,'');for(const match of body.matchAll(/\[[^\]]*\]\(([^\s)]+)(?:\s+"[^"]*")?\)/g)){const href=match[1];if(/^(https?:|#|mailto:)/.test(href))continue;const target=new URL(href,new URL(file,'file://'+process.cwd()+'/'));assert.ok(decodeURIComponent(target.pathname).startsWith(`${process.cwd()}/docs/`),`${file}: ${href} escapes docs artifact`);}}
+});
 test('existing deep links to examples remain stable',()=>{
  const html=read('docs/index.html','utf8');for(const e of json('docs/reference/examples.json').examples)assert.ok(html.includes(`id="${e.chapter}--${e.id.toLowerCase()}"`),e.id);
 });
