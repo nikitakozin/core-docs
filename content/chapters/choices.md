@@ -10,7 +10,7 @@
 
 `core-checkbox` — обёртка, внутри которой расположен input type=checkbox, а **сразу после него** — `.core-checkbox-label`. Удобнее сделать обёртку `<label>`, чтобы клик по подписи менял значение. Псевдоэлементы видимой подписи рисуют квадрат и галочку. Между input и span нельзя вставлять другой элемент: правило `input:checked + .core-checkbox-label` перестанет совпадать.
 
-`core-checkbox-primary` — подтверждённый вариант; в исходнике рядом встречается историческая опечатка `core-ckeckbox-primary`. Используйте корректное написание. Отдельный disabled-стиль имеет спорную подстановку полного border-токена в border-color; это не отменяет нативный disabled, но визуальное состояние нужно проверить.
+В v190 disabled checkbox/radio используют `border: var(--theme-input-border-disabled)` с полным токеном границы. Старая ошибка подстановки такого токена в border-color снята; проверяйте нативный disabled и визуальное состояние отдельно.
 
 ## Radio
 
@@ -107,8 +107,8 @@ CSS скрывает сами input через прозрачность/пози
     </fieldset>
   </div>
   <hr class="core-hr">
-  <div class="core-form-item">
-    <label class="core-label" for="notify-email">Адрес для уведомлений</label>
+  <div class="core-col core-g-4x">
+    <label class="core-text core-text-s" for="notify-email">Адрес для уведомлений</label>
     <input class="core-input" id="notify-email" name="email" type="email" autocomplete="email" value="team@example.org">
   </div>
   <div class="core-row m-core-col core-g-4x"><button class="core-button core-button-primary" type="submit">Проверить настройки</button><button class="core-button core-button-outline" type="reset">Сбросить</button></div>

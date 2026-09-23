@@ -1,5 +1,5 @@
 {
-  "source_basis": "CDN v185; all 10 modules byte-identical to reviewed v182",
+  "source_basis": "source-manifest.json; all ten module hashes unchanged from the previous reviewed version",
   "modules": [
     {
       "module": "collapse",

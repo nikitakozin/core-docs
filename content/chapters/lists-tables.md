@@ -14,11 +14,11 @@
 
 `core-table` задаёт табличное отображение, схлопывание границ и оформление ячеек. Базовые внутренние отступы — 8 px по вертикали и 16 px по горизонтали, но крайние ячейки могут иметь обрезанные внешние отступы. Точная логика зависит от присутствия thead/tbody/tfoot и первого/последнего элемента.
 
-`core-table-bordered-v` добавляет внутренние вертикальные границы, `core-table-bordered-h` — горизонтальные, `core-table-head-underline` — нижнюю линию заголовка. `core-table-noscroll` устанавливает table и width 100%; сам он не создаёт прокрутку.
+`core-table-border-y` добавляет внутренние вертикальные границы, `core-table-border-x` — горизонтальные, `core-table-border-head` — нижнюю линию заголовка. Это новые имена v190. Для таблицы на всю ширину используйте `core-table core-w-full`; старый `core-table-noscroll` удалён.
 
 ## Широкие данные
 
-Для горизонтальной прокрутки есть `core-table-container`: flex-контейнер с max-width 100%, overflow-x auto и overflow-y hidden. Его вариант `core-table-container-masked` добавляет крайние градиентные маски, padding, scroll-padding и отрицательные margins по 20 px. Более универсальная обёртка — `core-x-scroll`. Не путайте с `core-h-scroll`: тот в исследованном CSS управляет **overflow-y**. Чтобы данные не сжимались до нечитаемого состояния, можно явно задать минимальную ширину таблицы как проектное решение.
+Для горизонтальной прокрутки используйте обёртку `core-x-scroll`. Старые `core-table-container` и `core-table-container-masked` удалены. `core-h-scroll` управляет **overflow-y**, поэтому для таблицы не подходит. Минимальную ширину данных и маску краёв задавайте явно под задачу; наличие прокрутки само по себе не предотвращает сжатие ячеек.
 
 Core не превращает произвольную HTML-таблицу в карточки одним классом. Для табличной семантики используйте `<table>` с прокруткой (E51). Если данные допускают список записей, используйте адаптивные grid-композиции E67/E68: они целиком на Core и не притворяются таблицей.
 
@@ -47,7 +47,7 @@ Core не превращает произвольную HTML-таблицу в �
   <h3 class="core-text core-text-bold">План выпуска</h3>
   <p class="core-text core-text-s">Пять этапов, ответственные и сроки. Суммы условные.</p>
   <div class="core-x-scroll" tabindex="0" role="region" aria-label="План выпуска; таблицу можно прокручивать">
-    <table class="core-table core-w-128x core-table-bordered-h core-table-head-underline" style="--w: 680px">
+    <table class="core-table core-w-128x core-table-border-x core-table-border-head" style="--w: 680px">
       <caption>Согласованный объём работ</caption>
       <thead><tr><th scope="col">Этап</th><th scope="col">Ответственный</th><th scope="col">Срок</th><th scope="col">Часы</th><th scope="col">Статус</th></tr></thead>
       <tbody>
@@ -70,18 +70,18 @@ Core не превращает произвольную HTML-таблицу в �
 При >720 px каждая запись — grid 3:1:1; при ≤720 px — одна колонка. Это семантический список, визуально похожий на таблицу: `ul/li`, а не поддельные роли table. Подписи полей остаются видимыми, все данные сохраняются.
 
 ```html
-<ul class="core-col core-g-4x" aria-label="Проекты команды">
-  <li class="core-card core-grid core-grid-3c-3fr-1fr-1fr m-core-grid-1c core-g-8x">
+<ul class="core-col core-g-4x" aria-label="Проекты команды" style="--grid: 3fr 1fr 1fr">
+  <li class="core-card core-grid m-core-grid-1c core-g-8x">
     <div class="core-col core-g-2x core-shrink"><h4 class="core-text core-text-bold">Культурный центр</h4><p class="core-text core-text-s">Сайт и афиша</p></div>
     <div class="core-col core-g-2x"><span class="core-text core-text-xs">Ответственный</span><span class="core-text">Анна</span></div>
     <div class="core-col core-g-4x"><span class="core-badge">На проверке</span><button type="button" class="core-button core-button-outline core-button-s">Открыть</button></div>
   </li>
-  <li class="core-card core-grid core-grid-3c-3fr-1fr-1fr m-core-grid-1c core-g-8x">
+  <li class="core-card core-grid m-core-grid-1c core-g-8x">
     <div class="core-col core-g-2x core-shrink"><h4 class="core-text core-text-bold">Личный кабинет</h4><p class="core-text core-text-s">Документы и уведомления</p></div>
     <div class="core-col core-g-2x"><span class="core-text core-text-xs">Ответственный</span><span class="core-text">Илья</span></div>
     <div class="core-col core-g-4x"><span class="core-badge">В работе</span><button type="button" class="core-button core-button-outline core-button-s">Открыть</button></div>
   </li>
-  <li class="core-card core-grid core-grid-3c-3fr-1fr-1fr m-core-grid-1c core-g-8x">
+  <li class="core-card core-grid m-core-grid-1c core-g-8x">
     <div class="core-col core-g-2x core-shrink"><h4 class="core-text core-text-bold">Интернет-магазин</h4><p class="core-text core-text-s">Каталог и заказ</p></div>
     <div class="core-col core-g-2x"><span class="core-text core-text-xs">Ответственный</span><span class="core-text">Мария</span></div>
     <div class="core-col core-g-4x"><span class="core-badge">План</span><button type="button" class="core-button core-button-outline core-button-s">Открыть</button></div>

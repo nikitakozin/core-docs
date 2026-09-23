@@ -51,10 +51,10 @@ Underline-вариант меняет нижнюю границу, внутре�
 Иконка и input — прямые дети; это важно для селекторов внутренних отступов.
 
 ```html
-<div class="core-form-item">
+<div class="core-col core-g-4x">
   <label for="search-docs">Поиск</label>
   <div class="core-input-box">
-    <span class="core-icon-search core-icon-m" aria-hidden="true"></span>
+    <span class="core-icon-search core-icon-8x" aria-hidden="true"></span>
     <input id="search-docs" class="core-input" type="search" placeholder="Название или фрагмент текста">
   </div>
 </div>
@@ -67,13 +67,13 @@ Underline-вариант меняет нижнюю границу, внутре�
 Выбор остаётся нативным select. В v185 используется написание chevron.
 
 ```html
-<div class="core-form-item">
+<div class="core-col core-g-4x">
   <label for="project-stage">Этап проекта</label>
   <div class="core-input-box">
     <select id="project-stage" class="core-select">
       <option>Исследование</option><option>Проектирование</option><option>Дизайн</option>
     </select>
-    <span class="core-icon-chevron-bottom core-icon-m" aria-hidden="true"></span>
+    <span class="core-icon-chevron-bottom core-icon-8x" aria-hidden="true"></span>
   </div>
 </div>
 ```
@@ -86,7 +86,7 @@ Underline-вариант меняет нижнюю границу, внутре�
 
 ```html
 <div class="core-input-box core-input-box-l core-input-underline">
-  <span class="core-icon-search core-icon-l" aria-hidden="true"></span>
+  <span class="core-icon-search core-icon-10x" aria-hidden="true"></span>
   <input class="core-input core-input-l" aria-label="Крупный поиск" placeholder="Поиск по базе знаний">
 </div>
 ```

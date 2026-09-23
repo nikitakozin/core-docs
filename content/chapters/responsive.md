@@ -20,7 +20,7 @@
 
 В v185 адаптивные ограничения названы `t-core-nogrow`, `t-core-noshrink`, `m-core-nogrow`, `m-core-noshrink`. Старые имена без `core-` удалены.
 
-В v185 именованные и числовые размеры иконок задают `--i-s` на элементе. Сочетание `core-icon-m m-core-icon-6x` поддерживает адаптивное переключение; числовая база также допустима.
+Иконки используют числовые размеры: `core-icon-8x m-core-icon-6x`. Именованные размеры удалены. Для заголовков оставляйте `core-h1` … `core-h6` и меняйте размер текстовыми t/m-утилитами; адаптивных `t-core-h*` и `m-core-h*` больше нет.
 
 ## Что сравнивать в мануале
 
@@ -51,7 +51,7 @@
 
 ```html
 <button type="button" class="core-button core-button-primary" aria-label="Создать документ">
-  <span class="core-icon-plus core-icon-m" aria-hidden="true"></span>
+  <span class="core-icon-plus core-icon-8x" aria-hidden="true"></span>
   <span class="m-core-hide">Создать документ</span>
 </button>
 ```
@@ -64,19 +64,19 @@
 
 ```html
 <form class="core-card core-row m-core-col core-g-6x" role="search" aria-label="Поиск материалов">
-  <div class="core-form-item core-grow core-shrink">
-    <label class="core-label" for="library-search">Материал</label>
+  <div class="core-col core-g-4x core-grow core-shrink">
+    <label class="core-text core-text-s" for="library-search">Материал</label>
     <div class="core-input-box">
-      <span class="core-icon-search core-icon-m" aria-hidden="true"></span>
+      <span class="core-icon-search core-icon-8x" aria-hidden="true"></span>
       <input class="core-input" id="library-search" name="q" type="search" placeholder="Название или фрагмент текста">
     </div>
   </div>
-  <div class="core-form-item core-shrink">
-    <label class="core-label" for="library-status">Статус</label>
+  <div class="core-col core-g-4x core-shrink">
+    <label class="core-text core-text-s" for="library-status">Статус</label>
     <select class="core-select" id="library-status" name="status"><option>Все материалы</option><option>На проверке</option><option>Согласовано</option></select>
   </div>
   <div class="core-col core-g-4x core-x-start">
-    <span class="core-label">Действие</span>
+    <span class="core-text core-text-s">Действие</span>
     <button type="submit" class="core-button core-button-primary">Найти</button>
   </div>
 </form>

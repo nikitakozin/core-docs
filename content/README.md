@@ -1,8 +1,8 @@
-# Core — руководство v185
+# Core — руководство
 
 [Открыть HTML](https://nikitakozin.github.io/core-docs/) · [Правила агента](AGENTS.md) · [Разработка и сборка](https://github.com/nikitakozin/core-docs#readme)
 
-42 главы и 82 примера. Проверенный снимок CDN от 21.09.2026 соответствует v185 с различиями каналов в importmap и readme. Runtime использует изменяемый latest; подробности — в [источниках и проверках](chapters/verification.md).
+42 главы и 82 примера. Проверенная версия, дата и хеши указаны в [манифесте](reference/source-manifest.json). Runtime использует изменяемый latest; изменения API и границы проверки — в [источниках и проверках](chapters/verification.md).
 
 ## Разделы
 

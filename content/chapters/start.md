@@ -8,7 +8,7 @@
 
 ```html
 <!doctype html>
-<html lang="ru" class="core-solo" data-theme="light">
+<html lang="ru" class="core-solo core-theme-light">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -29,7 +29,7 @@
 
 ## CDN и актуальность
 
-Runtime подключает оригинальные CSS/JS из `https://cdn.sdelal.tech/core/latest/`. Локальных копий Core в репозитории нет: сборка читает проверенный v185 с CDN, браузерные тесты работают с настоящим latest. При недоступности сети мануал сообщает об ошибке.
+Runtime подключает оригинальные CSS/JS из `https://cdn.sdelal.tech/core/latest/`. Локальных копий Core в репозитории нет: сборка читает документированную версию с CDN, браузерные тесты работают с настоящим latest. При недоступности сети мануал сообщает об ошибке.
 
 `latest` изменяем. Перед использованием неизвестного класса или API прочитайте текущий исходник. Дата наблюдения и SHA-256 полученного ответа нужны для проверки, но не меняют runtime-ссылку на зафиксированную версию. [Утилита чтения CDN](https://github.com/nikitakozin/core-docs/blob/main/tools/inspect-cdn.py) проверяет тексты и не устанавливает зависимости в проект.
 
@@ -50,7 +50,7 @@ Runtime подключает оригинальные CSS/JS из `https://cdn.s
   <h2 class="core-text core-text-l core-text-bold">Материалы проекта</h2>
   <p class="core-text">Бриф, решения и последние версии макетов.</p>
   <button type="button" class="core-button core-button-accent">
-    <span class="core-icon-plus core-icon-m" aria-hidden="true"></span>
+    <span class="core-icon-plus core-icon-8x" aria-hidden="true"></span>
     Добавить материал
   </button>
 </article>

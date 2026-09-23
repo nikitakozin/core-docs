@@ -2,14 +2,14 @@
 
 [Оглавление](../README.md) · [Правила агента](../AGENTS.md)
 
-В четырёх CSS-файлах снимка v185 объявлено **481 разных имён custom properties**. [tokens.json](https://nikitakozin.github.io/core-docs/reference/tokens.json) содержит все декларации с файлом, строкой, областью действия и исходным значением. Это не 481 независимых настроек и не список вычисленных default.
+Полный список имён custom properties строится из четырёх проверенных CSS-файлов CDN при сборке. [tokens.json](https://nikitakozin.github.io/core-docs/reference/tokens.json) содержит все декларации с файлом, строкой, областью действия и исходным значением. Это не перечень независимых настроек и не список вычисленных default.
 
 Ниже — базовые параметры `core.css`. Тема NK меняет типографику, SS задаёт собственные области, TG требует проверки совместимости. Если переменная объявлена в нескольких местах, итог зависит от каскада и наследования. [Правила настройки](tokens.md).
 
 ## Основа
 
 ```css
---rem-base: 18px
+--f-s-base: 18px
 --w-max-desktop: 1200px
 --x: 2px
 --icon-x: 2px
@@ -143,7 +143,7 @@
 --font-accent-sCapHeight: 700
 --font-accent-sxHeight: 500
 --font-accent-l-h-compensation: 1.114
---font-mono: "JetBrains Mono", "Fira Mono", "Menlo", "Consolas", "Liberation Mono", monospace
+--font-mono: 'JetBrains Mono', 'Fira Mono', 'Menlo', 'Consolas', 'Liberation Mono', monospace
 --font-mono-unitsPerEm: 1000
 --font-mono-ascender: 0
 --font-mono-descender: 0
@@ -151,13 +151,13 @@
 --font-mono-sxHeight: 0
 --font-mono-center-compensation: 0
 --font-mono-l-h-compensation: 1
---f-s-xxs: 0.6rem
---f-s-xs: 0.7rem
---f-s-s: 0.8rem
---f-s-m: 1rem
---f-s-l: 1.3rem
---f-s-xl: 1.7rem
---f-s-xxl: 2.3rem
+--f-s-xxs: calc(0.6 * var(--f-s-base))
+--f-s-xs: calc(0.7 * var(--f-s-base))
+--f-s-s: calc(0.8 * var(--f-s-base))
+--f-s-m: calc(1 * var(--f-s-base))
+--f-s-l: calc(1.3 * var(--f-s-base))
+--f-s-xl: calc(1.7 * var(--f-s-base))
+--f-s-xxl: calc(2.3 * var(--f-s-base))
 --l-h-xxs: 1.4em
 --l-h-xs: 1.38em
 --l-h-s: 1.3em
@@ -273,28 +273,10 @@
 
 ## Ненаследуемые рабочие переменные
 
-Core регистрирует 19 переменных с `inherits: false` и `syntax: "*"`. Регистрация относится ко всему документу. Значение родителя не передаётся потомку само по себе.
+Core регистрирует 20 переменных с `inherits: false` и `syntax: "*"`. Регистрация относится ко всему документу. Значение родителя не передаётся потомку само по себе.
 
 ```text
---w
---h
---p-b-env
---t
---r
---b
---l
---tr
---x
---g
---p
---p-t
---p-r
---p-b
---p-l
---p-s
---m-t
---m-b
---m-l
+--b --b-r --g --h --l --m-b --m-l --m-t --p --p-b --p-b-env --p-l --p-r --p-s --p-t --r --t --tr --w --x
 ```
 
 ## Локальный цветовой расчёт

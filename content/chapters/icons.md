@@ -6,7 +6,7 @@
 
 Иконка создаётся через `::before`: SVG используется как CSS-mask, а силуэт окрашивается `currentColor`. Это не icon font и не вставленный в DOM SVG с путями. Семантическое имя должно находиться у окружающего элемента, а декоративную иконку можно скрыть от assistive technology.
 
-Класс `core-icon-plus` выбирает форму. Размер задавайте явно: например `core-icon-m`. Общее основание `core-icon` обычно не требуется при использовании конкретного `core-icon-*`, поскольку общий селектор охватывает такие имена.
+Класс `core-icon-plus` задаёт маску через `--im-img` на элементе, а псевдоэлемент её использует. Размер задавайте числом, например `core-icon-8x`. Общее основание `core-icon` при конкретном `core-icon-*` обычно не требуется.
 
 ## Каталог подтверждённых имён
 
@@ -20,11 +20,11 @@ add plus close minus check chevron chevron-left chevron-right chevron-down chevr
 
 ## Размерная шкала
 
-Именованные размеры: xxxs 4 единицы, xxs 5, xs 6, s 7, m 8, l 10, xl 12. При `--icon-x: 2px` это 8, 10, 12, 14, 16, 20, 24 px. Именованного XXL в рассмотренном блоке нет.
+В v190 именованные размеры удалены. Замены прежних xxxs / xxs / xs / s / m / l / xl: `core-icon-4x`, `-5x`, `-6x`, `-7x`, `-8x`, `-10x`, `-12x`. При `--icon-x: 2px` это 8 / 10 / 12 / 14 / 16 / 20 / 24 px.
 
 Числовые классы: `core-icon-1x`, `-2x`, `-3x`, `-4x`, `-5x`, `-6x`, `-7x`, `-8x`, `-9x`, `-10x`, `-12x`, `-14x`, `-16x`, `-18x`, `-20x`, `-24x`, `-28x`, `-32x`, `-48x`, `-64x`; есть t/m-версии.
 
-В v185 и числовые, и именованные размеры назначают `--i-s` самому элементу; псевдоэлемент наследует значение. Сочетание `core-icon-m m-core-icon-6x` теперь допустимо. Проверяйте итоговую геометрию на границе 720/721 px.
+Числовые размеры назначают `--i-s` элементу; псевдоэлемент наследует значение. `core-icon-8x m-core-icon-6x` даёт 16 px обычно и 12 px при ширине ≤720 px. Проверяйте обе стороны границы 720/721 px.
 
 ## Цвет и inline-выравнивание
 
@@ -44,11 +44,11 @@ add plus close minus check chevron chevron-left chevron-right chevron-down chevr
 
 ```html
 <div class="core-row core-y-center core-g-10x">
-  <span class="core-icon-plus core-icon-xl" role="img" aria-label="Добавить"></span>
-  <span class="core-icon-search core-icon-xl" role="img" aria-label="Поиск"></span>
-  <span class="core-icon-layers core-icon-xl" role="img" aria-label="Слои"></span>
-  <span class="core-icon-calendar core-icon-xl" role="img" aria-label="Календарь"></span>
-  <span class="core-icon-check core-icon-xl core-color-green:700" role="img" aria-label="Готово"></span>
+  <span class="core-icon-plus core-icon-12x" role="img" aria-label="Добавить"></span>
+  <span class="core-icon-search core-icon-12x" role="img" aria-label="Поиск"></span>
+  <span class="core-icon-layers core-icon-12x" role="img" aria-label="Слои"></span>
+  <span class="core-icon-calendar core-icon-12x" role="img" aria-label="Календарь"></span>
+  <span class="core-icon-check core-icon-12x core-color-green:700" role="img" aria-label="Готово"></span>
 </div>
 ```
 
@@ -60,9 +60,9 @@ add plus close minus check chevron chevron-left chevron-right chevron-down chevr
 
 ```html
 <div class="core-row core-y-center core-g-12x">
-  <button type="button" class="core-icon-button core-icon-close core-icon-m" aria-label="Закрыть"></button>
+  <button type="button" class="core-icon-button core-icon-close core-icon-8x" aria-label="Закрыть"></button>
   <button type="button" class="core-button" aria-label="Закрыть">
-    <span class="core-icon-close core-icon-m" aria-hidden="true"></span>
+    <span class="core-icon-close core-icon-8x" aria-hidden="true"></span>
   </button>
 </div>
 ```

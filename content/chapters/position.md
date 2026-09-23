@@ -24,7 +24,7 @@
 
 ## Адаптивные позиции требуют особой проверки
 
-В v185 разделители координат tablet-секции исправлены, но часть коротких и обратных алиасов названа `m-core-*` внутри `(max-width: 997px)`. Например, `m-core-fix-t` включается уже на 997 px, а ожидаемого `t-core-fix-t` нет. Длинный `t-core-fix-top` существует. В адаптивных угловых правилах остаются подозрительные формулы `--x`; проверяйте конкретный селектор и computed style. Не выводите поддержку варианта только из префикса.
+В v190 короткие tablet-алиасы имеют префикс `t-`: например, `t-core-fix-t` действует при ≤997 px. `m-core-fix-t` действует только при ≤720 px. Исправлены выражения `--x` у адаптивного основания absolute; координаты `--t` и `--b` больше не наследуются. Это не заменяет проверку угловой геометрии конкретной композиции и обеих сторон breakpoint.
 
 ## Sticky
 
@@ -59,7 +59,7 @@ Inline-переменные явно задают внутренний отст�
   <h3 class="core-text core-text-l core-text-bold">Состояние синхронизации</h3>
   <p class="core-text">Координаты и вращение находятся на разных узлах.</p>
   <span class="core-abs core-abs-top-right" style="--t: 12px; --r: 12px">
-    <span class="core-icon-spinner core-icon-m core-animate:spin core-animate-time-4x" role="img" aria-label="Синхронизация"></span>
+    <span class="core-icon-spinner core-icon-8x core-animate:spin core-animate-time-4x" role="img" aria-label="Синхронизация"></span>
   </span>
 </article>
 ```

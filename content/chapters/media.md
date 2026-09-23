@@ -18,7 +18,7 @@
 
 ## Overflow и маски
 
-`core-overflow-hidden`, `core-overflow-none`, `core-crop` обрезают переполнение. `core-overflow-y-auto` и `core-h-scroll` дают вертикальную прокрутку. `core-x-scroll` — горизонтальную.
+`core-overflow-hidden`, `core-overflow-hidden`, `core-crop` обрезают переполнение. `core-overflow-y-auto` и `core-h-scroll` дают вертикальную прокрутку. `core-x-scroll` — горизонтальную.
 
 Маски `core-masked-left/right/top/bottom` используют градиенты и `--core-overflow-mask-size` с default 20 px. Несколько классов маски могут записывать одно свойство `mask-image`; не считайте, что их эффекты автоматически объединяются. Маска на контейнере также может обрезать визуальный focus-outline его детей.
 

@@ -103,4 +103,4 @@ document.getElementById('fail').onclick = () => load(true);
 
 <!-- demo:E75 -->
 
-**Источник:** [resource.js](https://cdn.sdelal.tech/core/latest/resource.js), снимок v185 от 21.09.2026; файл совпадает с проверенным v182.
+**Источник:** [resource.js](https://cdn.sdelal.tech/core/latest/resource.js), проверенная версия и SHA-256 — в [манифесте](../reference/source-manifest.json); при обновлении байты модуля не изменились.

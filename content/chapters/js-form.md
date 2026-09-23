@@ -77,4 +77,4 @@ const off = forms.on('formBeforeSubmit:request-form', ({ data }, { accept, rejec
 
 Для загрузки файлов, специальных заголовков, отмены запроса или иного API используйте собственный submit-обработчик. Не создавайте FormManager для той же формы параллельно с ним.
 
-**Источник:** [form.js](https://cdn.sdelal.tech/core/latest/form.js), снимок v185 от 21.09.2026; файл совпадает с проверенным v182.
+**Источник:** [form.js](https://cdn.sdelal.tech/core/latest/form.js), проверенная версия и SHA-256 — в [манифесте](../reference/source-manifest.json); при обновлении байты модуля не изменились.

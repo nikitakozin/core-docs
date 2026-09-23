@@ -46,7 +46,7 @@
   <label class="core-text core-text-bold" for="project-query">Найти в проекте</label>
   <div class="core-row core-nowrap m-core-col core-g-4x">
     <div class="core-input-box core-grow core-shrink">
-      <span class="core-icon-search core-icon-m" aria-hidden="true"></span>
+      <span class="core-icon-search core-icon-8x" aria-hidden="true"></span>
       <input class="core-input" id="project-query" name="q" type="search" placeholder="Название или фрагмент текста">
     </div>
     <button class="core-button core-button-primary" type="submit">Найти</button>
@@ -64,11 +64,11 @@
 ```html
 <section class="core-card core-col core-p-12x core-g-8x" aria-labelledby="settings-title">
   <h2 class="core-text core-text-l core-text-bold" id="settings-title">Параметры документа</h2>
-  <div class="core-form-item">
+  <div class="core-col core-g-4x">
     <label for="doc-name" class="core-text core-text-bold">Название</label>
     <input class="core-input" id="doc-name" name="title" value="Структура сайта">
   </div>
-  <div class="core-form-item">
+  <div class="core-col core-g-4x">
     <label for="doc-stage" class="core-text core-text-bold">Этап</label>
     <select class="core-select" id="doc-stage" name="stage"><option>Исследование</option><option>Проектирование</option><option>Дизайн</option></select>
   </div>
@@ -108,7 +108,7 @@
   <span class="core-icon-layers core-icon-24x" aria-hidden="true"></span>
   <h2 class="core-text core-text-l core-text-bold" id="empty-title">Материалов пока нет</h2>
   <p class="core-text">Добавьте бриф или заметку, чтобы начать работу с проектом.</p>
-  <button type="button" class="core-button core-button-accent"><span class="core-icon-plus core-icon-m" aria-hidden="true"></span>Добавить материал</button>
+  <button type="button" class="core-button core-button-accent"><span class="core-icon-plus core-icon-8x" aria-hidden="true"></span>Добавить материал</button>
 </section>
 ```
 
@@ -119,7 +119,7 @@
 1200 px: четыре показателя и две рабочие области. 997 px: два показателя в ряд, боковая область уходит вниз. 720 px: по одной колонке. Вложенные grid получают собственные треки, поэтому не наследуют конфигурацию внешней сетки. Только Core, без CSS приложения.
 
 ```html
-<section class="core-col core-g-12x" aria-labelledby="dashboard-title">
+<section class="core-col core-g-12x" aria-labelledby="dashboard-title" style="--grid: 2fr 1fr">
   <header class="core-row core-justify core-y-center m-core-col m-core-x-start core-g-6x">
     <div class="core-col core-g-2x">
       <h3 id="dashboard-title" class="core-text core-text-xl core-text-bold">Проекты команды</h3>
@@ -133,7 +133,7 @@
     <div class="core-card core-col core-g-2x"><dt class="core-text core-text-s">Готово за неделю</dt><dd class="core-text core-text-xl core-text-bold">8</dd></div>
     <div class="core-card core-col core-g-2x"><dt class="core-text core-text-s">Участники</dt><dd class="core-text core-text-xl core-text-bold">6</dd></div>
   </dl>
-  <div class="core-grid core-grid-2c-2fr-1fr t-core-grid-1c core-g-8x">
+  <div class="core-grid t-core-grid-1c core-g-8x">
     <section class="core-card core-col core-g-8x core-shrink" aria-label="Ближайшие задачи">
       <h4 class="core-text core-text-bold">Ближайшие задачи</h4>
       <div class="core-grid core-grid-2c m-core-grid-1c core-g-8x">

@@ -106,7 +106,7 @@
     function verify() {
       if (finished) return;
       const probe=document.createElement('div'); probe.className='core-row core-abs core-ghost'; document.body.append(probe);
-      const ok=getComputedStyle(probe).display==='flex' && getComputedStyle(document.documentElement).getPropertyValue('--rem-base').trim()!=='';
+      const ok=getComputedStyle(probe).display==='flex' && getComputedStyle(document.documentElement).getPropertyValue('--f-s-base').trim()!=='';
       probe.remove();
       if (!ok) return fail('Основные правила Core не обнаружены.');
       coreReady=true;
@@ -138,6 +138,8 @@
       if (event.source!==parent || !message || message.type!=='core-docs-settings' || message.token!==config.token) return;
       if (message.theme!=='light' && message.theme!=='dark') return;
       document.documentElement.dataset.theme=message.theme;
+      document.documentElement.classList.toggle('core-theme-light',message.theme==='light');
+      document.documentElement.classList.toggle('core-theme-dark',message.theme==='dark');
       measure();
     });
     document.addEventListener('submit',event => event.preventDefault());
@@ -148,7 +150,7 @@
     const script=`(${childRuntime.toString()})(${JSON.stringify(config)});`;
     const styles=(example.styles||[]).map(url=>`<link rel="stylesheet" href="${esc(url)}">`).join('');
     const module=example.js ? `<script type="module">${example.js.replace(/<\/script/gi,'<\\/script')}\nwindow.dispatchEvent(new Event('core-docs-script-ready'));<\/script>` : '';
-    return `<!doctype html><html lang="ru" class="core-solo" data-theme="${esc(theme)}"><head>
+    return `<!doctype html><html lang="ru" class="core-solo core-theme-${esc(theme)}" data-theme="${esc(theme)}"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline' https://cdn.sdelal.tech; script-src 'unsafe-inline' https://cdn.sdelal.tech; img-src data: https:; font-src https: data:; connect-src 'none'; form-action 'none'; base-uri 'none'">
 <link id="core-css" rel="stylesheet" href="https://cdn.sdelal.tech/core/latest/core.css" onload="this.dataset.state='ok'" onerror="this.dataset.state='error'">
@@ -230,6 +232,7 @@ ${styles}</head>
   document.querySelectorAll('.demo-viewport').forEach(area => areaObserver.observe(area));
   function applyTheme() {
     releaseAnchor(); root.dataset.theme=theme;
+    root.classList.toggle('core-theme-light',theme==='light');root.classList.toggle('core-theme-dark',theme==='dark');
     themeButton.setAttribute('aria-pressed',String(theme==='dark'));
     themeButton.setAttribute('aria-label',theme==='dark'?'Включить светлую тему':'Включить тёмную тему');
     themeButton.querySelector('.theme-label').textContent=theme==='dark'?'Светлая тема':'Тёмная тема';

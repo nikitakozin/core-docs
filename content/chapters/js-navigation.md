@@ -71,4 +71,4 @@ unregister();
 navigation.destroy();
 ```
 
-**Источник:** [navigation.js](https://cdn.sdelal.tech/core/latest/navigation.js), снимок v185 от 21.09.2026; файл совпадает с проверенным v182.
+**Источник:** [navigation.js](https://cdn.sdelal.tech/core/latest/navigation.js), проверенная версия и SHA-256 — в [манифесте](../reference/source-manifest.json); при обновлении байты модуля не изменились.

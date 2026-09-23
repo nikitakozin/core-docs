@@ -94,9 +94,9 @@ const sliders = new SliderManager();
 
 <!-- demo:E79 -->
 
-**Источник:** [slider.js](https://cdn.sdelal.tech/core/latest/slider.js), снимок v185 от 21.09.2026; файл совпадает с проверенным v182.
+**Источник:** [slider.js](https://cdn.sdelal.tech/core/latest/slider.js), проверенная версия и SHA-256 — в [манифесте](../reference/source-manifest.json); при обновлении байты модуля не изменились.
 
-## Совместимость с CSS v185
+## Совместимость с текущим CSS
 
 JS по умолчанию использует удалённые классы `core-slide-shake-left/right`. Для обратной связи на краях задайте актуальные имена при первом создании singleton:
 

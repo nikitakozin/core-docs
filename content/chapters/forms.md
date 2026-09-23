@@ -4,7 +4,7 @@
 
 ## Структура поля
 
-`core-form-item` — вертикальная группа с gap 8 px. Используйте label, реальный контрол и при необходимости текст подсказки. `core-form-item-inline` располагает подпись и контрол горизонтально, а на мобильном переводит в колонку. Это компоновка, не HTML-форма и не связка label автоматически.
+В v190 `core-form-item`, `core-form-item-inline` и `core-label` удалены. Вертикальную группу собирайте как `core-col core-g-4x`, подпись — обычный `label` с `core-text core-text-s`. Горизонтальная группа — композиция `core-row`, выравнивания и `m-core-col`, как в E66. Связь label с полем задают `for` и `id`.
 
 Всегда связывайте `<label for>` с уникальным `id`; placeholder не заменяет подпись. Имена `name`, тип, autocomplete и required — часть контракта приложения, а не визуальных классов.
 
@@ -43,7 +43,7 @@
 id уникален внутри своего документа. Подпись и подсказка связаны с контролом, а не просто расположены рядом.
 
 ```html
-<div class="core-form-item">
+<div class="core-col core-g-4x">
   <label for="project-title">Название проекта</label>
   <input id="project-title" name="title" class="core-input" autocomplete="off"
          aria-describedby="project-title-help" placeholder="Например, сайт театра">
@@ -59,9 +59,9 @@ id уникален внутри своего документа. Подпись
 
 ```html
 <div class="core-grid core-grid-3c m-core-grid-1c">
-  <div class="core-form-item"><label for="stage">Этап</label><select id="stage" class="core-select"><option>Исследование</option><option>Дизайн</option></select></div>
-  <div class="core-form-item"><label for="deadline">Срок</label><input id="deadline" type="date" class="core-date"></div>
-  <div class="core-form-item"><label for="hours">Часы</label><input id="hours" type="number" min="0" step="0.5" value="12" class="core-num"></div>
+  <div class="core-col core-g-4x"><label for="stage">Этап</label><select id="stage" class="core-select"><option>Исследование</option><option>Дизайн</option></select></div>
+  <div class="core-col core-g-4x"><label for="deadline">Срок</label><input id="deadline" type="date" class="core-date"></div>
+  <div class="core-col core-g-4x"><label for="hours">Часы</label><input id="hours" type="number" min="0" step="0.5" value="12" class="core-num"></div>
 </div>
 ```
 
@@ -73,8 +73,8 @@ readonly и disabled имеют разную HTML-семантику. Внешн
 
 ```html
 <div class="core-col core-g-8x">
-  <div class="core-form-item"><label for="description">Описание</label><textarea id="description" class="core-textarea" rows="3" placeholder="Контекст и ограничения"></textarea></div>
-  <div class="core-form-item"><label for="project-code">Код проекта</label><input id="project-code" class="core-input" value="PRJ-024" readonly></div>
+  <div class="core-col core-g-4x"><label for="description">Описание</label><textarea id="description" class="core-textarea" rows="3" placeholder="Контекст и ограничения"></textarea></div>
+  <div class="core-col core-g-4x"><label for="project-code">Код проекта</label><input id="project-code" class="core-input" value="PRJ-024" readonly></div>
 </div>
 ```
 
@@ -85,7 +85,7 @@ readonly и disabled имеют разную HTML-семантику. Внешн
 Это рецепт, не встроенная validation-тема. Состояния контура заданы вместе; текст ошибки не зависит только от цвета.
 
 ```html
-<div class="core-form-item">
+<div class="core-col core-g-4x">
   <label for="email-error">Электронная почта</label>
   <input id="email-error" type="email" class="core-input" value="team@"
     aria-invalid="true" aria-describedby="email-message"
@@ -103,7 +103,7 @@ readonly и disabled имеют разную HTML-семантику. Внешн
 Файл выбирается нативно, но никуда не отправляется. accept — подсказка выбора, не серверная проверка содержимого.
 
 ```html
-<div class="core-form-item">
+<div class="core-col core-g-4x">
   <label for="brief-file">Бриф проекта</label>
   <div class="core-file"><input id="brief-file" type="file" name="brief" accept=".pdf,.docx,.txt"></div>
 </div>
@@ -122,33 +122,33 @@ readonly и disabled имеют разную HTML-семантику. Внешн
     <p class="core-text core-text-s">Укажите контакты, сроки и задачу. Данные никуда не отправляются.</p>
   </header>
   <div class="core-grid core-grid-2c m-core-grid-1c core-g-8x">
-    <div class="core-form-item core-shrink">
-      <label class="core-label" for="brief-name">Ваше имя *</label>
+    <div class="core-col core-g-4x core-shrink">
+      <label class="core-text core-text-s" for="brief-name">Ваше имя *</label>
       <input class="core-input" id="brief-name" name="name" autocomplete="name" required placeholder="Анна">
     </div>
-    <div class="core-form-item core-shrink">
-      <label class="core-label" for="brief-company">Компания</label>
+    <div class="core-col core-g-4x core-shrink">
+      <label class="core-text core-text-s" for="brief-company">Компания</label>
       <input class="core-input" id="brief-company" name="company" autocomplete="organization" placeholder="Название компании">
     </div>
-    <div class="core-form-item core-shrink">
-      <label class="core-label" for="brief-email">Электронная почта *</label>
+    <div class="core-col core-g-4x core-shrink">
+      <label class="core-text core-text-s" for="brief-email">Электронная почта *</label>
       <input class="core-input" id="brief-email" name="email" type="email" autocomplete="email" required placeholder="anna@example.org">
     </div>
-    <div class="core-form-item core-shrink">
-      <label class="core-label" for="brief-phone">Телефон</label>
+    <div class="core-col core-g-4x core-shrink">
+      <label class="core-text core-text-s" for="brief-phone">Телефон</label>
       <input class="core-input" id="brief-phone" name="phone" type="tel" autocomplete="tel" placeholder="+7 900 000-00-00">
     </div>
-    <div class="core-form-item core-shrink">
-      <label class="core-label" for="brief-type">Что нужно сделать</label>
+    <div class="core-col core-g-4x core-shrink">
+      <label class="core-text core-text-s" for="brief-type">Что нужно сделать</label>
       <select class="core-select" id="brief-type" name="type"><option>Сайт</option><option>Интерфейс сервиса</option><option>Айдентика</option></select>
     </div>
-    <div class="core-form-item core-shrink">
-      <label class="core-label" for="brief-deadline">Желаемый срок</label>
+    <div class="core-col core-g-4x core-shrink">
+      <label class="core-text core-text-s" for="brief-deadline">Желаемый срок</label>
       <input class="core-date" id="brief-deadline" name="deadline" type="date">
     </div>
   </div>
-  <div class="core-form-item">
-    <label class="core-label" for="brief-task">Задача</label>
+  <div class="core-col core-g-4x">
+    <label class="core-text core-text-s" for="brief-task">Задача</label>
     <textarea class="core-textarea" id="brief-task" name="task" rows="4" aria-describedby="brief-hint" placeholder="Для кого продукт и что должно измениться"></textarea>
     <p id="brief-hint" class="core-text core-text-xs">Достаточно контекста и ожидаемого результата.</p>
   </div>
@@ -168,24 +168,24 @@ readonly и disabled имеют разную HTML-семантику. Внешн
 
 ### E66. Горизонтальные подписи: автоматическая перестройка
 
-`core-form-item-inline` уже содержит media query ≤720 px: row становится column, ширина label — auto. Сравните 721 и 720 px. Это встроенная адаптивность самого компонента, не CSS мануала.
+E66 использует составной рецепт: строка без переноса (`core-row core-nowrap`) и подпись фиксированной ширины на большом экране, `m-core-col` и `m-core-w-auto` при ≤720 px. Сравните 721 и 720 px. Это композиция штатных утилит, а не отдельный компонент формы или собственный CSS мануала.
 
 ```html
 <form class="core-card core-col core-g-10x" aria-labelledby="profile-title">
   <h3 id="profile-title" class="core-text core-text-bold">Профиль участника</h3>
-  <div class="core-form-item-inline">
-    <label class="core-label" for="profile-name">Имя</label>
-    <input class="core-input" id="profile-name" name="name" autocomplete="name" value="Анна Иванова">
+  <div class="core-row core-nowrap core-y-center m-core-col core-g-4x m-core-g-2x">
+    <label class="core-text core-text-s core-w-40x m-core-w-auto core-noshrink" for="profile-name">Имя</label>
+    <input class="core-input core-grow core-shrink" id="profile-name" name="name" autocomplete="name" value="Анна Иванова">
   </div>
-  <div class="core-form-item-inline">
-    <label class="core-label" for="profile-email">Почта</label>
-    <input class="core-input" id="profile-email" name="email" type="email" autocomplete="email" value="anna@example.org">
+  <div class="core-row core-nowrap core-y-center m-core-col core-g-4x m-core-g-2x">
+    <label class="core-text core-text-s core-w-40x m-core-w-auto core-noshrink" for="profile-email">Почта</label>
+    <input class="core-input core-grow core-shrink" id="profile-email" name="email" type="email" autocomplete="email" value="anna@example.org">
   </div>
-  <div class="core-form-item-inline">
-    <label class="core-label" for="profile-role">Роль</label>
-    <select class="core-select" id="profile-role" name="role"><option>Редактор</option><option>Дизайнер</option><option>Наблюдатель</option></select>
+  <div class="core-row core-nowrap core-y-center m-core-col core-g-4x m-core-g-2x">
+    <label class="core-text core-text-s core-w-40x m-core-w-auto core-noshrink" for="profile-role">Роль</label>
+    <select class="core-select core-grow core-shrink" id="profile-role" name="role"><option>Редактор</option><option>Дизайнер</option><option>Наблюдатель</option></select>
   </div>
-  <p class="core-text core-text-s">На телефоне подпись перемещается над полем — без дополнительных классов.</p>
+  <p class="core-text core-text-s">На телефоне m-core-col перемещает подпись над полем.</p>
 </form>
 ```
 

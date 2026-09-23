@@ -83,9 +83,9 @@ Hover применяется в media `(hover: hover)`, есть active, focus-v
 
 ```html
 <div class="core-actions-box" role="group" aria-label="Действия с документом">
-  <button type="button" class="core-button"><span class="core-icon-edit core-icon-m" aria-hidden="true"></span>Изменить</button>
-  <button type="button" class="core-button"><span class="core-icon-copy core-icon-m" aria-hidden="true"></span>Копировать</button>
-  <button type="button" class="core-button" aria-label="Удалить"><span class="core-icon-bin core-icon-m" aria-hidden="true"></span></button>
+  <button type="button" class="core-button"><span class="core-icon-edit core-icon-8x" aria-hidden="true"></span>Изменить</button>
+  <button type="button" class="core-button"><span class="core-icon-copy core-icon-8x" aria-hidden="true"></span>Копировать</button>
+  <button type="button" class="core-button" aria-label="Удалить"><span class="core-icon-bin core-icon-8x" aria-hidden="true"></span></button>
 </div>
 ```
 

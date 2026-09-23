@@ -12,6 +12,9 @@ await buildReferences();
 const json=path=>JSON.parse(read(path,'utf8'));
 const esc=value=>String(value).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;');
 const chapters=json('docs/chapters.json'), examples=json('docs/reference/examples.json').examples;
+const manifest=json('docs/reference/source-manifest.json'),version=manifest.version;
+const checkedDate=(manifest.runtime_checked_at||manifest.retrieved_at).slice(0,10);
+const runtimeState=manifest.comparison?.latest_content_different?.length?'есть расхождения':'совпадал с версией';
 const searchSections=[], pages=[], groups=new Map();
 const button='core-button core-button-s';
 const widths=['auto',390,720,721,997,998,1200];
@@ -31,12 +34,12 @@ function demo(id) {
 <p class="demo-status core-text core-text-s core-p-8x" role="status">Откройте раздел для загрузки примера.</p>
 <div class="demo-error-actions core-p-8x core-hide"><button type="button" class="retry-demo ${button}">Повторить загрузку</button></div>
 <div class="demo-viewport core-w-full core-crop core-bg"><div class="demo-canvas core-col core-w-auto core-h-unset core-crop"><iframe class="core-abs core-abs-center core-w-auto core-h-unset core-ghost" title="${esc(e.id+'. '+e.title)}" sandbox="allow-scripts" referrerpolicy="no-referrer"></iframe></div></div>
-<details class="example-code core-border core-border-t"><summary class="core-row core-nowrap core-y-center core-g-4x core-text core-text-s core-text-bold core-p-8x core-cursor:pointer"><span class="code-chevron core-icon-chevron-right core-icon-xs" aria-hidden="true"></span>Код примера <span class="core-muted-4x">· ${id}</span></summary><div class="core-p-8x core-p-t-0x">${codeBlock(e.html,'HTML')}${e.js?codeBlock(e.js,'JavaScript'):''}</div></details>
+<details class="example-code core-border core-border-t"><summary class="core-row core-nowrap core-y-center core-g-4x core-text core-text-s core-text-bold core-p-8x core-cursor:pointer"><span class="code-chevron core-icon-chevron-right core-icon-6x" aria-hidden="true"></span>Код примера <span class="core-muted-4x">· ${id}</span></summary><div class="core-p-8x core-p-t-0x">${codeBlock(e.html,'HTML')}${e.js?codeBlock(e.js,'JavaScript'):''}</div></details>
 </div>`;
 }
 function chapterFooter(index) {
  const previous=chapters[index-1], next=chapters[index+1];
- const link=(c,label,icon)=>c?`<a class="core-col core-g-3x core-shrink core-color core-p-8x core-border core-b-r-4x" href="#${c.id}"><span class="core-row core-y-center core-g-3x core-text core-text-xs core-muted-4x"><span class="core-icon-${icon} core-icon-xs" aria-hidden="true"></span>${label}</span><span class="core-text core-text-s core-text-bold">${esc(c.navTitle)}</span></a>`:'<span></span>';
+ const link=(c,label,icon)=>c?`<a class="core-col core-g-3x core-shrink core-color core-p-8x core-border core-b-r-4x" href="#${c.id}"><span class="core-row core-y-center core-g-3x core-text core-text-xs core-muted-4x"><span class="core-icon-${icon} core-icon-6x" aria-hidden="true"></span>${label}</span><span class="core-text core-text-s core-text-bold">${esc(c.navTitle)}</span></a>`:'<span></span>';
  return `<footer class="chapter-footer core-grid core-grid-2c core-g-8x core-border core-border-t core-p-t-16x core-m-t-24x" aria-label="Переходы по руководству">${link(previous,'Предыдущий раздел','arrow-left')}${link(next,'Следующий раздел','arrow-right')}</footer>`;
 }
 for(const [index,c] of chapters.entries()) {
@@ -76,7 +79,7 @@ for(const [index,c] of chapters.entries()) {
  const flush=()=>{
   if(!prose.some(t=>t.type!=='space')){prose=[];return;}
   let content=marked.parser(prose);
-  content=content.replaceAll('<table>','<div class="core-table-container"><table class="core-table core-table-bordered-h">').replaceAll('</table>','</table></div>');
+  content=content.replaceAll('<table>','<div class="core-x-scroll"><table class="core-table core-table-border-x">').replaceAll('</table>','</table></div>');
   const source=prose.some(t=>t.type==='paragraph'&&t.text.startsWith('**Источник:'));
   html+=`<div class="prose core-content core-text m-core-text-s${source?' core-text-s core-muted-4x core-border core-border-t core-p-t-8x core-m-t-16x':''}">${content}</div>`;prose=[];
  };
@@ -86,7 +89,7 @@ for(const [index,c] of chapters.entries()) {
   if(token.type==='heading'||token.type==='code'||demoId) {
    flush();html+=demoId?demo(demoId):marked.parser([token]);
    if(token.type==='heading'&&token.depth===1&&c.id==='overview') {
-    html+=`<div class="core-row core-g-14x core-border core-border-b core-p-b-10x core-m-b-20x" aria-label="Состав руководства">${[['42','раздела'],['82','примера'],['10 JS','модулей']].map(([value,label])=>`<div class="core-col core-g-3x"><span class="core-text core-text-l core-text-bold">${value}</span><span class="core-text core-text-xs core-muted-4x">${label}</span></div>`).join('')}</div>`;
+    html+=`<div class="core-row core-g-14x core-border core-border-b core-p-b-10x core-m-b-20x" aria-label="Состав руководства">${[[chapters.length,'раздела'],[examples.length,'примера'],['10 JS','модулей']].map(([value,label])=>`<div class="core-col core-g-3x"><span class="core-text core-text-l core-text-bold">${value}</span><span class="core-text core-text-xs core-muted-4x">${label}</span></div>`).join('')}</div>`;
    }
   } else {if(token.type==='paragraph'&&token.text.startsWith('**Источник:'))flush();prose.push(token);}
  }
@@ -95,16 +98,16 @@ for(const [index,c] of chapters.entries()) {
  const sections=body.split(/(?=^#{2,6} )/m);
  searchSections.push({id:c.id,chapter:c.id,chapterTitle:c.navTitle,title:c.title,text:sections[0]});
  sections.slice(1).forEach((text,i)=>searchSections.push({id:headings[i]?.id||c.id,chapter:c.id,chapterTitle:c.navTitle,title:headings[i]?.title||c.title,text}));
- const item=`<div class="nav-item core-col core-g-0x" data-chapter="${c.id}"><a class="nav-link core-row core-nowrap core-y-center core-g-3x core-text core-text-s core-p-5x core-b-r-3x core-color" data-chapter="${c.id}" href="#${c.id}"><span class="core-grow core-shrink">${esc(c.navTitle)}</span><span class="nav-chevron core-icon-chevron-right core-icon-xs" aria-hidden="true"></span></a><div class="nav-submenu core-col core-g-0x core-p-l-8x core-p-b-6x core-hide">${headings.map(h=>`<a class="nav-sublink core-border core-border-l core-border-transparent core-text core-text-xs core-color core-muted-4x core-p-4x" data-target="${h.id}" href="#${h.id}">${esc(h.title)}</a>`).join('')}</div></div>`;
+ const item=`<div class="nav-item core-col core-g-0x" data-chapter="${c.id}"><a class="nav-link core-row core-nowrap core-y-center core-g-3x core-text core-text-s core-p-5x core-b-r-3x core-color" data-chapter="${c.id}" href="#${c.id}"><span class="core-grow core-shrink">${esc(c.navTitle)}</span><span class="nav-chevron core-icon-chevron-right core-icon-6x" aria-hidden="true"></span></a><div class="nav-submenu core-col core-g-0x core-p-l-8x core-p-b-6x core-hide">${headings.map(h=>`<a class="nav-sublink core-border core-border-l core-border-transparent core-text core-text-xs core-color core-muted-4x core-p-4x" data-target="${h.id}" href="#${h.id}">${esc(h.title)}</a>`).join('')}</div></div>`;
  if(!groups.has(c.group))groups.set(c.group,[]);groups.get(c.group).push(item);
 }
 const navigation=[...groups].map(([name,items])=>`<section class="nav-group core-m-b-10x"><h2 class="core-text core-text-xs core-text-upper core-text-bold core-color core-muted-4x core-p-5x core-m-b-2x">${esc(name)}</h2>${items.join('\n')}</section>`).join('\n');
-const data=JSON.stringify({version:185,chapters,examples,searchSections}).replaceAll('<','\\u003c');
+const data=JSON.stringify({version,chapters,examples,searchSections}).replaceAll('<','\\u003c');
 const app=read('content/viewer/app.js','utf8').replaceAll('</script','<\\/script');
 const html=`<!doctype html>
-<html lang="ru" class="core-solo" data-theme="light" style="--rem-base:16px"><head>
+<html lang="ru" class="core-solo core-theme-light" data-theme="light" style="--f-s-base:16px"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Core — руководство</title>
-<meta name="description" content="Документация Core v185: 42 раздела, 82 живых примера, CSS и JavaScript.">
+<meta name="description" content="Документация Core v${version}: ${chapters.length} раздела, ${examples.length} живых примера, CSS и JavaScript.">
 <link id="shell-core" rel="stylesheet" onload="this.dataset.state='ok'" onerror="this.dataset.state='error'" href="https://cdn.sdelal.tech/core/latest/core.css">
 <link id="shell-theme" rel="stylesheet" onload="this.dataset.state='ok'" onerror="this.dataset.state='error'" href="https://cdn.sdelal.tech/core/latest/theme-nk.css">
 </head><body class="core-bg core-color">
@@ -112,14 +115,14 @@ const html=`<!doctype html>
 <a id="skip-link" class="core-fix core-fix-top-left core-button core-button-accent core-ghost" href="#main-content">К содержанию</a>
 <div id="sidebar-slot" class="core-z-0 core-w-140x core-noshrink t-core-hide">
 <aside id="sidebar" class="core-theme-dark core-bg core-color core-col core-g-0x core-w-140x core-h-100dvh core-fix core-fix-top-left">
-<div class="core-row core-nowrap core-y-center core-g-6x core-p-10x core-border core-border-b"><a class="core-col core-g-2x core-grow core-color" href="#overview"><span class="core-row core-nowrap core-y-center core-g-5x core-text core-text-xl core-text-bold"><span class="core-w-8x core-h-8x core-border core-border-2x core-border-accent core-b-r-full" aria-hidden="true"></span>Core</span><span class="core-text core-text-xs core-muted-4x">Руководство по фреймворку</span></a><button id="menu-close" type="button" class="${button} core-hide t-core-show" aria-label="Закрыть меню"><span class="core-icon-close core-icon-s" aria-hidden="true"></span></button></div>
+<div class="core-row core-nowrap core-y-center core-g-6x core-p-10x core-border core-border-b"><a class="core-col core-g-2x core-grow core-color" href="#overview"><span class="core-row core-nowrap core-y-center core-g-5x core-text core-text-xl core-text-bold"><span class="core-w-8x core-h-8x core-border core-border-2x core-border-accent core-b-r-full" aria-hidden="true"></span>Core</span><span class="core-text core-text-xs core-muted-4x">Руководство по фреймворку</span></a><button id="menu-close" type="button" class="${button} core-hide t-core-show" aria-label="Закрыть меню"><span class="core-icon-close core-icon-7x" aria-hidden="true"></span></button></div>
 <nav id="chapter-nav" aria-label="Разделы руководства" class="core-grow core-shrink core-h-0x core-h-scroll core-p-6x core-p-t-10x">${navigation}</nav>
-<footer class="core-col core-g-3x core-p-10x core-border core-border-t"><a class="core-text core-text-xs core-color" href="AGENTS.md">Документация для агента <span class="core-icon-arrow-right core-icon-xs" aria-hidden="true"></span></a><span class="core-text core-text-xs core-muted-4x">Core v185 · 42 раздела · 82 примера</span></footer>
+<footer class="core-col core-g-3x core-p-10x core-border core-border-t"><a class="core-text core-text-xs core-color" href="AGENTS.md">Документация для агента <span class="core-icon-arrow-right core-icon-6x" aria-hidden="true"></span></a><span class="core-text core-text-xs core-muted-4x">Core v${version} · ${chapters.length} раздела · ${examples.length} примера</span><span class="core-text core-text-xs core-muted-4x">Latest: ${checkedDate} · ${runtimeState}</span></footer>
 </aside></div>
 <div id="workspace" class="core-z-0 core-grow core-shrink">
 <header class="topbar core-sticky core-row core-nowrap core-y-center core-g-6x m-core-g-4x core-p-8x core-p-l-20x core-p-r-20x m-core-p-6x m-core-p-l-8x m-core-p-r-8x core-bg core-border core-border-b">
 <button id="menu-button" type="button" class="${button} core-hide t-core-show" aria-controls="mobile-menu" aria-expanded="false" aria-label="Открыть разделы">Разделы</button>
-<div class="core-input-box core-grow core-shrink core-m-w-s" role="search"><span class="core-icon-search core-icon-s" aria-hidden="true"></span><input id="search" type="search" class="core-input core-shrink" placeholder="Поиск по руководству…" aria-label="Поиск по руководству" autocomplete="off"><kbd class="core-kbd core-text-xs core-noshrink core-muted-4x m-core-hide">⌘ K</kbd></div>
+<div class="core-input-box core-grow core-shrink core-m-w-s" role="search"><span class="core-icon-search core-icon-7x" aria-hidden="true"></span><input id="search" type="search" class="core-input core-shrink" placeholder="Поиск по руководству…" aria-label="Поиск по руководству" autocomplete="off"><kbd class="core-kbd core-text-xs core-noshrink core-muted-4x m-core-hide">⌘ K</kbd></div>
 <div class="core-row core-nowrap core-y-center core-g-6x core-grow core-text-right"><button id="theme-toggle" type="button" class="${button}" aria-pressed="false"><span class="core-text" aria-hidden="true">◐</span><span class="theme-label m-core-hide">Тёмная тема</span></button><span class="core-badge core-badge-s t-core-hide">CDN latest</span></div>
 </header>
 <main id="main-content" tabindex="-1" class="core-section core-text m-core-text-s core-g-0x core-m-w-l core-p-20x m-core-p-8x m-core-p-t-14x" style="--f-s-s:0.875rem;--l-h-m:1.45em">

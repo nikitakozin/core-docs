@@ -72,4 +72,4 @@ document.getElementById('reset').onclick = () => state.set('count', 0);
 
 <!-- demo:E73 -->
 
-**Источник:** [state.js](https://cdn.sdelal.tech/core/latest/state.js), снимок v185 от 21.09.2026; файл совпадает с проверенным v182.
+**Источник:** [state.js](https://cdn.sdelal.tech/core/latest/state.js), проверенная версия и SHA-256 — в [манифесте](../reference/source-manifest.json); при обновлении байты модуля не изменились.

@@ -4,19 +4,19 @@
 
 ## Интерфейсный текст
 
-`core-text` включает размер и межстрочный интервал через рабочие параметры. `core-text-xxs/xs/s/m/l/xl/xxl` — готовые размеры. При необходимости добавляйте `core-text-bold` / `core-text-b`, `core-text-italic`, `core-text-upper`, `core-text-nums`. Последний включает табличные цифры, если шрифт их поддерживает.
+`core-text` включает размер и межстрочный интервал через рабочие параметры. `core-text-xxs/xs/s/m/l/xl/xxl` — готовые размеры. Добавляйте `core-text-bold`, `core-text-italic`, `core-text-upper`, `core-text-nums` по задаче. Последний включает табличные цифры, если шрифт их поддерживает; старый алиас `core-text-b` удалён.
 
 `core-text-primary`, `core-text-accent`, `core-text-mono` выбирают не только font-family, но и набор рабочих метрик. Семантический «акцентный шрифт» не равен акцентному цвету. Для цвета есть отдельные средства.
 
 `core-text-center`, `core-text-right` и `core-text-left` задают выравнивание. Коротких алиасов `core-text-c` и `core-text-r` в архиве нет. `core-text-l` задаёт только крупный размер: он не сбрасывает унаследованное выравнивание.
 
-В `core-solo` у `b`, `strong`, `em` и `br` действует `all: revert` в селекторе с тегом. На таком элементе размер из `core-text-l` может быть сброшен. Для интерфейсного числа или подписи назначайте типографическую роль `span`; если нужно семантическое выделение, поместите `strong` внутрь этой обёртки.
+В reset `:where([class*="core-"])` вложенный `&:is(b, strong, em, br)` использует `all: revert`: он относится к самим тегам с Core-классом. На таком элементе размер может сброситься. Для интерфейсного числа или подписи назначайте типографическую роль `span`; семантический `strong` при необходимости поместите внутрь.
 
 ## Заголовки
 
 В `core-content` обычные `h1`…`h6` оформляются контекстом. В интерфейсной разметке удобнее сохранять семантический тег и явно задавать `core-text core-text-xl core-text-bold` или нужную конфигурацию.
 
-В v185 общий селектор заголовка использует `[class*="core-h"]` с исключениями для `core-h-`, `core-hide` и `core-hover`. Он больше не требует точного `class="core-h"`: `core-h core-h2` работает в композиции. Поскольку селектор подстрочный, не используйте собственные имена, случайно содержащие `core-h`. Для явной текстовой роли также доступны `core-text core-text-xl core-text-bold`.
+В v190 основание заголовка выбирает точные `.core-h1` … `.core-h6`. Отдельный `core-h` не требуется. Адаптивные `t-core-h*` и `m-core-h*` удалены: для изменения размера используйте `t-core-text-*` и `m-core-text-*`, сохраняя семантический HTML-тег.
 
 ## Display-шкала
 
@@ -77,11 +77,11 @@
 
 ```html
 <div class="core-row core-nowrap core-y-center core-w-full">
-  <span class="core-icon-layers core-icon-m" aria-hidden="true"></span>
+  <span class="core-icon-layers core-icon-8x" aria-hidden="true"></span>
   <span class="core-text core-text-ellipsis core-grow core-shrink" title="Исследование пользовательских сценариев и структура личного кабинета">
     Исследование пользовательских сценариев и структура личного кабинета
   </span>
-  <button type="button" class="core-icon-button core-icon-external-link core-icon-m" aria-label="Открыть полное название"></button>
+  <button type="button" class="core-icon-button core-icon-external-link core-icon-8x" aria-label="Открыть полное название"></button>
 </div>
 ```
 

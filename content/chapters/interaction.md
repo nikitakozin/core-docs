@@ -74,7 +74,7 @@ Show/hide используют opacity: место сохраняется. Add/r
 
 ```html
 <div class="core-row core-y-center">
-  <span class="core-icon-spinner core-icon-l core-animate-time-4x" id="progress-icon" aria-hidden="true"></span>
+  <span class="core-icon-spinner core-icon-10x core-animate-time-4x" id="progress-icon" aria-hidden="true"></span>
   <span class="core-text" role="status">Идёт синхронизация</span>
 </div>
 ```

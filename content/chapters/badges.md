@@ -43,7 +43,7 @@
 <div class="core-col">
   <p class="core-text">В проекте <span class="core-badge">12</span> активных задач.</p>
   <button type="button" class="core-badge-button core-badge-s">
-    <span class="core-icon-copy core-icon-xs" aria-hidden="true"></span>Копировать ID
+    <span class="core-icon-copy core-icon-6x" aria-hidden="true"></span>Копировать ID
   </button>
 </div>
 ```

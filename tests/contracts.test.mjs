@@ -31,10 +31,19 @@ test('viewer and demos use Core without custom style rules', () => {
  for(const match of shell.matchAll(/style="([^"]*)"/g))for(const declaration of match[1].split(';').filter(Boolean))
   assert.ok(tokens[declaration.split(':')[0].trim()],`Non-Core style: ${declaration}`);
 
- for (const e of json('docs/reference/examples.json').examples) assert.equal(e.css,'',e.id);
+ for (const e of json('docs/reference/examples.json').examples) {
+  assert.equal(e.css,'',e.id);
+  const extra=e.styles?.some(url=>url.endsWith('/theme-ss.css'))?['core-theme-ss-light','core-theme-ss-dark','core-theme-ss-black']:[];
+  for(const match of e.html.matchAll(/class="([^"]*)"/g))for(const name of match[1].split(/\s+/))
+   if(/^(?:m-|t-)?core-/.test(name))assert.ok(known[name]||extra.includes(name),`${e.id}: unknown Core class ${name}`);
+ }
 });
 test('live CDN assets are available and version drift is reported', {timeout:300000}, async context => {
- const m=json('content/reference/source-manifest.json');assert.equal(m.version,185);
+ const m=json('content/reference/source-manifest.json');assert.ok(Number.isSafeInteger(m.version));
+ assert.ok(m.version_base.endsWith(`/v${m.version}/`));
+ const html=read('docs/index.html','utf8');
+ const data=JSON.parse(html.match(/<script id="manual-data" type="application\/json">([\s\S]*?)<\/script>/)[1]);
+ assert.equal(data.version,m.version);assert.ok(html.includes(`Core v${m.version}`));
  const changed=[];
  for(let i=0;i<m.files.length;i+=4)await Promise.all(m.files.slice(i,i+4).map(async file=>{
   const bytes=await fetchBytes(file.url);assert.ok(bytes.length>0,`${file.url}: empty response`);
@@ -44,7 +53,7 @@ test('live CDN assets are available and version drift is reported', {timeout:300
 });
 test('published renamed classes and tokens are indexed', () => {
  const c=json('docs/reference/classes.json').classes,t=json('docs/reference/tokens.json').tokens;
- for(const k of ['core-icon-chevron','core-table-head-underline','t-core-nogrow','m-core-noshrink','core-animate:spin']) assert.ok(c[k],k);
+ for(const k of ['core-icon-chevron','core-table-border-head','t-core-nogrow','m-core-noshrink','core-animate:spin']) assert.ok(c[k],k);
  for(const k of ['core-icon-shevron','core-heading-underline','t-nogrow','core-spin']) assert.equal(c[k],undefined,k);
  assert.ok(t['--s-170x']);
 });

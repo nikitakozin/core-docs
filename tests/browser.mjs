@@ -30,8 +30,27 @@ try {
  check('42 chapters / 82 cards',await page.locator('.chapter').count()===42&&await page.locator('.example').count()===82);
  if(!failuresOnly) {
   await go('start');check('iframes load Core from the CDN',cdnResponses.iframe>0);
+  const themeFrame=await frame('E01');
+  const lightShell=await page.evaluate(()=>getComputedStyle(document.body).backgroundColor),lightFrame=await themeFrame.evaluate(()=>getComputedStyle(document.body).backgroundColor);
+  await page.locator('#theme-toggle').click();
+  await waitFrame(themeFrame,()=>document.documentElement.dataset.theme==='dark');
+  check('dark mode changes shell colors',await page.evaluate(()=>getComputedStyle(document.body).backgroundColor)!==lightShell);
+  check('dark mode changes iframe colors',await themeFrame.evaluate(()=>getComputedStyle(document.body).backgroundColor)!==lightFrame);
+  await page.locator('#theme-toggle').click();await waitFrame(themeFrame,()=>document.documentElement.dataset.theme==='light');
+  check('light mode restores iframe colors',await themeFrame.evaluate(()=>getComputedStyle(document.body).backgroundColor)===lightFrame);
   for(const c of chapters){await go(c.id);for(const e of data.filter(e=>e.chapter===c.id))checks.push(`${e.id} loads Core and initializes`);}
   check('all examples boot without runtime errors',errors.length===0);check('ESM modules load from the CDN',cdnResponses.modules>=8);
+  for(const [chapter,id,selector,boundary] of [['forms','E66','',720],['layout','E07','.core-grid',720],['lists-tables','E67','li',720],['recipes','E70','.core-grid.t-core-grid-1c',997]]) {
+   await go(chapter);const target=await frame(id);
+   for(const width of [boundary+1,boundary]) {
+    await page.locator(`[data-example="${id}"] .demo-width[data-width="${width}"]`).click();await waitFrame(target,w=>innerWidth===w,width);
+    const boxes=await target.evaluate(({id,selector})=>{
+     const nodes=id==='E66'?[document.querySelector('label[for="profile-name"]'),document.getElementById('profile-name')]:[...document.querySelector(selector).children];
+     return nodes.map(n=>{const r=n.getBoundingClientRect();return {x:r.x,y:r.y,right:r.right,bottom:r.bottom};});
+    },{id,selector});
+    check(`${id} composition at ${width}`,width>boundary?boxes[1].x>=boxes[0].right:boxes.every((b,i)=>!i||(Math.abs(b.x-boxes[0].x)<1&&b.y>=boxes[i-1].bottom)));
+   }
+  }
   await page.locator('#search').fill('core-icon-chevron');await page.waitForSelector('#search-results .search-item');check('search finds current API',await page.locator('#search-results .search-item').count()>0);await page.locator('#search-results .search-item').first().click();check('search opens section anchor',page.url().includes('--'));
   await go('js-state');const state=await frame('E73');await state.locator('#plus').click();await waitFrame(state,()=>document.querySelector('#count').textContent==='1');checks.push('state counter');
   await go('js-event');const event=await frame('E74');await event.locator('#send').click();await waitFrame(event,()=>document.querySelector('#log').textContent==='Первое → Второе');checks.push('event queue preserves both events');
@@ -48,11 +67,11 @@ try {
    await page.locator('[data-example="E01"] .demo-width[data-width="1200"]').click();const demo=await frame('E01');await waitFrame(demo,()=>innerWidth===1200);const box=await page.locator('[data-example="E01"] iframe').boundingBox();check(`full scaled viewport at ${width}`,box.width<=width&&Math.abs(await demo.evaluate(()=>innerWidth)-1200)<1);
    if([390,998,1440].includes(width))await page.screenshot({path:resolve(out,`manual-${width}.png`),fullPage:false});
   }
-  await go('lists-tables');await page.locator('[data-example="E68"] .demo-width[data-width="390"]').click();const registry=await frame('E68');await waitFrame(registry,()=>innerWidth===390);check('registry single column on mobile',await registry.locator('article').first().evaluate(e=>getComputedStyle(e).gridTemplateColumns.split(' ').length===1));
+  await go('lists-tables');await page.locator('[data-example="E68"] .demo-width[data-width="390"]').click();const registry=await frame('E68');await waitFrame(registry,()=>innerWidth===390);check('registry single column on mobile',await registry.locator('article').first().evaluate(e=>{const boxes=[...e.children].map(n=>n.getBoundingClientRect());return boxes.every((b,i)=>!i||(Math.abs(b.x-boxes[0].x)<1&&b.y>=boxes[i-1].bottom));}));
   await page.evaluate(()=>{window.hiddenMeasures=[];addEventListener('message',e=>{if(e.data?.id==='E68'&&e.data.state==='resize')window.hiddenMeasures.push(e.data.height);});});await go('overview');await registry.evaluate(()=>{dispatchEvent(new Event('resize'));return new Promise(done=>setTimeout(done,150));});check('hidden chapter preserves last iframe height',!await page.evaluate(()=>window.hiddenMeasures.includes(64)));
   await go('interaction');const motion=await frame('E58');await page.emulateMedia({reducedMotion:'reduce'});await waitFrame(motion,()=>!document.getElementById('progress-icon').classList.contains('core-animate:spin'));checks.push('reduced motion removes animation');await page.emulateMedia({reducedMotion:'no-preference'});await waitFrame(motion,()=>document.getElementById('progress-icon').classList.contains('core-animate:spin'));checks.push('motion preference change restores animation');
   // Exact CSS assertions belong to the documented version, not the mutable alias.
-  // All manual interactions above use latest; this isolated probe loads v185 from CDN.
+  // All manual interactions above use latest; this isolated probe loads the manifest version from CDN.
   await go('start');const probe=await frame('E01');
   const versionBase=JSON.parse(read('docs/reference/source-manifest.json','utf8')).version_base;
   await probe.evaluate(async base=>{
@@ -60,9 +79,17 @@ try {
     link.onload=done;link.onerror=()=>fail(new Error(`Versioned CDN stylesheet failed: ${link.href}`));
     link.href=base+new URL(link.href).pathname.split('/').pop();
    })));
-   document.getElementById('demo-root').innerHTML='<span id="icon" class="core-icon-plus core-icon-m m-core-icon-6x"></span><h2 id="heading" class="core-h core-h2">Заголовок</h2><div id="size" class="core-h-170x"></div><div id="position" class="core-fix m-core-fix-t">Позиция</div>';
+   document.getElementById('demo-root').innerHTML='<span id="icon" class="core-icon-plus core-icon-8x m-core-icon-6x"></span><h2 id="heading" class="core-h2">Заголовок</h2><div id="size" class="core-h-170x"></div><div id="position" class="core-fix m-core-fix-t">Позиция</div>';
   },versionBase);
-  for(const width of [720,721,997,998]){await page.locator(`[data-example="E01"] .demo-width[data-width="${width}"]`).click();await waitFrame(probe,w=>innerWidth===w,width);const values=await probe.evaluate(()=>({icon:getComputedStyle(document.getElementById('icon'),'::before').width,height:getComputedStyle(document.getElementById('size')).height,top:getComputedStyle(document.getElementById('position')).top,t:getComputedStyle(document.getElementById('position')).getPropertyValue('--t').trim(),heading:getComputedStyle(document.getElementById('heading')).fontSize}));check(`icon cascade ${width}`,values.icon===(width<=720?'12px':'16px'));check(`170x resolves ${width}`,values.height==='340px');check(`mixed mobile alias ${width}`,width<=997?values.top==='0px':values.t==='');}
+  const updatedContracts=await probe.evaluate(()=>{
+   const node=document.createElement('div');node.innerHTML='<span id="font-sample" class="core-text">Текст</span><div style="--t:40px;--b:20px;--b-r:32px"><span id="inherited-coordinates">Потомок</span></div><div id="directional-padding" class="core-p-t-4x"></div>';document.getElementById('demo-root').append(node);
+   document.documentElement.style.setProperty('--f-s-base','20px');document.documentElement.style.fontSize='30px';
+   return {font:getComputedStyle(document.getElementById('font-sample')).fontSize,padding:getComputedStyle(document.getElementById('directional-padding')).paddingTop,inherited:['--t','--b','--b-r'].map(name=>getComputedStyle(document.getElementById('inherited-coordinates')).getPropertyValue(name).trim())};
+  });
+  check('font scale follows Core base independently of html rem',updatedContracts.font==='20px');
+  check('directional padding works without a general padding token',updatedContracts.padding==='8px');
+  check('coordinates and radius do not inherit into children',updatedContracts.inherited.every(value=>value===''));
+  for(const width of [720,721,997,998]){await page.locator(`[data-example="E01"] .demo-width[data-width="${width}"]`).click();await waitFrame(probe,w=>innerWidth===w,width);const values=await probe.evaluate(()=>({icon:getComputedStyle(document.getElementById('icon'),'::before').width,height:getComputedStyle(document.getElementById('size')).height,top:getComputedStyle(document.getElementById('position')).top,t:getComputedStyle(document.getElementById('position')).getPropertyValue('--t').trim(),heading:getComputedStyle(document.getElementById('heading')).fontSize}));check(`icon cascade ${width}`,values.icon===(width<=720?'12px':'16px'));check(`170x resolves ${width}`,values.height==='340px');check(`mobile positioning alias ${width}`,width<=720?values.top==='0px':values.t==='');}
   await page.goto('file://'+resolve('docs/index.html'),{waitUntil:'networkidle'});check('standalone file opens',await page.locator('#shell-status').isHidden());
  }
  {

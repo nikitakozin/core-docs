@@ -1,0 +1,11 @@
+{
+  "files": {
+    "theme-nk.css": ["themes", "typography", "tokens"],
+    "theme-ss.css": ["themes", "typography", "tokens"],
+    "theme-tg.css": ["themes", "colors", "tokens"],
+    "importmap.js": ["start", "javascript", "agent-workflow"],
+    "template.html": ["start", "javascript"],
+    ".readme.html": ["start", "verification"]
+  },
+  "global_tokens": ["--x", "--icon-x", "--f-s-base", "--rem-base", "--font-primary", "--font-primary-line-height"]
+}
