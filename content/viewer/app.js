@@ -3,7 +3,10 @@
  'use strict';
  const data=JSON.parse(document.getElementById('manual-data').textContent);
  const root=document.documentElement,chapters=new Map(data.chapters.map(c=>[c.id,c])),examples=new Map(data.examples.map(e=>[e.id,e]));
- const instances=new Map(),search=document.getElementById('search'),results=document.getElementById('search-results'),sidebar=document.getElementById('sidebar'),nav=document.getElementById('chapter-nav'),menuButton=document.getElementById('menu-button'),themeButton=document.getElementById('theme-toggle');
+ const instances=new Map(),search=document.getElementById('search'),results=document.getElementById('search-results'),sidebar=document.getElementById('sidebar'),nav=document.getElementById('chapter-nav'),menuButton=document.getElementById('menu-button'),themeButton=document.getElementById('theme-toggle'),themeSelect=document.getElementById('theme-select');
+ const themeController=createDocsThemeController(document,'shell-theme');
+ let design='nk',preferredDesign='nk';
+ try {const saved=localStorage.getItem('core-docs-design');if(['core','nk','ss','nkui'].includes(saved))preferredDesign=saved;} catch {}
  const norm=value=>String(value).toLocaleLowerCase('ru').replaceAll('ё','е');
  const esc=value=>String(value).replaceAll('&','&amp;').replaceAll('"','&quot;').replaceAll('<','&lt;');
  const visible=(node,show)=>node.classList.toggle('core-hide',!show);
@@ -90,6 +93,7 @@
     const main=document.getElementById('demo-root');
     const core=document.getElementById('core-css');
     const nk=document.getElementById('nk-css');
+    const themeController=createDocsThemeController(document,'nk-css');
     const send=(state,detail='') => {
       const bounds=main.getBoundingClientRect();
       // A hidden chapter has no layout. Preserve its last measured size.
@@ -128,7 +132,7 @@
     else if (core.sheet || core.dataset.state==='ok') setTimeout(verify,0);
     setTimeout(() => fail('Нет ответа от CDN. Проверьте подключение.'),16000);
     const themeFailed=() => {
-      warning='Тема NK недоступна. Показан базовый Core; проверьте доступ к CDN.';
+      warning='Тема оформления недоступна. Проверьте доступ к CDN.';
       if (ready) send('warning',warning);
     };
     nk.addEventListener('load',measure); nk.addEventListener('error',themeFailed);
@@ -137,17 +141,19 @@
       const message=event.data;
       if (event.source!==parent || !message || message.type!=='core-docs-settings' || message.token!==config.token) return;
       if (message.theme!=='light' && message.theme!=='dark') return;
-      document.documentElement.dataset.theme=message.theme;
-      document.documentElement.classList.toggle('core-theme-light',message.theme==='light');
-      document.documentElement.classList.toggle('core-theme-dark',message.theme==='dark');
-      measure();
+      themeController.mode(message.theme);
+      themeController.design(message.design).then(ok=>{
+        if(ok===false)themeFailed();
+        else if(ok===true){warning='';if(ready)send('theme-ready');}
+        measure();
+      });
     });
     document.addEventListener('submit',event => event.preventDefault());
     document.addEventListener('click',event => {if(event.target.closest('a')) event.preventDefault();});
   }
   function iframeDocument(example, token) {
     const config={id:example.id,token,hasScript:Boolean(example.js),fixedHeight:example.fixedHeight || (example.chapter==='popups'?example.height:0)};
-    const script=`(${childRuntime.toString()})(${JSON.stringify(config)});`;
+    const script=`${createDocsThemeController.toString()};(${childRuntime.toString()})(${JSON.stringify(config)});`;
     const styles=(example.styles||[]).map(url=>`<link rel="stylesheet" href="${esc(url)}">`).join('');
     const module=example.js ? `<script type="module">${example.js.replace(/<\/script/gi,'<\\/script')}\nwindow.dispatchEvent(new Event('core-docs-script-ready'));<\/script>` : '';
     return `<!doctype html><html lang="ru" class="core-solo core-theme-${esc(theme)}" data-theme="${esc(theme)}"><head>
@@ -176,7 +182,7 @@ ${styles}</head>
     instance.width=width; instance.scale=scale;
   }
   function sendTheme(instance) {
-    if (instance) instance.frame.contentWindow.postMessage({type:'core-docs-settings',token:instance.token,theme},'*');
+    if (instance) instance.frame.contentWindow.postMessage({type:'core-docs-settings',token:instance.token,theme,design},'*');
   }
   function loadDemo(card) {
     const example=examples.get(card.dataset.example); if (!example) return;
@@ -213,6 +219,7 @@ ${styles}</head>
       status.dataset.state='ok'; status.textContent=''; visible(status,false); instance.frame.classList.remove('core-ghost'); sendTheme(instance);
     }
     if (message.state==='warning' && instance.ready) {visible(status,true);status.dataset.state='warning';status.textContent=message.detail;}
+    if (message.state==='theme-ready' && instance.ready && status.dataset.state==='warning') {visible(status,false);status.dataset.state='ok';status.textContent='';}
     if ((message.state==='ok'||message.state==='resize') && instance.ready && Number.isFinite(message.height)) {
       instance.height=message.height; layoutDemo(instance);
       if (anchorLock && instance.card.closest('.chapter').id===activeId) requestAnimationFrame(positionAnchor);
@@ -232,13 +239,21 @@ ${styles}</head>
   document.querySelectorAll('.demo-viewport').forEach(area => areaObserver.observe(area));
   function applyTheme() {
     releaseAnchor(); root.dataset.theme=theme;
-    root.classList.toggle('core-theme-light',theme==='light');root.classList.toggle('core-theme-dark',theme==='dark');
+    themeController.mode(theme);
     themeButton.setAttribute('aria-pressed',String(theme==='dark'));
     themeButton.setAttribute('aria-label',theme==='dark'?'Включить светлую тему':'Включить тёмную тему');
     themeButton.querySelector('.theme-label').textContent=theme==='dark'?'Светлая тема':'Тёмная тема';
     instances.forEach(sendTheme);
     try {localStorage.setItem('core-docs-theme',theme);} catch { /* Storage необязателен. */ }
   }
+  async function chooseDesign(value,persist=true) {
+    themeSelect.disabled=true;
+    const ok=await themeController.design(value);
+    themeSelect.disabled=false;
+    if(ok){design=value;themeSelect.value=design;instances.forEach(sendTheme);checkShell();if(persist)try{localStorage.setItem('core-docs-design',design);}catch{}}
+    else if(ok===false){themeSelect.value=design;if(document.getElementById('shell-theme').dataset.state==='error')checkShell();else{shellStatus.textContent='Тема не загрузилась. Сохранено прежнее оформление; попробуйте ещё раз.';visible(shellStatus,true);}}
+  }
+  themeSelect.addEventListener('change',()=>{preferredDesign=themeSelect.value;chooseDesign(preferredDesign);});
   themeButton.addEventListener('click',() => {theme=theme==='dark'?'light':'dark';applyTheme();});
   document.querySelectorAll('.example-code').forEach(details=>details.addEventListener('toggle',()=>{
     const icon=details.querySelector('.code-chevron');
@@ -264,4 +279,16 @@ ${styles}</head>
     document.getElementById(id).addEventListener('error',checkShell);
   }
   checkShell(); applyTheme(); route();
+  // Каталог обновится вместе со следующим билдом Core; не запрашиваем отсутствующий CSS.
+  async function discoverThemes(){
+    try {
+      const response=await fetch('https://cdn.sdelal.tech/core/latest/.readme.html',{signal:AbortSignal.timeout(8000)});
+      if(response.ok&&(await response.text()).includes('/theme-nkui.css')){
+        const option=themeSelect.querySelector('[value="nkui"]');option.disabled=false;option.textContent='NKUI';
+        if(preferredDesign==='nkui')await chooseDesign('nkui',false);
+      }
+    }catch{}
+  }
+  if(preferredDesign!=='nkui')chooseDesign(preferredDesign,false);
+  discoverThemes();
 })();
