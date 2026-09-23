@@ -3,19 +3,22 @@ import {readFileSync as read,writeFileSync as write,mkdirSync} from 'node:fs';
 import {createServer} from 'node:http';
 import {resolve,extname,sep} from 'node:path';
 import assert from 'node:assert/strict';
-const live=process.argv.includes('--live'),failuresOnly=process.argv.includes('--failures'),root=resolve('docs'),out=resolve('test-results');mkdirSync(out,{recursive:true});
+const failuresOnly=process.argv.includes('--failures'),root=resolve('docs'),out=resolve('test-results');mkdirSync(out,{recursive:true});
 const data=JSON.parse(read('docs/reference/examples.json','utf8')).examples;
 const chapters=JSON.parse(read('docs/chapters.json','utf8'));
-const checks=[],errors=[],intercepted={shell:0,iframe:0,modules:0};let browser;
+const checks=[],errors=[],cdnResponses={shell:0,iframe:0,modules:0};let browser;
 const server=createServer((req,res)=>{try{const path=resolve(root,'.'+decodeURIComponent(new URL(req.url,'http://localhost').pathname));if(!path.startsWith(root+sep))throw new Error('outside docs');res.setHeader('Content-Type',({'.html':'text/html; charset=utf-8','.json':'application/json','.md':'text/plain; charset=utf-8'})[extname(path)]||'text/plain');res.end(read(path));}catch{res.writeHead(404).end();}});
 await new Promise(done=>server.listen(0,'127.0.0.1',done));const url=`http://127.0.0.1:${server.address().port}/index.html`;
 try {
  browser=await chromium.launch({headless:true});
  const context=await browser.newContext({viewport:{width:1440,height:1000},permissions:['clipboard-read','clipboard-write']});
- if(!live){
-  await context.route('https://cdn.sdelal.tech/core/latest/**',route=>{intercepted[route.request().frame().parentFrame()?'iframe':'shell']++;if(route.request().url().endsWith('.js'))intercepted.modules++;const name=new URL(route.request().url()).pathname.split('/').pop();try{return route.fulfill({body:read(`upstream/latest/${name}`),contentType:name.endsWith('.css')?'text/css':'text/javascript',headers:{'access-control-allow-origin':'*'}});}catch{return route.abort();}});
-  await context.route(/https:\/\/(fonts\.googleapis\.com|fonts\.gstatic\.com)\//,route=>route.abort());
- }
+ context.on('response',response=>{
+  if(!response.url().startsWith('https://cdn.sdelal.tech/core/latest/'))return;
+  if(!response.ok()){errors.push(`CDN HTTP ${response.status()}: ${response.url()}`);return;}
+  cdnResponses[response.request().frame().parentFrame()?'iframe':'shell']++;
+  if(response.url().endsWith('.js'))cdnResponses.modules++;
+ });
+ context.on('requestfailed',request=>{if(request.url().startsWith('https://cdn.sdelal.tech/core/latest/'))errors.push(`CDN request failed: ${request.url()}: ${request.failure()?.errorText}`);});
  const page=await context.newPage();page.on('pageerror',e=>errors.push(e.message));
  await page.goto(url,{waitUntil:'networkidle',timeout:45000});
  await page.evaluate(()=>{window.demoMessages=[];addEventListener('message',e=>{if(e.data?.type==='core-docs-demo'&&e.data.state!=='resize')window.demoMessages.push({...e.data,at:Math.round(performance.now())});});});
@@ -25,14 +28,10 @@ try {
  const frame=async id=>{const node=page.locator(`[data-example="${id}"] iframe`);await node.evaluate(e=>e.scrollIntoView({block:'center',behavior:'instant'}));return await node.elementHandle().then(e=>e.contentFrame());};
  check('shell CSS loaded',await page.locator('#shell-status').isHidden());
  check('42 chapters / 82 cards',await page.locator('.chapter').count()===42&&await page.locator('.example').count()===82);
- if(live){
-  await go('js-state');check('live CDN module initializes',(await frame('E73'))!==null);
-  await (await frame('E73')).locator('#plus').click();await waitFrame(await frame('E73'),()=>document.querySelector('#count').textContent==='1');checks.push('live state counter');
-  await page.screenshot({path:resolve(out,'live-cdn.png'),fullPage:false});
- } else if(!failuresOnly) {
-  await go('start');check('iframe CDN requests really use snapshot interception',intercepted.iframe>0);
+ if(!failuresOnly) {
+  await go('start');check('iframes load Core from the CDN',cdnResponses.iframe>0);
   for(const c of chapters){await go(c.id);for(const e of data.filter(e=>e.chapter===c.id))checks.push(`${e.id} loads Core and initializes`);}
-  check('all examples boot without runtime errors',errors.length===0);check('ESM requests really use snapshot interception',intercepted.modules>=8);
+  check('all examples boot without runtime errors',errors.length===0);check('ESM modules load from the CDN',cdnResponses.modules>=8);
   await page.locator('#search').fill('core-icon-chevron');await page.waitForSelector('#search-results .search-item');check('search finds current API',await page.locator('#search-results .search-item').count()>0);await page.locator('#search-results .search-item').first().click();check('search opens section anchor',page.url().includes('--'));
   await go('js-state');const state=await frame('E73');await state.locator('#plus').click();await waitFrame(state,()=>document.querySelector('#count').textContent==='1');checks.push('state counter');
   await go('js-event');const event=await frame('E74');await event.locator('#send').click();await waitFrame(event,()=>document.querySelector('#log').textContent==='Первое → Второе');checks.push('event queue preserves both events');
@@ -52,17 +51,26 @@ try {
   await go('lists-tables');await page.locator('[data-example="E68"] .demo-width[data-width="390"]').click();const registry=await frame('E68');await waitFrame(registry,()=>innerWidth===390);check('registry single column on mobile',await registry.locator('article').first().evaluate(e=>getComputedStyle(e).gridTemplateColumns.split(' ').length===1));
   await page.evaluate(()=>{window.hiddenMeasures=[];addEventListener('message',e=>{if(e.data?.id==='E68'&&e.data.state==='resize')window.hiddenMeasures.push(e.data.height);});});await go('overview');await registry.evaluate(()=>{dispatchEvent(new Event('resize'));return new Promise(done=>setTimeout(done,150));});check('hidden chapter preserves last iframe height',!await page.evaluate(()=>window.hiddenMeasures.includes(64)));
   await go('interaction');const motion=await frame('E58');await page.emulateMedia({reducedMotion:'reduce'});await waitFrame(motion,()=>!document.getElementById('progress-icon').classList.contains('core-animate:spin'));checks.push('reduced motion removes animation');await page.emulateMedia({reducedMotion:'no-preference'});await waitFrame(motion,()=>document.getElementById('progress-icon').classList.contains('core-animate:spin'));checks.push('motion preference change restores animation');
-  // Verify changed upstream contracts in a real CSS engine, including the known mixed prefix.
-  await go('start');const probe=await frame('E01');await probe.evaluate(()=>{document.getElementById('demo-root').innerHTML='<span id="icon" class="core-icon-plus core-icon-m m-core-icon-6x"></span><h2 id="heading" class="core-h core-h2">Заголовок</h2><div id="size" class="core-h-170x"></div><div id="position" class="core-fix m-core-fix-t">Позиция</div>';});
+  // Exact CSS assertions belong to the documented version, not the mutable alias.
+  // All manual interactions above use latest; this isolated probe loads v185 from CDN.
+  await go('start');const probe=await frame('E01');
+  const versionBase=JSON.parse(read('docs/reference/source-manifest.json','utf8')).version_base;
+  await probe.evaluate(async base=>{
+   await Promise.all([...document.querySelectorAll('link[rel="stylesheet"]')].map(link=>new Promise((done,fail)=>{
+    link.onload=done;link.onerror=()=>fail(new Error(`Versioned CDN stylesheet failed: ${link.href}`));
+    link.href=base+new URL(link.href).pathname.split('/').pop();
+   })));
+   document.getElementById('demo-root').innerHTML='<span id="icon" class="core-icon-plus core-icon-m m-core-icon-6x"></span><h2 id="heading" class="core-h core-h2">Заголовок</h2><div id="size" class="core-h-170x"></div><div id="position" class="core-fix m-core-fix-t">Позиция</div>';
+  },versionBase);
   for(const width of [720,721,997,998]){await page.locator(`[data-example="E01"] .demo-width[data-width="${width}"]`).click();await waitFrame(probe,w=>innerWidth===w,width);const values=await probe.evaluate(()=>({icon:getComputedStyle(document.getElementById('icon'),'::before').width,height:getComputedStyle(document.getElementById('size')).height,top:getComputedStyle(document.getElementById('position')).top,t:getComputedStyle(document.getElementById('position')).getPropertyValue('--t').trim(),heading:getComputedStyle(document.getElementById('heading')).fontSize}));check(`icon cascade ${width}`,values.icon===(width<=720?'12px':'16px'));check(`170x resolves ${width}`,values.height==='340px');check(`mixed mobile alias ${width}`,width<=997?values.top==='0px':values.t==='');}
   await page.goto('file://'+resolve('docs/index.html'),{waitUntil:'networkidle'});check('standalone file opens',await page.locator('#shell-status').isHidden());
  }
- if(!live) {
+ {
   // Fresh contexts avoid Chromium's already-loaded stylesheet memory cache.
   for(const asset of ['core.css','theme-nk.css']) {
    const failureContext=await browser.newContext({viewport:{width:1440,height:1000}});let allowAsset=false,blockedRequests=0;
-   await failureContext.route('https://cdn.sdelal.tech/core/latest/**',route=>{const name=new URL(route.request().url()).pathname.split('/').pop();if(name===asset&&!allowAsset){blockedRequests++;return route.abort();}return route.fulfill({body:read(`upstream/latest/${name}`),contentType:name.endsWith('.css')?'text/css':'text/javascript',headers:{'access-control-allow-origin':'*'}});});
-   await failureContext.route(/https:\/\/(fonts\.googleapis\.com|fonts\.gstatic\.com)\//,route=>route.abort());const failed=await failureContext.newPage();await failed.goto(url+'#start',{waitUntil:'networkidle'});
+   await failureContext.route('https://cdn.sdelal.tech/core/latest/**',route=>{const name=new URL(route.request().url()).pathname.split('/').pop();if(name===asset&&!allowAsset){blockedRequests++;return route.abort();}return route.continue();});
+   const failed=await failureContext.newPage();await failed.goto(url+'#start',{waitUntil:'networkidle'});
    check(`failure injected for ${asset}`,blockedRequests>0);
    if(asset==='core.css') {
     await failed.waitForSelector('[data-example="E01"] .demo-status[data-state="error"]');check('CDN error visible',await failed.locator('[data-example="E01"] .demo-error-actions').isVisible());
@@ -75,7 +83,8 @@ try {
   }
  }
 
- console.log(JSON.stringify({mode:live?'live':'snapshot',browser:browser.version(),passed:checks.length,errors,intercepted,checks},null,2));
- write(resolve(out,live?'live.json':failuresOnly?'failures.json':'browser.json'),JSON.stringify({mode:live?'live':'snapshot',browser:browser.version(),passed:checks.length,errors,intercepted,checks},null,2)+'\n');
-} catch(error){console.error(error);if(browser){const page=browser.contexts()[0]?.pages()[0];if(page){await page.screenshot({path:resolve(out,live?'failure-live.png':'failure-snapshot.png'),fullPage:false}).catch(()=>{});console.error('Recent messages',await page.evaluate(()=>window.demoMessages?.slice(-5)));console.error(await page.locator('.demo-status[data-state="error"]').evaluateAll(nodes=>nodes.map(n=>({id:n.closest('[data-example]').dataset.example,text:n.textContent})))); for(const f of page.frames()) {if(await f.locator('#log').count())console.error('Event diagnostic',await f.evaluate(()=>({text:document.getElementById('log').textContent,pending:window.EventEmitter?.pendingEvents.size,iframeWidth:innerWidth})));}}}process.exitCode=1;
+ check('no unexpected runtime or CDN errors',errors.length===0);
+ console.log(JSON.stringify({mode:'live',browser:browser.version(),passed:checks.length,errors,cdnResponses,checks},null,2));
+ write(resolve(out,failuresOnly?'failures.json':'browser.json'),JSON.stringify({mode:'live',browser:browser.version(),passed:checks.length,errors,cdnResponses,checks},null,2)+'\n');
+} catch(error){console.error(error);if(browser){const page=browser.contexts()[0]?.pages()[0];if(page){await page.screenshot({path:resolve(out,'failure-live.png'),fullPage:false}).catch(()=>{});console.error('Recent messages',await page.evaluate(()=>window.demoMessages?.slice(-5)));console.error(await page.locator('.demo-status[data-state="error"]').evaluateAll(nodes=>nodes.map(n=>({id:n.closest('[data-example]').dataset.example,text:n.textContent})))); for(const f of page.frames()) {if(await f.locator('#log').count())console.error('Event diagnostic',await f.evaluate(()=>({text:document.getElementById('log').textContent,pending:window.EventEmitter?.pendingEvents.size,iframeWidth:innerWidth})));}}}process.exitCode=1;
 } finally {await browser?.close();await new Promise(done=>server.close(done));}

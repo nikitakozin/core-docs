@@ -10,13 +10,9 @@ const check=(name,condition)=>{checks.push(name);if(!condition)failures.push(nam
 const browser=await chromium.launch({headless:true});
 try {
  const context=await browser.newContext({viewport:{width:390,height:844}});
- await context.route('https://cdn.sdelal.tech/core/latest/**',route=>{
-  const name=new URL(route.request().url()).pathname.split('/').pop();
-  return route.fulfill({body:read(`upstream/latest/${name}`),contentType:name.endsWith('.css')?'text/css':'text/javascript',headers:{'access-control-allow-origin':'*'}});
- });
- await context.route(/https:\/\/(fonts\.googleapis\.com|fonts\.gstatic\.com)\//,route=>route.abort());
  const page=await context.newPage();
  await page.goto('file://'+resolve('docs/index.html'),{waitUntil:'networkidle'});
+ check('Core CSS and theme loaded from CDN',await page.locator('#shell-status').isHidden());
  await page.keyboard.press('Tab');
  check('mobile first Tab offers skip link',await page.locator('#skip-link').evaluate(e=>e===document.activeElement));
  check('mobile skip link is visible above header',await page.locator('#skip-link').evaluate(e=>{const r=e.getBoundingClientRect();return e.contains(document.elementFromPoint(r.x+r.width/2,r.y+r.height/2));}));

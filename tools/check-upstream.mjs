@@ -1,9 +1,9 @@
 // Read-only: run explicitly when the owner asks to check Core updates.
 import {readFileSync} from 'node:fs';
 import {createHash} from 'node:crypto';
-const manifest=JSON.parse(readFileSync('docs/reference/source-manifest.json','utf8'));
+import {fetchBytes} from './cdn.mjs';
+const manifest=JSON.parse(readFileSync('content/reference/source-manifest.json','utf8'));
 const base='https://cdn.sdelal.tech/core/';
-async function fetchBytes(url){const response=await fetch(url,{signal:AbortSignal.timeout(30000)});if(!response.ok)throw new Error(`${response.status}: ${url}`);return Buffer.from(await response.arrayBuffer());}
 try {
  const [catalog,listing]=await Promise.all([fetchBytes(base),fetchBytes(base+'latest/')]);
  const versions=[...catalog.toString().matchAll(/\bv(\d+)\//g)].map(m=>Number(m[1]));

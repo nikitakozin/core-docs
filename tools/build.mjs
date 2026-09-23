@@ -1,5 +1,13 @@
-import {readFileSync as read, writeFileSync as write} from 'node:fs';
+import {readFileSync as read, writeFileSync as write, rmSync, mkdirSync, cpSync} from 'node:fs';
 import {Marked, Renderer} from 'marked';
+import {buildReferences} from './references.mjs';
+
+// docs/ is disposable output. Copy only files intended for public readers.
+rmSync('docs',{recursive:true,force:true});
+mkdirSync('docs',{recursive:true});
+for(const name of ['README.md','AGENTS.md','chapters.json','chapters','reference'])
+ cpSync(`content/${name}`,`docs/${name}`,{recursive:true});
+await buildReferences();
 
 const json=path=>JSON.parse(read(path,'utf8'));
 const esc=value=>String(value).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;');
@@ -32,7 +40,7 @@ function chapterFooter(index) {
  return `<footer class="chapter-footer core-grid core-grid-2c core-g-8x core-border core-border-t core-p-t-16x core-m-t-24x" aria-label="Переходы по руководству">${link(previous,'Предыдущий раздел','arrow-left')}${link(next,'Следующий раздел','arrow-right')}</footer>`;
 }
 for(const [index,c] of chapters.entries()) {
- const body=read(`docs/docs/${c.id}.md`,'utf8');
+ const body=read(`docs/chapters/${c.id}.md`,'utf8');
  let n=0;const headings=[];const renderer=new Renderer();
  renderer.heading=function({tokens,depth}) {
   const title=this.parser.parseInline(tokens),plain=title.replace(/<[^>]+>/g,'');
@@ -92,7 +100,7 @@ for(const [index,c] of chapters.entries()) {
 }
 const navigation=[...groups].map(([name,items])=>`<section class="nav-group core-m-b-10x"><h2 class="core-text core-text-xs core-text-upper core-text-bold core-color core-muted-4x core-p-5x core-m-b-2x">${esc(name)}</h2>${items.join('\n')}</section>`).join('\n');
 const data=JSON.stringify({version:185,chapters,examples,searchSections}).replaceAll('<','\\u003c');
-const app=read('docs/viewer/app.js','utf8').replaceAll('</script','<\\/script');
+const app=read('content/viewer/app.js','utf8').replaceAll('</script','<\\/script');
 const html=`<!doctype html>
 <html lang="ru" class="core-solo" data-theme="light" style="--rem-base:16px"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Core — руководство</title>
