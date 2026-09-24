@@ -10,12 +10,22 @@ export async function checkViewer(page,check) {
  check('version is the rightmost header control',badge.x>(await page.locator('#theme-toggle').boundingBox()).x);
  for(const selector of ['.nav-link[href="#start"]','.nav-sublink','.chapter:not(.core-hide) .chapter-footer a']) {
   const link=page.locator(selector).first();await link.scrollIntoViewIfNeeded();await page.mouse.move(1400,900);
+  const box=await link.boundingBox();
   const before=await link.evaluate(e=>getComputedStyle(e).backgroundColor);await link.hover();
   check(`${selector} has a filled hover`,await link.evaluate(e=>getComputedStyle(e).backgroundColor)!==before);
+  check(`${selector} hover keeps its height`,Math.abs((await link.boundingBox()).height-box.height)<0.5);
   await link.focus();check(`${selector} retains visible focus`,await link.evaluate(e=>getComputedStyle(e).outlineStyle!=='none'));
+  check(`${selector} focus keeps its height`,Math.abs((await link.boundingBox()).height-box.height)<0.5);
+  await page.mouse.down();
+  check(`${selector} press keeps its height`,Math.abs((await link.boundingBox()).height-box.height)<0.5);
+  await page.mouse.move(1400,900);await page.mouse.up();await link.evaluate(e=>e.blur());
  }
+ await page.evaluate(()=>location.hash='buttons--e31');
+ await page.waitForFunction(()=>document.querySelector('.nav-sublink[aria-current="location"]')?.dataset.target==='buttons--e31');
+ check('long menu labels fit without horizontal scrolling',await page.locator('#chapter-nav').evaluate(e=>e.scrollWidth<=e.clientWidth+1));
  await page.evaluate(()=>location.hash='js-field');
  await page.waitForFunction(()=>document.querySelector('[data-example="E77"]').dataset.ok==='true');
+ check('HTML and JavaScript are visible without expanding the example',await page.locator('[data-example="E77"] pre').first().isVisible()&&await page.locator('[data-example="E77"] pre').last().isVisible());
  for(const name of ['core','ss','nk']) {
   const frame=await page.locator('[data-example="E77"] iframe').elementHandle().then(e=>e.contentFrame());
   await frame.locator('#quantity').fill('12');

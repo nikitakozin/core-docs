@@ -51,7 +51,7 @@
  function releaseAnchor(){clearTimeout(anchorTimer);anchorLock=null;}
  function positionAnchor(){if(anchorLock){const node=document.getElementById(anchorLock);if(node)window.scrollTo({top:node.getBoundingClientRect().top+scrollY-topbar.getBoundingClientRect().height-20,behavior:'instant'});}}
  for(const event of ['wheel','touchstart','pointerdown']) window.addEventListener(event,releaseAnchor,{passive:true});
- function setActiveSubsection(id){nav.querySelectorAll('.nav-sublink').forEach(link=>{const active=link.dataset.target===id;link.classList.toggle('core-text-bold',active);link.classList.toggle('core-muted-4x',!active);link.classList.toggle('core-border-transparent',!active);for(const name of ['core-color-accent','core-border-accent','core-bg-accent','core-bg-opacity:10'])link.classList.toggle(name,active);if(active)link.setAttribute('aria-current','location');else link.removeAttribute('aria-current');});}
+ function setActiveSubsection(id){nav.querySelectorAll('.nav-sublink').forEach(link=>{const active=link.dataset.target===id,label=link.querySelector('.nav-label');link.classList.toggle('core-text-bold',active);label.classList.toggle('core-muted-2x',!active);label.classList.toggle('core-border-transparent',!active);label.classList.toggle('core-border-accent',active);for(const name of ['core-bg-accent','core-bg-opacity:10'])link.classList.toggle(name,active);if(active)link.setAttribute('aria-current','location');else link.removeAttribute('aria-current');});}
  let scrollQueued=false;
  window.addEventListener('scroll',()=>{if(scrollQueued)return;scrollQueued=true;requestAnimationFrame(()=>{scrollQueued=false;if(search.value||anchorLock)return;let current='';for(const h of activeHeadings){if(h.getBoundingClientRect().top<=topbar.getBoundingClientRect().height+28)current=h.id;else break;}setActiveSubsection(current);});},{passive:true});
  function route(){
@@ -228,7 +228,7 @@ ${styles}</head>
   document.querySelectorAll('.example').forEach(card => {
     card.querySelectorAll('.demo-width').forEach(button=>button.addEventListener('click',()=>{
       releaseAnchor();card.dataset.width=button.dataset.width;
-      card.querySelectorAll('.demo-width').forEach(item=>{const active=item===button;item.classList.toggle('core-button-accent',active);item.setAttribute('aria-pressed',String(active));});
+      card.querySelectorAll('.demo-width').forEach(item=>{const active=item===button;item.classList.toggle('core-button-primary',active);item.classList.toggle('core-button-transparent',!active);item.setAttribute('aria-pressed',String(active));});
       layoutDemo(instances.get(card.dataset.example));
     }));
     card.querySelector('.retry-demo').addEventListener('click',() => loadDemo(card));
@@ -255,17 +255,6 @@ ${styles}</head>
   }
   themeSelect.addEventListener('change',()=>{preferredDesign=themeSelect.value;chooseDesign(preferredDesign);});
   themeButton.addEventListener('click',() => {theme=theme==='dark'?'light':'dark';applyTheme();});
-  document.querySelectorAll('.example-code').forEach(details=>details.addEventListener('toggle',()=>{
-    const icon=details.querySelector('.code-chevron');
-    icon.classList.toggle('core-icon-chevron-right',!details.open);
-    icon.classList.toggle('core-icon-chevron-bottom',details.open);
-  }));
-  let printState=[];
-  window.addEventListener('beforeprint',() => {
-    printState=[...document.querySelectorAll('.example-code')].map(node => [node,node.open]);
-    printState.forEach(([node]) => {node.open=true;});
-  });
-  window.addEventListener('afterprint',() => {printState.forEach(([node,open]) => {node.open=open;});});
   const shellStatus=document.getElementById('shell-status');
   function checkShell(){
     const probe=document.createElement('div');probe.className='core-row';document.body.append(probe);

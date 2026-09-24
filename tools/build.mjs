@@ -18,11 +18,11 @@ const checkedDate=(manifest.runtime_checked_at||manifest.retrieved_at).slice(0,1
 const runtimeState=manifest.comparison?.latest_content_different?.length?'есть расхождения':'совпадал с версией';
 const searchSections=[], pages=[], groups=new Map();
 const button='core-button core-button-s';
-const navStyle='--theme-btn-bg:transparent;--theme-btn-bg-hover:var(--color-surface-alt);--theme-btn-color:var(--color-text-primary);--theme-btn-color-hover:var(--color-text-primary);--theme-btn-border:1px solid transparent;--theme-btn-border-hover:1px solid transparent;--theme-btn-shadow:none;--theme-btn-shadow-hover:none;--transition-interactive:0s';
+const navStyle='--theme-btn-bg:transparent;--theme-btn-bg-hover:var(--color-surface-alt);--theme-btn-bg-active:var(--color-surface-alt);--theme-btn-color:var(--color-text-primary);--theme-btn-color-hover:var(--color-text-primary);--theme-btn-color-active:var(--color-text-primary);--theme-btn-border:1px solid transparent;--theme-btn-border-hover:1px solid transparent;--theme-btn-border-active:1px solid transparent;--theme-btn-shadow:none;--theme-btn-shadow-hover:none;--transition-interactive:0s';
 const widths=['auto',390,720,721,997,998,1200];
 
-function codeBlock(text,lang='текст') {
- return `<div class="code-block core-col core-g-0x core-border core-b-r-4x core-crop core-m-t-6x core-m-b-8x">
+function codeBlock(text,lang='текст',embedded=false) {
+ return `<div class="code-block core-col core-g-0x core-border core-crop ${embedded?'core-border-t':'core-b-r-4x core-m-t-6x core-m-b-8x'}">
 <div class="core-row core-nowrap core-y-center core-justify core-g-4x core-p-4x core-p-l-8x core-bg-surface core-border core-border-b"><span class="core-text core-text-xs core-text-mono">${esc(lang)}</span><button type="button" class="copy-button ${button}" aria-label="Копировать блок кода">Копировать</button></div>
 <div class="core-content"><pre class="core-m-t-0x core-m-b-0x core-b-r-0x core-p-8x"><code class="core-text-mono">${highlightCode(text,lang)}</code></pre></div>
 </div>`;
@@ -32,16 +32,20 @@ function demo(id) {
  if(!e) throw new Error(`Unknown example ${id}`);
  if(e.css) throw new Error(`Custom CSS is not allowed: ${id}`);
  return `<div class="example core-col core-g-0x core-w-full core-border core-b-r-6x core-crop core-m-t-8x core-m-b-12x" data-example="${id}" data-width="auto">
-<div class="demo-toolbar core-row core-y-center core-g-3x core-p-6x core-bg-surface core-border core-border-b"><span class="core-text core-text-xs core-text-bold">Ширина</span><div class="core-row core-g-2x" role="group" aria-label="Ширина примера ${id}">${widths.map(w=>`<button type="button" class="demo-width ${button} core-text-xs core-p-l-4x core-p-r-4x${w==='auto'?' core-button-accent':''}" data-width="${w}" aria-pressed="${w==='auto'}">${w==='auto'?'Auto':w}</button>`).join('')}</div><output class="demo-metrics core-text core-text-xs core-muted-4x core-grow core-text-right"></output></div>
+<div class="demo-toolbar core-row core-y-center core-g-3x core-p-4x core-p-l-6x core-p-r-6x core-border core-border-b"><span class="core-text core-text-xs core-muted-2x">Ширина</span><div class="core-row core-g-2x" role="group" aria-label="Ширина примера ${id}">${widths.map(w=>`<button type="button" class="demo-width ${button} core-text-xs core-p-l-4x core-p-r-4x ${w==='auto'?'core-button-primary':'core-button-transparent'}" data-width="${w}" aria-pressed="${w==='auto'}">${w==='auto'?'Auto':w}</button>`).join('')}</div><output class="demo-metrics core-text core-text-xs core-muted-4x core-grow core-text-right"></output></div>
 <p class="demo-status core-text core-text-s core-p-8x" role="status">Откройте раздел для загрузки примера.</p>
 <div class="demo-error-actions core-p-8x core-hide"><button type="button" class="retry-demo ${button}">Повторить загрузку</button></div>
 <div class="demo-viewport core-w-full core-crop core-bg"><div class="demo-canvas core-col core-w-auto core-h-unset core-crop"><iframe class="core-abs core-abs-center core-w-auto core-h-unset core-ghost" title="${esc(e.id+'. '+e.title)}" sandbox="allow-scripts" referrerpolicy="no-referrer"></iframe></div></div>
-<details class="example-code core-border core-border-t"><summary class="core-row core-nowrap core-y-center core-g-4x core-text core-text-s core-text-bold core-p-8x core-cursor:pointer"><span class="code-chevron core-icon-chevron-right core-icon-6x" aria-hidden="true"></span>Код примера <span class="core-muted-4x">· ${id}</span></summary><div class="core-p-8x core-p-t-0x">${codeBlock(e.html,'HTML')}${e.js?codeBlock(e.js,'JavaScript'):''}</div></details>
+<div class="example-code core-col core-g-0x">${codeBlock(e.html,'HTML',true)}${e.js?codeBlock(e.js,'JavaScript',true):''}</div>
 </div>`;
 }
 function chapterFooter(index) {
  const previous=chapters[index-1], next=chapters[index+1];
- const link=(c,label,icon)=>c?`<a class="core-button core-col core-w-full core-x-start core-g-3x core-shrink core-h-unset core-text-left core-p-8x core-border core-b-r-4x" style="${navStyle}" href="#${c.id}"><span class="core-row core-y-center core-g-3x core-text core-text-xs core-muted-4x"><span class="core-icon-${icon} core-icon-6x" aria-hidden="true"></span>${label}</span><span class="core-row core-text core-text-s core-text-bold">${esc(c.navTitle)}</span></a>`:'<span></span>';
+ const link=(c,label,icon)=>{
+  if(!c)return '<span></span>';
+  const next=icon==='arrow-right',arrow=`<span class="core-icon-${icon} core-icon-6x core-noshrink" aria-hidden="true"></span>`;
+  return `<a class="core-button core-col core-w-full core-x-${next?'end':'start'} core-g-3x core-shrink core-h-unset core-text-${next?'right':'left'} core-p-8x core-border core-b-r-4x" style="${navStyle}" href="#${c.id}"><span class="core-row core-nowrap core-y-center core-g-3x core-text core-text-xs core-muted-4x">${next?label+arrow:arrow+label}</span><span class="core-col core-text core-text-s core-text-bold">${esc(c.navTitle)}</span></a>`;
+ };
  return `<footer class="chapter-footer core-grid core-grid-2c core-g-8x core-border core-border-t core-p-t-16x core-m-t-24x" aria-label="Переходы по руководству">${link(previous,'Предыдущий раздел','arrow-left')}${link(next,'Следующий раздел','arrow-right')}</footer>`;
 }
 for(const [index,c] of chapters.entries()) {
@@ -102,7 +106,7 @@ for(const [index,c] of chapters.entries()) {
  const sections=body.split(/(?=^#{2,6} )/m);
  searchSections.push({id:c.id,chapter:c.id,chapterTitle:c.navTitle,title:c.title,text:sections[0]});
  sections.slice(1).forEach((text,i)=>searchSections.push({id:headings[i]?.id||c.id,chapter:c.id,chapterTitle:c.navTitle,title:headings[i]?.title||c.title,text}));
- const item=`<div class="nav-item core-col core-g-0x" data-chapter="${c.id}"><a class="nav-link core-button core-h-unset core-text-left core-row core-nowrap core-y-center core-g-3x core-text core-text-s core-p-5x core-b-r-3x core-w-full" style="${navStyle}" data-chapter="${c.id}" href="#${c.id}"><span class="core-grow core-shrink">${esc(c.navTitle)}</span><span class="nav-chevron core-icon-chevron-right core-icon-6x" aria-hidden="true"></span></a><div class="nav-submenu core-col core-g-0x core-p-l-8x core-p-b-6x core-hide">${headings.map(h=>`<a class="nav-sublink core-button core-row core-h-unset core-w-full core-text-left core-border core-border-l core-border-transparent core-text core-text-xs core-color core-muted-4x core-p-4x" style="${navStyle}" data-target="${h.id}" href="#${h.id}">${esc(h.title)}</a>`).join('')}</div></div>`;
+ const item=`<div class="nav-item core-col core-g-0x" data-chapter="${c.id}"><a class="nav-link core-button core-h-unset core-text-left core-row core-nowrap core-y-center core-g-3x core-text core-text-s core-p-5x core-b-r-3x core-w-full" style="${navStyle}" data-chapter="${c.id}" href="#${c.id}"><span class="core-grow core-shrink">${esc(c.navTitle)}</span><span class="nav-chevron core-icon-chevron-right core-icon-6x" aria-hidden="true"></span></a><div class="nav-submenu core-col core-g-0x core-p-l-8x core-p-b-6x core-hide">${headings.map(h=>`<a class="nav-sublink core-button core-row core-h-unset core-w-full core-text-left core-text core-text-xs core-color core-p-4x" style="${navStyle}" data-target="${h.id}" href="#${h.id}"><span class="nav-label core-col core-w-full core-shrink core-border core-border-l core-border-transparent core-p-l-4x core-muted-2x">${esc(h.title)}</span></a>`).join('')}</div></div>`;
  if(!groups.has(c.group))groups.set(c.group,[]);groups.get(c.group).push(item);
 }
 const navigation=[...groups].map(([name,items])=>`<section class="nav-group core-m-b-10x"><h2 class="core-text core-text-xs core-text-upper core-text-bold core-color core-muted-4x core-p-5x core-m-b-2x">${esc(name)}</h2>${items.join('\n')}</section>`).join('\n');
