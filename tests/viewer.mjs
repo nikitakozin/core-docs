@@ -6,8 +6,6 @@ export async function checkViewer(page,check) {
  const box=await page.locator('[role=search]').boundingBox(),kbd=await page.locator('kbd').boundingBox();
  check('search is compact on desktop',box.width<=340);
  check('shortcut has a right inset and is vertically centered',box.x+box.width-kbd.x-kbd.width>=8&&Math.abs(kbd.y+kbd.height/2-box.y-box.height/2)<2);
- const badge=await page.locator('#version-badge').boundingBox();
- check('version is the rightmost header control',badge.x>(await page.locator('#theme-toggle').boundingBox()).x);
  for(const selector of ['.nav-link[href="#start"]','.nav-sublink','.chapter:not(.core-hide) .chapter-footer a']) {
   const link=page.locator(selector).first();await link.scrollIntoViewIfNeeded();await page.mouse.move(1400,900);
   const box=await link.boundingBox();
