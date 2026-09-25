@@ -11,6 +11,7 @@ export async function checkMediaCrops(page,check) {
   for(const id of ['E52','E53']) {
    const card=page.locator(`[data-example="${id}"]`);
    await card.locator(`.demo-width[data-width="${width}"]`).click();
+   await card.locator('iframe').evaluate(e=>e.scrollIntoView({block:'center',behavior:'instant'}));
    const frame=await card.locator('iframe').elementHandle().then(e=>e.contentFrame());
    await frame.waitForFunction(width=>innerWidth===width,width,{polling:100});
    const images=await frame.locator('.core-bg-img').evaluateAll(nodes=>nodes.map(img=>{
@@ -51,12 +52,19 @@ export async function checkCatalogue(page,check,out='test-results') {
    // Narrow auto width exercises actual phone layout, not only a scaled desktop.
    await page.setViewportSize({width:390,height:844});
    await card.locator('.demo-width[data-width="auto"]').click();
+   await card.locator('iframe').evaluate(e=>e.scrollIntoView({block:'center',behavior:'instant'}));
    await frame.waitForFunction(()=>innerWidth<390,null,{polling:100});
    for(const size of ['mobile','desktop']) {
     if(size==='desktop') {
      await page.setViewportSize({width:1440,height:1000});
      await card.locator('.demo-width[data-width="1200"]').click();
-     await frame.waitForFunction(()=>innerWidth===1200,null,{polling:100});
+     // Clicking the toolbar may leave a tall iframe outside the visible area.
+     await card.locator('iframe').evaluate(e=>e.scrollIntoView({block:'center',behavior:'instant'}));
+     try {await frame.waitForFunction(()=>innerWidth===1200,null,{polling:100});}
+     catch(error) {
+      console.error('Catalogue width diagnostic',{id,mode,child:await frame.evaluate(()=>({width:innerWidth,height:innerHeight,hidden:document.hidden})),parent:await card.locator('iframe').evaluate(e=>({style:e.getAttribute('style'),width:e.clientWidth,rect:e.getBoundingClientRect().toJSON(),mode:e.closest('.example').dataset.width,chapter:e.closest('.chapter').className,viewport:innerHeight}))});
+      throw error;
+     }
     }
     await card.locator('iframe').evaluate(e=>e.scrollIntoView({block:'center',behavior:'instant'}));
     if(!example.fixedHeight)await frame.waitForFunction(()=>Math.ceil(document.getElementById('demo-root').getBoundingClientRect().height)<=innerHeight+1,null,{polling:100});
