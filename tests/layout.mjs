@@ -23,11 +23,13 @@ try {
  check('mobile header is at most 80px tall',(await header.boundingBox()).height<=80);
  await page.evaluate(()=>window.scrollTo({top:180,behavior:'instant'}));
  const reading=await page.locator('#overview h2').first().boundingBox();
+ const readingWidth=(await page.locator('body').boundingBox()).width;
  const scroll=await page.evaluate(()=>scrollY);
  check('header stays visible while reading',Math.abs((await header.boundingBox()).y)<=1);
  await page.locator('#menu-button').click();
  check('menu opens above the article',await page.locator('#sidebar').isVisible());
  check('menu does not move the article',Math.abs((await page.locator('#overview h2').first().boundingBox()).y-reading.y)<=1);
+ check('menu preserves the document width when scrollbars disappear',Math.abs((await page.locator('body').boundingBox()).width-readingWidth)<=0.5);
  check('background is inert while menu is open',await page.locator('#document-shell').evaluate(e=>e.inert));
  const links=page.locator('#sidebar a:visible, #sidebar button:visible');
  await links.last().focus();await page.keyboard.press('Tab');
@@ -57,6 +59,11 @@ try {
   check('chapter selection closes menu',await page.locator('#sidebar').isHidden());
   check('chapter selection moves focus to content',await page.locator('#start--title').evaluate(e=>e===document.activeElement));
  } else check('menu has a backdrop',false);
+ await page.locator('#menu-button').click();
+ await page.setViewportSize({width:375,height:844});
+ check('open mobile menu fits after narrowing the viewport',await page.evaluate(()=>document.documentElement.scrollWidth<=document.documentElement.clientWidth+1));
+ await page.keyboard.press('Escape');
+ await page.setViewportSize({width:390,height:844});
  await page.evaluate(()=>{location.hash='start';});
  await page.waitForFunction(()=>document.querySelector('[data-example="E01"]').dataset.ok==='true');
  check('ordinary installation code is visible',await page.locator('#start pre').first().isVisible());

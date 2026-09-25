@@ -123,7 +123,7 @@ const html=`<!doctype html>
 <meta name="description" content="Документация Core v${version}: ${chapters.length} раздела, ${examples.length} живых примера, CSS и JavaScript.">
 <link id="shell-core" rel="stylesheet" onload="this.dataset.state='ok'" onerror="this.dataset.state='error'" href="https://cdn.sdelal.tech/core/latest/core.css">
 <link id="shell-theme" rel="stylesheet" onload="this.dataset.state='ok'" onerror="this.dataset.state='error'" href="https://cdn.sdelal.tech/core/latest/theme-nk.css">
-</head><body class="core-bg core-color">
+</head><body class="core-bg core-color core-w-full">
 <div id="document-shell" class="core-row core-nowrap core-g-0x">
 <a id="skip-link" class="core-fix core-fix-top-left core-button core-button-accent core-ghost" href="#main-content">К содержанию</a>
 <div id="sidebar-slot" class="core-z-0 core-w-140x core-noshrink t-core-hide">

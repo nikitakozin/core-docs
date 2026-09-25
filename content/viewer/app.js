@@ -21,11 +21,15 @@
   slot.append(sidebar);nav.scrollTop=navScroll;
   menu.classList.remove('opened');visible(menu,false);
   shell.inert=false;document.body.classList.remove('core-crop');
+  document.body.style.removeProperty('--w');
   menuButton.setAttribute('aria-expanded','false');
   if(restoreFocus)menuButton.focus({preventScroll:true});
  }
  function openMenu(){
   if(!mobile.matches)return;
+  // Keep the reading width when scroll locking removes the viewport scrollbar.
+  const scrollbar=innerWidth-root.clientWidth;
+  document.body.style.setProperty('--w',`calc(100vw - ${scrollbar}px)`);
   releaseAnchor();const navScroll=nav.scrollTop;
   panel.append(sidebar);nav.scrollTop=navScroll;
   visible(menu,true);menu.classList.add('opened');
