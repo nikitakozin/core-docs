@@ -80,6 +80,10 @@ export async function checkViewer(page,check) {
  await page.locator('#theme-select').selectOption('nk');
  await page.waitForFunction(()=>document.documentElement.dataset.design==='nk');
  await page.locator('#theme-toggle').click();
+ // Reserve a real scrollbar gutter: 100vw includes it, clientWidth does not.
+ // Without this fixture, overlay scrollbars can hide a root-width regression.
+ await page.addStyleTag({content:'html { scrollbar-gutter: stable; }'});
+ check('overflow fixture reserves a vertical scrollbar gutter',await page.evaluate(()=>document.documentElement.clientWidth<innerWidth));
  for(const width of [390,720,721,997,998,1200,1440]) {
   await page.setViewportSize({width,height:1000});
   const overflow=await page.evaluate(()=>{
@@ -87,7 +91,7 @@ export async function checkViewer(page,check) {
    const failures=[];articles.forEach(e=>e.classList.add('core-hide'));
    for(const article of articles){article.classList.remove('core-hide');
     const main=document.getElementById('main-content');
-    if(main.scrollWidth>main.clientWidth+1||article.scrollWidth>article.clientWidth+1||document.documentElement.scrollWidth>innerWidth+1)failures.push(article.id);
+    if(main.scrollWidth>main.clientWidth+1||article.scrollWidth>article.clientWidth+1||document.documentElement.scrollWidth>document.documentElement.clientWidth+1)failures.push(article.id);
     article.classList.add('core-hide');
    }
    active.forEach(e=>e.classList.remove('core-hide'));return failures;

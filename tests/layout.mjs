@@ -8,7 +8,7 @@ import assert from 'node:assert/strict';
 // that keeps both the reading position and keyboard access intact.
 const checks=[], failures=[];
 const check=(name,condition)=>{checks.push(name);if(!condition)failures.push(name);};
-const browser=await chromium.launch({headless:true});
+const browser=await chromium.launch({headless:true,ignoreDefaultArgs:['--hide-scrollbars']});
 try {
  const context=await browser.newContext({viewport:{width:390,height:844}});
  const page=await context.newPage();
@@ -70,7 +70,7 @@ try {
   check(`header remains compact at ${width}`,(await header.boundingBox()).height<=84);
   check(`sticky header remains visible at ${width}`,Math.abs((await header.boundingBox()).y)<=1);
   if(width>=998)check(`sidebar stays fixed at ${width}`,Math.abs((await page.locator('#sidebar').boundingBox()).y)<=1);
-  check(`no document overflow at ${width}`,await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1));
+  check(`no document overflow at ${width}`,await page.evaluate(()=>document.documentElement.scrollWidth<=document.documentElement.clientWidth+1));
  }
  await page.goto('file://'+resolve('docs/index.html'),{waitUntil:'networkidle'});
  await page.keyboard.press('Tab');

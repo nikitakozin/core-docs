@@ -62,7 +62,7 @@ try {
   await go('start');await page.locator('#start .copy-button').first().click();await page.waitForFunction(()=>[...document.querySelectorAll('#start .copy-button')].some(b=>b.textContent==='Скопировано'));checks.push('copy code');
   for(const width of [390,720,721,997,998,1440]){
    await page.setViewportSize({width,height:1000});await go('start');await page.evaluate(()=>new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(r))));
-   const bounds=await page.evaluate(()=>({scroll:document.documentElement.scrollWidth,width:innerWidth}));check(`no page overflow at ${width}`,bounds.scroll<=bounds.width+1);
+   const bounds=await page.evaluate(()=>({scroll:document.documentElement.scrollWidth,width:document.documentElement.clientWidth}));check(`no page overflow at ${width}`,bounds.scroll<=bounds.width+1);
    check(`menu visibility at ${width}`,await page.locator('#menu-button').isVisible()===(width<=997));
    if(width===390){await page.locator('#menu-button').click();check('mobile menu opens',await page.locator('#sidebar').isVisible());await page.keyboard.press('Escape');check('mobile menu closes',await page.locator('#sidebar').isHidden());}
    await page.locator('[data-example="E01"] .demo-width[data-width="1200"]').click();const demo=await frame('E01');await waitFrame(demo,()=>innerWidth===1200);const box=await page.locator('[data-example="E01"] iframe').boundingBox();check(`full scaled viewport at ${width}`,box.width<=width&&Math.abs(await demo.evaluate(()=>innerWidth)-1200)<1);

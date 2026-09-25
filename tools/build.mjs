@@ -118,7 +118,7 @@ const data=JSON.stringify({version,chapters,examples,searchSections}).replaceAll
 const themeRuntime=read('content/viewer/themes.js','utf8');
 const app=read('content/viewer/app.js','utf8').replaceAll('</script','<\\/script');
 const html=`<!doctype html>
-<html lang="ru" class="core-solo core-theme-light" data-theme="light" style="--f-s-base:16px"><head>
+<html lang="ru" class="core-solo core-col core-g-0x core-theme-light" data-theme="light" style="--f-s-base:16px"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Core — руководство</title>
 <meta name="description" content="Документация Core v${version}: ${chapters.length} раздела, ${examples.length} живых примера, CSS и JavaScript.">
 <link id="shell-core" rel="stylesheet" onload="this.dataset.state='ok'" onerror="this.dataset.state='error'" href="https://cdn.sdelal.tech/core/latest/core.css">
@@ -128,7 +128,7 @@ const html=`<!doctype html>
 <a id="skip-link" class="core-fix core-fix-top-left core-button core-button-accent core-ghost" href="#main-content">К содержанию</a>
 <div id="sidebar-slot" class="core-z-0 core-w-140x core-noshrink t-core-hide">
 <aside id="sidebar" class="core-bg core-color core-col core-g-0x core-w-140x core-h-100dvh core-fix core-fix-top-left">
-<div class="${headerSize} core-row core-nowrap core-y-center core-g-6x core-p-8x core-p-l-10x core-p-r-10x core-border core-border-b"><a class="core-row core-nowrap core-y-center core-g-5x core-grow core-color core-text core-text-xl core-text-bold" href="#overview"><img class="core-w-16x core-h-16x core-noshrink core-bg-black" src="https://sdelal.tech/favicon.ico" width="32" height="32" alt="">Core</a><button id="menu-close" type="button" class="${button} core-hide t-core-show" aria-label="Закрыть меню"><span class="core-icon-close core-icon-7x" aria-hidden="true"></span></button></div>
+<div class="${headerSize} core-row core-nowrap core-y-center core-g-6x core-p-8x core-p-l-10x core-p-r-10x core-border core-border-b"><a class="core-row core-nowrap core-y-center core-g-5x core-grow core-color core-text core-text-xl core-text-bold" href="#overview"><span class="core-icon-54 core-icon-16x core-noshrink" aria-hidden="true"></span>Core</a><button id="menu-close" type="button" class="${button} core-hide t-core-show" aria-label="Закрыть меню"><span class="core-icon-close core-icon-7x" aria-hidden="true"></span></button></div>
 <nav id="chapter-nav" aria-label="Разделы руководства" class="core-grow core-shrink core-h-0x core-h-scroll core-p-6x core-p-t-12x">${navigation}</nav>
 <footer class="core-col core-g-3x core-p-10x core-border core-border-t"><a class="${button} core-text-xs core-w-full core-g-3x core-m-b-5x" href="#agent-workflow">Документация для агента <span class="core-icon-arrow-right core-icon-6x" aria-hidden="true"></span></a><span class="core-text core-text-xs core-muted-4x">Core v${version}</span><span class="core-text core-text-xs core-muted-4x">Документация от <time datetime="${updatedDate}">${updatedLabel}</time></span></footer>
 </aside></div>
