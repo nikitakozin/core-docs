@@ -4,6 +4,26 @@ import {resolve} from 'node:path';
 import {pathToFileURL} from 'node:url';
 import assert from 'node:assert/strict';
 
+export async function checkMediaCrops(page,check) {
+ await page.goto(new URL('#media',page.url()).href,{waitUntil:'networkidle'});
+ await page.waitForFunction(()=>['E52','E53'].every(id=>document.querySelector(`[data-example="${id}"]`).dataset.ok==='true'));
+ for(const width of [390,1200]) {
+  for(const id of ['E52','E53']) {
+   const card=page.locator(`[data-example="${id}"]`);
+   await card.locator(`.demo-width[data-width="${width}"]`).click();
+   const frame=await card.locator('iframe').elementHandle().then(e=>e.contentFrame());
+   await frame.waitForFunction(width=>innerWidth===width,width,{polling:100});
+   const images=await frame.locator('.core-bg-img').evaluateAll(nodes=>nodes.map(img=>{
+    const image=img.getBoundingClientRect(),box=img.parentElement.getBoundingClientRect();
+    return {x:image.x,y:image.y,width:image.width,height:image.height,boxX:box.x,boxY:box.y,boxWidth:box.width,boxHeight:box.height,fit:getComputedStyle(img).objectFit};
+   }));
+   check(`${id} images fill their crop areas at ${width}`,images.length===(id==='E52'?3:1)&&images.every(img=>img.width>0&&img.height>0&&Math.abs(img.x-img.boxX)<1&&Math.abs(img.y-img.boxY)<1&&Math.abs(img.width-img.boxWidth)<1&&Math.abs(img.height-img.boxHeight)<1&&img.fit==='cover'));
+   if(id==='E52')check(`media crop ratios at ${width}`,images.every((img,i)=>Math.abs(img.boxWidth/img.boxHeight-[1,4/3,16/9][i])<.01));
+   else check(`natural image retains its ratio at ${width}`,await frame.locator('.core-img').evaluate(img=>Math.abs(img.getBoundingClientRect().width/img.getBoundingClientRect().height-img.naturalWidth/img.naturalHeight)<.01));
+  }
+ }
+}
+
 export async function checkCatalogue(page,check,out='test-results') {
  page.on('pageerror',error=>console.error('Catalogue page error',error.message));
  const examples=JSON.parse(read('docs/reference/examples.json','utf8')).examples;
@@ -128,7 +148,9 @@ if(import.meta.url===pathToFileURL(process.argv[1]).href) {
  try {
   const page=await browser.newPage({viewport:{width:1440,height:1000}}),checks=[],failures=[];
   await page.goto(pathToFileURL(resolve('docs/index.html')).href,{waitUntil:'networkidle'});
-  await checkCatalogue(page,(name,condition)=>{checks.push(name);if(!condition)failures.push(name);});
+  const check=(name,condition)=>{checks.push(name);if(!condition)failures.push(name);};
+  if(process.argv.includes('--media'))await checkMediaCrops(page,check);
+  else await checkCatalogue(page,check);
   console.log(JSON.stringify({passed:checks.length-failures.length,failures,checks},null,2));
   assert.equal(failures.length,0,failures.join("\n"));
  } finally {await browser.close();}

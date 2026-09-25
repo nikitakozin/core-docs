@@ -5,7 +5,7 @@ import {resolve,extname,sep} from 'node:path';
 import assert from 'node:assert/strict';
 import {checkNkui} from './nkui.mjs';
 import {checkInverseTheme} from './inverse-theme.mjs';
-import {checkCatalogue} from './catalogue.mjs';
+import {checkCatalogue,checkMediaCrops} from './catalogue.mjs';
 const failuresOnly=process.argv.includes('--failures'),root=resolve('docs'),out=resolve('test-results');mkdirSync(out,{recursive:true});
 const data=JSON.parse(read('docs/reference/examples.json','utf8')).examples;
 const chapters=JSON.parse(read('docs/chapters.json','utf8'));
@@ -98,6 +98,7 @@ try {
   await checkNkui(probe,versionBase,check,out);
   await checkInverseTheme(page,check);
   await checkCatalogue(page,check,out);
+  await checkMediaCrops(page,check);
   await page.goto('file://'+resolve('docs/index.html'),{waitUntil:'networkidle'});check('standalone file opens',await page.locator('#shell-status').isHidden());
  }
  {

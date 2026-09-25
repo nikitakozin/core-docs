@@ -28,27 +28,27 @@
 
 ### E52. Одна картинка в пропорциях 1:1, 4:3 и 16:9
 
-Изображение заполняет контейнер через core-bg-img. По расположению фигур видно, какая часть обрезается.
+Изображение заполняет контейнер через core-bg-img. Внешний figure использует core-col: core-figure задаёт всем вложенным img высоту auto и мешает заполнению. По расположению фигур видно, какая часть обрезается.
 
 ```html
 <div class="core-grid core-grid-3c m-core-grid-1c core-g-8x">
-  <figure class="core-figure">
+  <figure class="core-col core-g-4x">
     <div class="core-col core-ratio-1w-1h core-w-full core-crop core-b-r-8x">
       <img class="core-bg-img" alt="Прямоугольник и круг: обрезка 1w-1h" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='640' height='400' viewBox='0 0 640 400'%3E%3Crect width='640' height='400' fill='%23e8edf1'/%3E%3Crect x='100' y='90' width='260' height='220' rx='26' fill='%23b2ff35'/%3E%3Ccircle cx='420' cy='200' r='95' fill='%2321262b'/%3E%3C/svg%3E">
     </div>
-    <figcaption>core-ratio-1w-1h · core-bg-img</figcaption>
+    <figcaption class="core-text core-text-s">core-ratio-1w-1h · core-bg-img</figcaption>
   </figure>
-  <figure class="core-figure">
+  <figure class="core-col core-g-4x">
     <div class="core-col core-ratio-4w-3h core-w-full core-crop core-b-r-8x">
       <img class="core-bg-img" alt="Прямоугольник и круг: обрезка 4w-3h" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='640' height='400' viewBox='0 0 640 400'%3E%3Crect width='640' height='400' fill='%23e8edf1'/%3E%3Crect x='100' y='90' width='260' height='220' rx='26' fill='%23b2ff35'/%3E%3Ccircle cx='420' cy='200' r='95' fill='%2321262b'/%3E%3C/svg%3E">
     </div>
-    <figcaption>core-ratio-4w-3h · core-bg-img</figcaption>
+    <figcaption class="core-text core-text-s">core-ratio-4w-3h · core-bg-img</figcaption>
   </figure>
-  <figure class="core-figure">
+  <figure class="core-col core-g-4x">
     <div class="core-col core-ratio-16w-9h core-w-full core-crop core-b-r-8x">
       <img class="core-bg-img" alt="Прямоугольник и круг: обрезка 16w-9h" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='640' height='400' viewBox='0 0 640 400'%3E%3Crect width='640' height='400' fill='%23e8edf1'/%3E%3Crect x='100' y='90' width='260' height='220' rx='26' fill='%23b2ff35'/%3E%3Ccircle cx='420' cy='200' r='95' fill='%2321262b'/%3E%3C/svg%3E">
     </div>
-    <figcaption>core-ratio-16w-9h · core-bg-img</figcaption>
+    <figcaption class="core-text core-text-s">core-ratio-16w-9h · core-bg-img</figcaption>
   </figure>
 </div>
 ```
@@ -66,11 +66,11 @@
          src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='640' height='400' viewBox='0 0 640 400'%3E%3Crect width='640' height='400' fill='%23e8edf1'/%3E%3Crect x='100' y='90' width='260' height='220' rx='26' fill='%23b2ff35'/%3E%3Ccircle cx='420' cy='200' r='95' fill='%2321262b'/%3E%3C/svg%3E">
     <figcaption>width/height задают исходную геометрию до загрузки.</figcaption>
   </figure>
-  <figure class="core-figure">
+  <figure class="core-col core-g-4x">
     <div class="core-col core-ratio-1w-1h core-w-full core-crop core-b-r-8x">
       <img class="core-bg-img" alt="Прямоугольник и круг: обрезка 1w-1h" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='640' height='400' viewBox='0 0 640 400'%3E%3Crect width='640' height='400' fill='%23e8edf1'/%3E%3Crect x='100' y='90' width='260' height='220' rx='26' fill='%23b2ff35'/%3E%3Ccircle cx='420' cy='200' r='95' fill='%2321262b'/%3E%3C/svg%3E">
     </div>
-    <figcaption>core-ratio-1w-1h · core-bg-img</figcaption>
+    <figcaption class="core-text core-text-s">core-ratio-1w-1h · core-bg-img</figcaption>
   </figure>
 </div>
 ```
