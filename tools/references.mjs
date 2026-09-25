@@ -7,7 +7,7 @@ export async function buildReferences() {
 const manifest=JSON.parse(read('content/reference/source-manifest.json','utf8'));
 const output=(path,value)=>write(path,JSON.stringify(value,null,2)+'\n');
 const classes={}, tokens={}, registrations={};
-for (const file of ['core.css','theme-nk.css','theme-ss.css','theme-tg.css']) {
+for (const file of ['core.css','theme-nk.css','theme-nkui.css','theme-ss.css','theme-tg.css']) {
  const source=manifest.version_files.find(entry=>entry.file===file);
  const tree=postcss.parse((await fetchVerified(source)).toString('utf8'),{from:source.url});
  const context=node=>{const parts=[];for(let p=node.parent;p&&p.type!=='root';p=p.parent)parts.unshift(p.type==='atrule'?`@${p.name} ${p.params}`:p.selector);return parts.join(' → ');};
@@ -22,7 +22,7 @@ for (const file of ['core.css','theme-nk.css','theme-ss.css','theme-tg.css']) {
  tree.walkAtRules('property',rule=>{const entry={file,line:rule.source.start.line};rule.walkDecls(d=>entry[d.prop]=d.value);registrations[rule.params]=entry;});
 }
 output('docs/reference/classes.json',{source:manifest.version_base+'core.css',coverage:'explicit class selectors, including nested rules; attribute patterns and JS-created names excluded',count:Object.keys(classes).length,classes});
-output('docs/reference/tokens.json',{source:manifest.version_base,coverage:'all declared custom-property names in four verified CDN CSS files; declarations, not computed defaults',count:Object.keys(tokens).length,registrations,tokens});
+output('docs/reference/tokens.json',{source:manifest.version_base,coverage:'all declared custom-property names in five verified CDN CSS files; declarations, not computed defaults',count:Object.keys(tokens).length,registrations,tokens});
 const examples=JSON.parse(read('content/reference/examples.json','utf8')).examples,used={};
 for(const e of examples) for(const match of e.html.matchAll(/class="([^"]+)"/g)) for(const name of match[1].split(/\s+/)) if(name.includes('core-')) {const ids=used[name] ||= new Set();ids.add(e.id);}
 let index=`# Индекс классов и примеров\n\n[Оглавление](../README.md) · [Правила агента](../AGENTS.md)\n\nВ проверенном CSS v${manifest.version} с CDN найдено **${Object.keys(classes).length} явных имён классов**. Полный каталог с селекторами, контекстом и строками — [classes.json](../reference/classes.json). Атрибутные шаблоны и классы, создаваемые JS, не входят в этот счётчик.\n\nНиже — **${Object.keys(used).length} классов из примеров**. Это навигация по мануалу, не полный список возможностей.\n\n## Классы из примеров\n\n`;

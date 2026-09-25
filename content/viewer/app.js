@@ -268,16 +268,5 @@ ${styles}</head>
     document.getElementById(id).addEventListener('error',checkShell);
   }
   checkShell(); applyTheme(); route();
-  // Каталог обновится вместе со следующим билдом Core; не запрашиваем отсутствующий CSS.
-  async function discoverThemes(){
-    try {
-      const response=await fetch('https://cdn.sdelal.tech/core/latest/.readme.html',{signal:AbortSignal.timeout(8000)});
-      if(response.ok&&(await response.text()).includes('/theme-nkui.css')){
-        const option=themeSelect.querySelector('[value="nkui"]');option.disabled=false;option.textContent='NKUI';
-        if(preferredDesign==='nkui')await chooseDesign('nkui',false);
-      }
-    }catch{}
-  }
-  if(preferredDesign!=='nkui')chooseDesign(preferredDesign,false);
-  discoverThemes();
+  chooseDesign(preferredDesign,false);
 })();

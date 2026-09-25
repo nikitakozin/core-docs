@@ -2,7 +2,7 @@
 
 [Оглавление](../README.md) · [Правила агента](../AGENTS.md)
 
-В верхней панели мануала можно выбрать базовый Core, NK или SS и отдельно светлый/тёмный режим. NKUI становится доступной, когда каталог `latest/.readme.html` объявит `theme-nkui.css`. TG предназначена для Telegram и в переключатель сайта не включена. Оформление и режим сохраняются в localStorage; примеры получают тему без перезагрузки и сохраняют введённые значения. Если файл темы не загрузился, остаётся прежнее оформление.
+В верхней панели мануала можно выбрать базовый Core, NK, SS или NKUI и отдельно светлый/тёмный режим. NKUI доступна начиная с Core v191. TG предназначена для Telegram и в переключатель сайта не включена. Оформление и режим сохраняются в localStorage; примеры получают тему без перезагрузки и сохраняют введённые значения. Если файл темы не загрузился, остаётся прежнее оформление.
 
 ## Два уровня тем
 
@@ -38,6 +38,28 @@ function setTheme(mode) {
 `theme-nk.css` подключает Inter, задаёт основное семейство `var(--font-primary-local, "Inter"), sans-serif`, метрики primary: unitsPerEm 2048, ascender 1984, descender 494, sxHeight 1118, sCapHeight 1490, коэффициент line-height 1,15. Файл всё ещё объявляет `--rem-base: 17px`, но CSS v190 использует `--f-s-base: 18px`: старый токен больше не меняет масштаб интерфейса. Для другого масштаба задайте `--f-s-base` на корневой области с объявлениями шкалы.
 
 Файл содержит и шрифт, и его метрики. Замена семейства без метрик может нарушить оптическую компенсацию. Вложенный `.core-theme-light` заново объявляет базовые font-токены: проверьте computed styles внутри такой области, даже если тема подключена глобально.
+
+## NKUI: палитра и компактные контролы
+
+Подключите `theme-nkui.css` после `core.css` и задайте обычный режим `core-theme-light` или `core-theme-dark`. Отдельного класса `core-theme-nkui` нет. Тема сама импортирует `latest/theme-nk.css` со шрифтом Inter; отдельные CSS/JS библиотеки NKUI не нужны. Даже файл NKUI из `v191/` содержит импорт NK из изменяемого `latest/`: закрепление URL одного файла не закрепляет все его зависимости.
+
+```html
+<link rel="stylesheet" href="https://cdn.sdelal.tech/core/latest/core.css">
+<link rel="stylesheet" href="https://cdn.sdelal.tech/core/latest/theme-nkui.css">
+<section class="core-solo core-theme-light core-bg core-color core-card core-col">
+  <h2 class="core-text core-text-bold">Панель в теме NKUI</h2>
+  <input class="core-input" aria-label="Название" placeholder="Название">
+  <button type="button" class="core-button core-button-primary">Продолжить</button>
+</section>
+```
+
+Светлый фон — `#fff`, основной текст — `#0d0d0d`, акцент — `#93c5fd`. Тёмный фон — `#2d2d2b`, текст — `#f9f9f7`, акцент — `#cc7d5e`. Палитра, метрики Inter и алиасы компонентов объявлены в каждом scope, поэтому вложенные светлые и тёмные области можно сочетать.
+
+Шкала компактнее базового Core: `--f-s-base: 14px`, но текстовый размер m явно равен 13 px; xs/s/l/xl/xxl — 11/12/16/20/28 px. Обычные кнопки и поля имеют высоту 36 px, варианты xs/s/l — 24/28/44 px, базовый радиус — 8 px. Обычная кнопка оформлена как secondary, `core-button-transparent` — как ghost; primary использует основной цвет текста, accent — цвет акцента. Danger получает мягкий фон и красный текст.
+
+`core-radio-group` и `core-radio-group-inline` оформляют горизонтальный выбор сегментами. Сохраняйте разметку `label.core-button-radio > input[type="radio"] + .core-radio-label` и одинаковый `name`: это нативная radio-группа с управлением стрелками, а не tabs API. Минимальная высота сегмента по умолчанию 40 px, в группах xs/s/l — 24/28/44 px; длинные подписи переносятся и увеличивают высоту. Проверьте доступную ширину и disabled-состояния конкретной группы.
+
+Тема сохраняет стрелку disabled-select и видимый keyboard focus, уменьшает непрозрачность недоступных контролов, отключает переходы контролов при `prefers-reduced-motion: reduce`. Собственные токены `--nkui-*` и переопределения Core перечислены в [справочнике токенов](https://nikitakozin.github.io/core-docs/reference/tokens.json).
 
 ## Проектная тема
 
@@ -99,4 +121,4 @@ function setTheme(mode) {
 
 <!-- demo:E82 -->
 
-**Источник:** [Исходный Core CSS](https://cdn.sdelal.tech/core/latest/core.css). [Тема NK](https://cdn.sdelal.tech/core/latest/theme-nk.css), [SS](https://cdn.sdelal.tech/core/latest/theme-ss.css), [TG](https://cdn.sdelal.tech/core/latest/theme-tg.css).
+**Источник:** [Исходный Core CSS](https://cdn.sdelal.tech/core/latest/core.css). [Тема NK](https://cdn.sdelal.tech/core/latest/theme-nk.css), [NKUI](https://cdn.sdelal.tech/core/latest/theme-nkui.css), [SS](https://cdn.sdelal.tech/core/latest/theme-ss.css), [TG](https://cdn.sdelal.tech/core/latest/theme-tg.css).

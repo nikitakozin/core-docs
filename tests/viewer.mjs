@@ -24,7 +24,7 @@ export async function checkViewer(page,check) {
  await page.evaluate(()=>location.hash='js-field');
  await page.waitForFunction(()=>document.querySelector('[data-example="E77"]').dataset.ok==='true');
  check('HTML and JavaScript are visible without expanding the example',await page.locator('[data-example="E77"] pre').first().isVisible()&&await page.locator('[data-example="E77"] pre').last().isVisible());
- for(const name of ['core','ss','nk']) {
+ for(const name of ['core','ss','nk','nkui']) {
   const frame=await page.locator('[data-example="E77"] iframe').elementHandle().then(e=>e.contentFrame());
   await frame.locator('#quantity').fill('12');
   await page.locator('#theme-select').selectOption(name);
