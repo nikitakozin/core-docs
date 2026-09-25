@@ -38,33 +38,157 @@
 
 `core-link` по умолчанию использует основной цвет текста с мягким подчёркиванием; `core-link-blue` подключает цвет семантической ссылки. `core-link-nostroke` меняет базовое подчёркивание, но состояния всё равно нужно смотреть отдельно. `core-mark` — подсветка, `core-kbd` — оформление клавиши. Используйте соответствующие HTML-теги для смысла: `<a>`, `<mark>`, `<kbd>`.
 
-### E23. Текстовая иерархия без спорного core-h
+### E23. Шкалы заголовков, текста и шрифтов
 
-Семантические уровни задаются тегами, визуальные размеры — текстовыми классами.
+Три независимых сравнения: core-h1…h6, текстовые размеры xxs…xxl и семейства primary/accent/mono. Семантику заголовка задаёт HTML-тег.
 
 ```html
-<div class="core-col core-g-6x">
-  <h1 class="core-text core-text-xxl m-core-text-xl core-text-bold">Материалы команды</h1>
-  <p class="core-text core-text-l">Общее пространство для работы с документами.</p>
-  <p class="core-text core-text-s">Последнее обновление: сегодня, 12:30.</p>
+<div class="core-col core-g-8x">
+  <div class="core-col core-g-8x">
+    <h3 class="core-text core-text-bold">Заголовки</h3>
+    <div class="core-col core-g-8x">
+      <div class="core-col core-g-8x">
+        <span class="core-text core-text-s core-text-mono">core-h1</span>
+        <h1 class="core-h1">Заголовок 1</h1>
+      </div>
+      <div class="core-col core-g-8x">
+        <span class="core-text core-text-s core-text-mono">core-h2</span>
+        <h2 class="core-h2">Заголовок 2</h2>
+      </div>
+      <div class="core-col core-g-8x">
+        <span class="core-text core-text-s core-text-mono">core-h3</span>
+        <h3 class="core-h3">Заголовок 3</h3>
+      </div>
+      <div class="core-col core-g-8x">
+        <span class="core-text core-text-s core-text-mono">core-h4</span>
+        <h4 class="core-h4">Заголовок 4</h4>
+      </div>
+      <div class="core-col core-g-8x">
+        <span class="core-text core-text-s core-text-mono">core-h5</span>
+        <h5 class="core-h5">Заголовок 5</h5>
+      </div>
+      <div class="core-col core-g-8x">
+        <span class="core-text core-text-s core-text-mono">core-h6</span>
+        <h6 class="core-h6">Заголовок 6</h6>
+      </div>
+    </div>
+  </div>
+  <div class="core-col core-g-8x">
+    <h3 class="core-text core-text-bold">Текст</h3>
+    <div class="core-col core-g-8x">
+      <div class="core-col core-g-8x">
+        <span class="core-text core-text-s core-text-mono">core-text-xxs</span>
+        <p class="core-text core-text-xxs">Материалы проекта</p>
+      </div>
+      <div class="core-col core-g-8x">
+        <span class="core-text core-text-s core-text-mono">core-text-xs</span>
+        <p class="core-text core-text-xs">Материалы проекта</p>
+      </div>
+      <div class="core-col core-g-8x">
+        <span class="core-text core-text-s core-text-mono">core-text-s</span>
+        <p class="core-text core-text-s">Материалы проекта</p>
+      </div>
+      <div class="core-col core-g-8x">
+        <span class="core-text core-text-s core-text-mono">core-text-m</span>
+        <p class="core-text core-text-m">Материалы проекта</p>
+      </div>
+      <div class="core-col core-g-8x">
+        <span class="core-text core-text-s core-text-mono">core-text-l</span>
+        <p class="core-text core-text-l">Материалы проекта</p>
+      </div>
+      <div class="core-col core-g-8x">
+        <span class="core-text core-text-s core-text-mono">core-text-xl</span>
+        <p class="core-text core-text-xl">Материалы проекта</p>
+      </div>
+      <div class="core-col core-g-8x">
+        <span class="core-text core-text-s core-text-mono">core-text-xxl</span>
+        <p class="core-text core-text-xxl">Материалы проекта</p>
+      </div>
+    </div>
+  </div>
+  <div class="core-col core-g-8x">
+    <h3 class="core-text core-text-bold">Семейства</h3>
+    <div class="core-col core-g-8x">
+      <div class="core-col core-g-8x">
+        <span class="core-text core-text-s core-text-mono">core-text-primary</span>
+        <p class="core-text core-text-l core-text-primary">Проект 024 · Aa Бб</p>
+      </div>
+      <div class="core-col core-g-8x">
+        <span class="core-text core-text-s core-text-mono">core-text-accent</span>
+        <p class="core-text core-text-l core-text-accent">Проект 024 · Aa Бб</p>
+      </div>
+      <div class="core-col core-g-8x">
+        <span class="core-text core-text-s core-text-mono">core-text-mono</span>
+        <p class="core-text core-text-l core-text-mono">Проект 024 · Aa Бб</p>
+      </div>
+    </div>
+  </div>
 </div>
 ```
 
 <!-- demo:E23 -->
 
-### E24. Оптическое выравнивание бирки с соседним текстом
+### E24. Бирка и текст: геометрическое и оптическое выравнивание
 
-Сверху только геометрический центр, снизу — sxHeight-компенсация. Сравнение корректно при загруженном шрифте и соответствующих метриках.
+Для каждого размера первая строка использует только y-center, вторая добавляет sxHeight. Текст и бирка — прямые соседи.
 
 ```html
-<div class="core-col core-g-12x">
-  <div class="core-row core-y-center core-g-4x">
-    <span class="core-text core-text-xl">Материалы</span>
-    <span class="core-badge core-badge-s">24</span>
+<div class="core-grid core-grid-2c m-core-grid-1c core-g-8x">
+  <div class="core-col core-g-8x">
+    <span class="core-text core-text-s core-text-mono">s · геометрический центр</span>
+    <div class="core-row core-y-center core-g-4x">
+      <span class="core-text core-text-s">Материалы</span>
+      <span class="core-badge core-badge-s ">24</span>
+    </div>
   </div>
-  <div class="core-row core-y-center core-g-4x">
-    <span class="core-text core-text-xl">Материалы</span>
-    <span class="core-badge core-badge-s core-sxHeight-middle">24</span>
+  <div class="core-col core-g-8x">
+    <span class="core-text core-text-s core-text-mono">s · sxHeight</span>
+    <div class="core-row core-y-center core-g-4x">
+      <span class="core-text core-text-s">Материалы</span>
+      <span class="core-badge core-badge-s core-sxHeight-middle">24</span>
+    </div>
+  </div>
+  <div class="core-col core-g-8x">
+    <span class="core-text core-text-s core-text-mono">m · геометрический центр</span>
+    <div class="core-row core-y-center core-g-4x">
+      <span class="core-text core-text-m">Материалы</span>
+      <span class="core-badge core-badge-s ">24</span>
+    </div>
+  </div>
+  <div class="core-col core-g-8x">
+    <span class="core-text core-text-s core-text-mono">m · sxHeight</span>
+    <div class="core-row core-y-center core-g-4x">
+      <span class="core-text core-text-m">Материалы</span>
+      <span class="core-badge core-badge-s core-sxHeight-middle">24</span>
+    </div>
+  </div>
+  <div class="core-col core-g-8x">
+    <span class="core-text core-text-s core-text-mono">l · геометрический центр</span>
+    <div class="core-row core-y-center core-g-4x">
+      <span class="core-text core-text-l">Материалы</span>
+      <span class="core-badge core-badge-s ">24</span>
+    </div>
+  </div>
+  <div class="core-col core-g-8x">
+    <span class="core-text core-text-s core-text-mono">l · sxHeight</span>
+    <div class="core-row core-y-center core-g-4x">
+      <span class="core-text core-text-l">Материалы</span>
+      <span class="core-badge core-badge-s core-sxHeight-middle">24</span>
+    </div>
+  </div>
+  <div class="core-col core-g-8x">
+    <span class="core-text core-text-s core-text-mono">xl · геометрический центр</span>
+    <div class="core-row core-y-center core-g-4x">
+      <span class="core-text core-text-xl">Материалы</span>
+      <span class="core-badge core-badge-s ">24</span>
+    </div>
+  </div>
+  <div class="core-col core-g-8x">
+    <span class="core-text core-text-s core-text-mono">xl · sxHeight</span>
+    <div class="core-row core-y-center core-g-4x">
+      <span class="core-text core-text-xl">Материалы</span>
+      <span class="core-badge core-badge-s core-sxHeight-middle">24</span>
+    </div>
   </div>
 </div>
 ```
@@ -87,16 +211,25 @@
 
 <!-- demo:E25 -->
 
-### E26. Семантическая ссылка и сочетание клавиш
+### E26. Иконка, ссылка, бирка и клавиши в строке
 
-Это только представление подсказки: обработчик сочетания клавиш в примере отсутствует.
+Один набор inline-элементов в трёх размерах текста. У иконки используется core-icon-inline, у бирки — core-badge-inline.
 
 ```html
-<p class="core-text">
-  Откройте <a href="#guide" class="core-link core-link-blue">руководство проекта</a>
-  или нажмите <kbd class="core-kbd">⌘</kbd> <kbd class="core-kbd">K</kbd>.
-  <mark class="core-mark">Новая версия</mark> уже доступна.
-</p>
+<div class="core-col core-g-8x">
+  <div class="core-col core-g-8x">
+    <span class="core-text core-text-s core-text-mono">core-text-s</span>
+    <p class="core-text core-text-s"><span class="core-icon-search core-icon-8x core-icon-inline" aria-hidden="true"></span> Открыть <a href="#guide" class="core-link core-link-blue">руководство</a> <span class="core-badge core-badge-s core-badge-inline">24</span> · <kbd class="core-kbd">⌘</kbd> <kbd class="core-kbd">K</kbd> · <mark class="core-mark">Новое</mark></p>
+  </div>
+  <div class="core-col core-g-8x">
+    <span class="core-text core-text-s core-text-mono">core-text-m</span>
+    <p class="core-text core-text-m"><span class="core-icon-search core-icon-8x core-icon-inline" aria-hidden="true"></span> Открыть <a href="#guide" class="core-link core-link-blue">руководство</a> <span class="core-badge core-badge-s core-badge-inline">24</span> · <kbd class="core-kbd">⌘</kbd> <kbd class="core-kbd">K</kbd> · <mark class="core-mark">Новое</mark></p>
+  </div>
+  <div class="core-col core-g-8x">
+    <span class="core-text core-text-s core-text-mono">core-text-l</span>
+    <p class="core-text core-text-l"><span class="core-icon-search core-icon-8x core-icon-inline" aria-hidden="true"></span> Открыть <a href="#guide" class="core-link core-link-blue">руководство</a> <span class="core-badge core-badge-s core-badge-inline">24</span> · <kbd class="core-kbd">⌘</kbd> <kbd class="core-kbd">K</kbd> · <mark class="core-mark">Новое</mark></p>
+  </div>
+</div>
 ```
 
 <!-- demo:E26 -->

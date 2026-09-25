@@ -94,6 +94,39 @@ const sliders = new SliderManager();
 
 <!-- demo:E79 -->
 
+### E86. Лента с карточками разной ширины
+
+Шесть прямых детей имеют разные штатные ширины. Лента доступна для нативной прокрутки и управления кнопками; программная плавность отключена.
+
+```html
+<div class="core-col core-g-6x">
+  <div id="e86-widths" data-slider class="core-slider core-g-8x" tabindex="0" role="region" aria-label="Карточки разной ширины">
+    <article class="core-card core-col core-w-80x core-g-4x"><h3 class="core-text core-text-bold">Заметка</h3><code class="core-text core-text-s">core-w-80x</code></article>
+    <article class="core-card core-col core-w-96x core-g-4x"><h3 class="core-text core-text-bold">Материалы</h3><code class="core-text core-text-s">core-w-96x</code></article>
+    <article class="core-card core-col core-w-112x core-g-4x"><h3 class="core-text core-text-bold">Сценарий</h3><code class="core-text core-text-s">core-w-112x</code></article>
+    <article class="core-card core-col core-w-128x core-g-4x"><h3 class="core-text core-text-bold">Исследование</h3><code class="core-text core-text-s">core-w-128x</code></article>
+    <article class="core-card core-col core-w-120x core-g-4x"><h3 class="core-text core-text-bold">Макеты</h3><code class="core-text core-text-s">core-w-120x</code></article>
+    <article class="core-card core-col core-w-140x core-g-4x"><h3 class="core-text core-text-bold">Передача проекта</h3><code class="core-text core-text-s">core-w-140x</code></article>
+  </div>
+  <div class="core-row core-g-4x">
+    <button type="button" class="core-button" data-slider-trigger="e86-widths" data-slider-prev aria-controls="e86-widths">Назад</button>
+    <button type="button" class="core-button" data-slider-trigger="e86-widths" data-slider-next aria-controls="e86-widths">Далее</button>
+    <button type="button" class="core-button core-button-transparent" data-slider-trigger="e86-widths" data-slider-goto="start" aria-controls="e86-widths">В начало</button>
+    <button type="button" class="core-button core-button-transparent" data-slider-trigger="e86-widths" data-slider-goto="end" aria-controls="e86-widths">В конец</button>
+  </div>
+</div>
+```
+
+```js
+import EventEmitter from 'https://cdn.sdelal.tech/core/latest/event.js';
+import SliderManager from 'https://cdn.sdelal.tech/core/latest/slider.js';
+const events = new EventEmitter();
+const sliders = new SliderManager();
+// При добавлении или удалении слайдов: sliders.refresh();
+```
+
+<!-- demo:E86 -->
+
 **Источник:** [slider.js](https://cdn.sdelal.tech/core/latest/slider.js), проверенная версия и SHA-256 — в [манифесте](../reference/source-manifest.json); при обновлении байты модуля не изменились.
 
 ## Совместимость с текущим CSS

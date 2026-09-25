@@ -4,8 +4,13 @@ function createDocsThemeController(doc,linkId) {
  const names=['core','nk','ss','nkui'];
  let design='nk',mode='light',revision=0;
  const apply=()=>{
-  root.classList.remove('core-theme-light','core-theme-dark','core-theme-ss-light','core-theme-ss-dark');
-  root.classList.add(design==='ss'?`core-theme-ss-${mode}`:`core-theme-${mode}`);
+  const scope=(node,value)=>{
+   node.classList.remove('core-theme-light','core-theme-dark','core-theme-ss-light','core-theme-ss-dark');
+   node.classList.add(design==='ss'?`core-theme-ss-${value}`:`core-theme-${value}`);
+  };
+  scope(root,mode);
+  // This document owns the chrome; sandbox documents keep their selected mode.
+  doc.querySelectorAll('[data-docs-inverse]').forEach(node=>scope(node,mode==='light'?'dark':'light'));
   root.dataset.theme=mode;root.dataset.design=design;
  };
  return {

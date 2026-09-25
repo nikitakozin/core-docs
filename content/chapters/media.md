@@ -18,7 +18,7 @@
 
 ## Overflow и маски
 
-`core-overflow-hidden`, `core-overflow-hidden`, `core-crop` обрезают переполнение. `core-overflow-y-auto` и `core-h-scroll` дают вертикальную прокрутку. `core-x-scroll` — горизонтальную.
+`core-overflow-hidden` и `core-crop` обрезают переполнение. `core-overflow-y-auto` и `core-h-scroll` дают вертикальную прокрутку. `core-x-scroll` — горизонтальную.
 
 Маски `core-masked-left/right/top/bottom` используют градиенты и `--core-overflow-mask-size` с default 20 px. Несколько классов маски могут записывать одно свойство `mask-image`; не считайте, что их эффекты автоматически объединяются. Маска на контейнере также может обрезать визуальный focus-outline его детей.
 
@@ -26,31 +26,53 @@
 
 В следующих примерах используется простая встроенная SVG-заглушка. Она нужна только для наблюдения пропорций и не является новым набором фирменных иконок или изображением из showcase. Файлы шрифтов и чужие фотографии в архив не включены.
 
-### E52. Пропорциональная область и подпись
+### E52. Одна картинка в пропорциях 1:1, 4:3 и 16:9
 
-Это геометрический стенд, не проверка всех intrinsic-особенностей img.
+Изображение заполняет контейнер через core-bg-img. По расположению фигур видно, какая часть обрезается.
 
 ```html
-<figure class="core-figure">
-  <div class="core-ratio-16w-9h core-w-full core-bg-blue:100 core-b-r-8x core-col core-center" role="img" aria-label="Демонстрационная область 16 к 9">
-    <span class="core-text core-text-xl">16 : 9</span>
-  </div>
-  <figcaption>Область с явной шириной и соотношением сторон.</figcaption>
-</figure>
+<div class="core-grid core-grid-3c m-core-grid-1c core-g-8x">
+  <figure class="core-figure">
+    <div class="core-col core-ratio-1w-1h core-w-full core-crop core-b-r-8x">
+      <img class="core-bg-img" alt="Прямоугольник и круг: обрезка 1w-1h" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='640' height='400' viewBox='0 0 640 400'%3E%3Crect width='640' height='400' fill='%23e8edf1'/%3E%3Crect x='100' y='90' width='260' height='220' rx='26' fill='%23b2ff35'/%3E%3Ccircle cx='420' cy='200' r='95' fill='%2321262b'/%3E%3C/svg%3E">
+    </div>
+    <figcaption>core-ratio-1w-1h · core-bg-img</figcaption>
+  </figure>
+  <figure class="core-figure">
+    <div class="core-col core-ratio-4w-3h core-w-full core-crop core-b-r-8x">
+      <img class="core-bg-img" alt="Прямоугольник и круг: обрезка 4w-3h" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='640' height='400' viewBox='0 0 640 400'%3E%3Crect width='640' height='400' fill='%23e8edf1'/%3E%3Crect x='100' y='90' width='260' height='220' rx='26' fill='%23b2ff35'/%3E%3Ccircle cx='420' cy='200' r='95' fill='%2321262b'/%3E%3C/svg%3E">
+    </div>
+    <figcaption>core-ratio-4w-3h · core-bg-img</figcaption>
+  </figure>
+  <figure class="core-figure">
+    <div class="core-col core-ratio-16w-9h core-w-full core-crop core-b-r-8x">
+      <img class="core-bg-img" alt="Прямоугольник и круг: обрезка 16w-9h" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='640' height='400' viewBox='0 0 640 400'%3E%3Crect width='640' height='400' fill='%23e8edf1'/%3E%3Crect x='100' y='90' width='260' height='220' rx='26' fill='%23b2ff35'/%3E%3Ccircle cx='420' cy='200' r='95' fill='%2321262b'/%3E%3C/svg%3E">
+    </div>
+    <figcaption>core-ratio-16w-9h · core-bg-img</figcaption>
+  </figure>
+</div>
 ```
 
 <!-- demo:E52 -->
 
-### E53. Изображение с собственной геометрией
+### E53. Исходные пропорции и заполнение квадрата
 
-SVG-заглушка создана специально для этого примера; внешняя загрузка картинки не требуется.
+Слева core-img с собственной геометрией 640×400, справа та же картинка заполняет квадрат. В v191 нет утилиты object-fit:contain; первый вариант сохраняет исходные пропорции благодаря auto-height.
 
 ```html
-<figure class="core-figure core-m-w-xs">
-  <img class="core-img core-b-r-8x" width="640" height="400" alt="Демонстрационная композиция: прямоугольник и круг"
-       src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='640' height='400' viewBox='0 0 640 400'%3E%3Crect width='640' height='400' fill='%23e8edf1'/%3E%3Crect x='100' y='90' width='260' height='220' rx='26' fill='%23b2ff35'/%3E%3Ccircle cx='420' cy='200' r='95' fill='%2321262b'/%3E%3C/svg%3E">
-  <figcaption>width/height задают исходную геометрию до загрузки.</figcaption>
-</figure>
+<div class="core-grid core-grid-2c m-core-grid-1c core-g-8x">
+  <figure class="core-figure core-m-w-xs">
+    <img class="core-img core-b-r-8x" width="640" height="400" alt="Демонстрационная композиция: прямоугольник и круг"
+         src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='640' height='400' viewBox='0 0 640 400'%3E%3Crect width='640' height='400' fill='%23e8edf1'/%3E%3Crect x='100' y='90' width='260' height='220' rx='26' fill='%23b2ff35'/%3E%3Ccircle cx='420' cy='200' r='95' fill='%2321262b'/%3E%3C/svg%3E">
+    <figcaption>width/height задают исходную геометрию до загрузки.</figcaption>
+  </figure>
+  <figure class="core-figure">
+    <div class="core-col core-ratio-1w-1h core-w-full core-crop core-b-r-8x">
+      <img class="core-bg-img" alt="Прямоугольник и круг: обрезка 1w-1h" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='640' height='400' viewBox='0 0 640 400'%3E%3Crect width='640' height='400' fill='%23e8edf1'/%3E%3Crect x='100' y='90' width='260' height='220' rx='26' fill='%23b2ff35'/%3E%3Ccircle cx='420' cy='200' r='95' fill='%2321262b'/%3E%3C/svg%3E">
+    </div>
+    <figcaption>core-ratio-1w-1h · core-bg-img</figcaption>
+  </figure>
+</div>
 ```
 
 <!-- demo:E53 -->

@@ -67,8 +67,8 @@ try {
  await page.evaluate(()=>{location.hash='start';});
  await page.waitForFunction(()=>document.querySelector('[data-example="E01"]').dataset.ok==='true');
  check('ordinary installation code is visible',await page.locator('#start pre').first().isVisible());
- check('all 82 examples keep code inside their card',await page.locator('.example > .example-code').count()===82);
- check('all 82 examples offer seven one-click widths',await page.locator('.example .demo-width').count()===82*7&&await page.locator('select.demo-width').count()===0);
+ check('all 87 examples keep code inside their card',await page.locator('.example > .example-code').count()===87);
+ check('all 87 examples offer seven one-click widths',await page.locator('.example .demo-width').count()===87*7&&await page.locator('select.demo-width').count()===0);
  check('all nine navigation groups are present',await page.locator('.nav-group').count()===9);
  check('all 42 chapters have previous/next navigation',await page.locator('.chapter-footer').count()===42);
  for(const width of [390,720,721,997,998,1440]) {

@@ -4,6 +4,8 @@ import {createServer} from 'node:http';
 import {resolve,extname,sep} from 'node:path';
 import assert from 'node:assert/strict';
 import {checkNkui} from './nkui.mjs';
+import {checkInverseTheme} from './inverse-theme.mjs';
+import {checkCatalogue} from './catalogue.mjs';
 const failuresOnly=process.argv.includes('--failures'),root=resolve('docs'),out=resolve('test-results');mkdirSync(out,{recursive:true});
 const data=JSON.parse(read('docs/reference/examples.json','utf8')).examples;
 const chapters=JSON.parse(read('docs/chapters.json','utf8'));
@@ -28,7 +30,7 @@ try {
  async function go(id){console.log("Chapter",id);await page.evaluate(id=>{location.hash=id;},id);await page.waitForFunction(id=>!document.getElementById(id).classList.contains('core-hide'),id);const ids=data.filter(e=>e.chapter===id).map(e=>e.id);if(ids.length)await page.waitForFunction(ids=>ids.every(id=>document.querySelector(`[data-example="${id}"]`).dataset.ok==='true'),ids,{timeout:25000});}
  const frame=async id=>{const node=page.locator(`[data-example="${id}"] iframe`);await node.evaluate(e=>e.scrollIntoView({block:'center',behavior:'instant'}));return await node.elementHandle().then(e=>e.contentFrame());};
  check('shell CSS loaded',await page.locator('#shell-status').isHidden());
- check('42 chapters / 82 cards',await page.locator('.chapter').count()===42&&await page.locator('.example').count()===82);
+ check('42 chapters / 87 cards',await page.locator('.chapter').count()===42&&await page.locator('.example').count()===87);
  if(!failuresOnly) {
   await go('start');check('iframes load Core from the CDN',cdnResponses.iframe>0);
   const themeFrame=await frame('E01');
@@ -94,6 +96,8 @@ try {
   for(const width of [720,721,997,998]){await page.locator(`[data-example="E01"] .demo-width[data-width="${width}"]`).click();await waitFrame(probe,w=>innerWidth===w,width);const values=await probe.evaluate(()=>({icon:getComputedStyle(document.getElementById('icon'),'::before').width,height:getComputedStyle(document.getElementById('size')).height,top:getComputedStyle(document.getElementById('position')).top,t:getComputedStyle(document.getElementById('position')).getPropertyValue('--t').trim(),heading:getComputedStyle(document.getElementById('heading')).fontSize}));check(`icon cascade ${width}`,values.icon===(width<=720?'12px':'16px'));check(`170x resolves ${width}`,values.height==='340px');check(`mobile positioning alias ${width}`,width<=720?values.top==='0px':values.t==='');}
   for(const width of [720,721,997,998]){await page.locator(`[data-example="E01"] .demo-width[data-width="${width}"]`).click();await waitFrame(probe,w=>innerWidth===w,width);check(`56x/64x top coordinates at ${width}`,await probe.locator('#top-offset').evaluate(e=>getComputedStyle(e).top)===(width>720&&width<=997?'112px':'128px'));}
   await checkNkui(probe,versionBase,check,out);
+  await checkInverseTheme(page,check);
+  await checkCatalogue(page,check,out);
   await page.goto('file://'+resolve('docs/index.html'),{waitUntil:'networkidle'});check('standalone file opens',await page.locator('#shell-status').isHidden());
  }
  {

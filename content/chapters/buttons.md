@@ -45,60 +45,168 @@ Hover применяется в media `(hover: hover)`, есть active, focus-v
 
 `core-actions-box` создаёт ряд без переноса, минимальный шов и меняет скругления непосредственных детей: внешние края остаются, внутренние убираются. Это не меню и не radiogroup автоматически. Подпишите группу через role/group или fieldset по смыслу. Добавленная вокруг одной кнопки обёртка меняет, кто считается первым/последним ребёнком.
 
-### E29. Варианты основных действий
+### E29. Варианты кнопок в четырёх размерах
 
-Все элементы — реальные button с указанным type. Посмотрите также focus клавишей Tab.
+В каждой строке один размер и пять вариантов оформления. Все элементы — настоящие button; проверьте focus клавишей Tab.
 
 ```html
-<div class="core-row core-y-center">
-  <button type="button" class="core-button">Обычная</button>
-  <button type="button" class="core-button core-button-primary">Основная</button>
-  <button type="button" class="core-button core-button-accent">Акцентная</button>
-  <button type="button" class="core-button core-button-outline">Контурная</button>
-  <button type="button" class="core-button core-button-transparent">Прозрачная</button>
+<div class="core-col core-g-8x">
+  <div class="core-col core-g-8x">
+    <h3 class="core-text core-text-bold">XS</h3>
+    <div class="core-row core-y-center core-g-6x">
+      <button type="button" class="core-button core-button-xs">Обычная</button>
+      <button type="button" class="core-button core-button-xs core-button-primary">Основная</button>
+      <button type="button" class="core-button core-button-xs core-button-accent">Акцентная</button>
+      <button type="button" class="core-button core-button-xs core-button-outline">Контурная</button>
+      <button type="button" class="core-button core-button-xs core-button-transparent">Прозрачная</button>
+    </div>
+  </div>
+  <div class="core-col core-g-8x">
+    <h3 class="core-text core-text-bold">S</h3>
+    <div class="core-row core-y-center core-g-6x">
+      <button type="button" class="core-button core-button-s">Обычная</button>
+      <button type="button" class="core-button core-button-s core-button-primary">Основная</button>
+      <button type="button" class="core-button core-button-s core-button-accent">Акцентная</button>
+      <button type="button" class="core-button core-button-s core-button-outline">Контурная</button>
+      <button type="button" class="core-button core-button-s core-button-transparent">Прозрачная</button>
+    </div>
+  </div>
+  <div class="core-col core-g-8x">
+    <h3 class="core-text core-text-bold">M</h3>
+    <div class="core-row core-y-center core-g-6x">
+      <button type="button" class="core-button core-button-m">Обычная</button>
+      <button type="button" class="core-button core-button-m core-button-primary">Основная</button>
+      <button type="button" class="core-button core-button-m core-button-accent">Акцентная</button>
+      <button type="button" class="core-button core-button-m core-button-outline">Контурная</button>
+      <button type="button" class="core-button core-button-m core-button-transparent">Прозрачная</button>
+    </div>
+  </div>
+  <div class="core-col core-g-8x">
+    <h3 class="core-text core-text-bold">L</h3>
+    <div class="core-row core-y-center core-g-6x">
+      <button type="button" class="core-button core-button-l">Обычная</button>
+      <button type="button" class="core-button core-button-l core-button-primary">Основная</button>
+      <button type="button" class="core-button core-button-l core-button-accent">Акцентная</button>
+      <button type="button" class="core-button core-button-l core-button-outline">Контурная</button>
+      <button type="button" class="core-button core-button-l core-button-transparent">Прозрачная</button>
+    </div>
+  </div>
 </div>
 ```
 
 <!-- demo:E29 -->
 
-### E30. Четыре размера кнопки
+### E30. Текст, иконка с текстом и только иконка
 
-Буквы — имена профилей, не единая линейная шкала.
+Одна и та же операция в трёх представлениях и четырёх размерах. У каждой кнопки только с иконкой есть доступное имя.
 
 ```html
-<div class="core-row core-y-center">
-  <button type="button" class="core-button core-button-xs">XS</button>
-  <button type="button" class="core-button core-button-s">S</button>
-  <button type="button" class="core-button core-button-m">M</button>
-  <button type="button" class="core-button core-button-l">L</button>
+<div class="core-col core-g-8x">
+  <div class="core-col core-g-8x">
+    <h3 class="core-text core-text-bold">XS</h3>
+    <div class="core-row core-y-center core-g-6x">
+      <button type="button" class="core-button core-button-xs">Создать</button>
+      <button type="button" class="core-button core-button-xs"><span class="core-icon-plus core-icon-6x" aria-hidden="true"></span> Создать</button>
+      <button type="button" class="core-button core-button-xs" aria-label="Создать · XS"><span class="core-icon-plus core-icon-6x" aria-hidden="true"></span></button>
+    </div>
+  </div>
+  <div class="core-col core-g-8x">
+    <h3 class="core-text core-text-bold">S</h3>
+    <div class="core-row core-y-center core-g-6x">
+      <button type="button" class="core-button core-button-s">Создать</button>
+      <button type="button" class="core-button core-button-s"><span class="core-icon-plus core-icon-7x" aria-hidden="true"></span> Создать</button>
+      <button type="button" class="core-button core-button-s" aria-label="Создать · S"><span class="core-icon-plus core-icon-7x" aria-hidden="true"></span></button>
+    </div>
+  </div>
+  <div class="core-col core-g-8x">
+    <h3 class="core-text core-text-bold">M</h3>
+    <div class="core-row core-y-center core-g-6x">
+      <button type="button" class="core-button core-button-m">Создать</button>
+      <button type="button" class="core-button core-button-m"><span class="core-icon-plus core-icon-8x" aria-hidden="true"></span> Создать</button>
+      <button type="button" class="core-button core-button-m" aria-label="Создать · M"><span class="core-icon-plus core-icon-8x" aria-hidden="true"></span></button>
+    </div>
+  </div>
+  <div class="core-col core-g-8x">
+    <h3 class="core-text core-text-bold">L</h3>
+    <div class="core-row core-y-center core-g-6x">
+      <button type="button" class="core-button core-button-l">Создать</button>
+      <button type="button" class="core-button core-button-l"><span class="core-icon-plus core-icon-10x" aria-hidden="true"></span> Создать</button>
+      <button type="button" class="core-button core-button-l" aria-label="Создать · L"><span class="core-icon-plus core-icon-10x" aria-hidden="true"></span></button>
+    </div>
+  </div>
 </div>
 ```
 
 <!-- demo:E30 -->
 
-### E31. Опасное действие и нативно отключённая кнопка
+### E31. Статусы, disabled и загрузка
 
-В реальном продукте удаление требует соответствующей логики подтверждения; пример её не реализует.
+Статусы сравниваются в активном и нативно отключённом виде. core-loading показывает загрузку; disabled и aria-busy задают состояние элемента.
 
 ```html
-<div class="core-row core-y-center">
-  <button type="button" class="core-button core-button-danger">Удалить документ</button>
-  <button type="button" class="core-button core-button-primary" disabled>Сохранение недоступно</button>
-  <button type="button" class="core-button core-button-success">Подтвердить</button>
+<div class="core-col core-g-8x">
+  <div class="core-col core-g-8x">
+    <h3 class="core-text core-text-bold">Статусы</h3>
+    <div class="core-row core-y-center core-g-6x">
+      <button type="button" class="core-button core-button-warning">Осторожно</button>
+      <button type="button" class="core-button core-button-warning" disabled>Осторожно</button>
+      <button type="button" class="core-button core-button-success">Подтвердить</button>
+      <button type="button" class="core-button core-button-success" disabled>Подтвердить</button>
+      <button type="button" class="core-button core-button-danger">Удалить</button>
+      <button type="button" class="core-button core-button-danger" disabled>Удалить</button>
+    </div>
+  </div>
+  <div class="core-col core-g-8x">
+    <h3 class="core-text core-text-bold">Состояния основной кнопки</h3>
+    <div class="core-row core-y-center core-g-6x">
+      <button type="button" class="core-button core-button-primary">Сохранить</button>
+      <button type="button" class="core-button core-button-primary" disabled>Недоступно</button>
+      <button type="button" class="core-button core-button-primary core-loading" disabled aria-busy="true" aria-label="Сохранение"><span class="core-ghost" aria-hidden="true">Сохранение…</span></button>
+    </div>
+  </div>
 </div>
 ```
 
 <!-- demo:E31 -->
 
-### E32. Слипшаяся группа действий
+### E32. Слипшиеся группы XS/S/M/L
 
-Кнопки — непосредственные дети группы: так работают правила внешних углов.
+Кнопки являются непосредственными детьми actions-box. Последняя кнопка каждой группы отключена; размеры всей группы согласованы.
 
 ```html
-<div class="core-actions-box" role="group" aria-label="Действия с документом">
-  <button type="button" class="core-button"><span class="core-icon-edit core-icon-8x" aria-hidden="true"></span>Изменить</button>
-  <button type="button" class="core-button"><span class="core-icon-copy core-icon-8x" aria-hidden="true"></span>Копировать</button>
-  <button type="button" class="core-button" aria-label="Удалить"><span class="core-icon-bin core-icon-8x" aria-hidden="true"></span></button>
+<div class="core-col core-g-8x">
+  <div class="core-col core-g-8x">
+    <h3 class="core-text core-text-bold">XS</h3>
+    <div class="core-actions-box" role="group" aria-label="Действия с документом · XS">
+      <button type="button" class="core-button core-button-xs" aria-label="Изменить · XS"><span class="core-icon-edit core-icon-6x" aria-hidden="true"></span></button>
+      <button type="button" class="core-button core-button-xs" aria-label="Копировать · XS"><span class="core-icon-copy core-icon-6x" aria-hidden="true"></span></button>
+      <button type="button" class="core-button core-button-xs" aria-label="Удалить · XS" disabled><span class="core-icon-bin core-icon-6x" aria-hidden="true"></span></button>
+    </div>
+  </div>
+  <div class="core-col core-g-8x">
+    <h3 class="core-text core-text-bold">S</h3>
+    <div class="core-actions-box" role="group" aria-label="Действия с документом · S">
+      <button type="button" class="core-button core-button-s" aria-label="Изменить · S"><span class="core-icon-edit core-icon-7x" aria-hidden="true"></span></button>
+      <button type="button" class="core-button core-button-s" aria-label="Копировать · S"><span class="core-icon-copy core-icon-7x" aria-hidden="true"></span></button>
+      <button type="button" class="core-button core-button-s" aria-label="Удалить · S" disabled><span class="core-icon-bin core-icon-7x" aria-hidden="true"></span></button>
+    </div>
+  </div>
+  <div class="core-col core-g-8x">
+    <h3 class="core-text core-text-bold">M</h3>
+    <div class="core-actions-box" role="group" aria-label="Действия с документом · M">
+      <button type="button" class="core-button core-button-m" aria-label="Изменить · M"><span class="core-icon-edit core-icon-8x" aria-hidden="true"></span></button>
+      <button type="button" class="core-button core-button-m" aria-label="Копировать · M"><span class="core-icon-copy core-icon-8x" aria-hidden="true"></span></button>
+      <button type="button" class="core-button core-button-m" aria-label="Удалить · M" disabled><span class="core-icon-bin core-icon-8x" aria-hidden="true"></span></button>
+    </div>
+  </div>
+  <div class="core-col core-g-8x">
+    <h3 class="core-text core-text-bold">L</h3>
+    <div class="core-actions-box" role="group" aria-label="Действия с документом · L">
+      <button type="button" class="core-button core-button-l" aria-label="Изменить · L"><span class="core-icon-edit core-icon-10x" aria-hidden="true"></span></button>
+      <button type="button" class="core-button core-button-l" aria-label="Копировать · L"><span class="core-icon-copy core-icon-10x" aria-hidden="true"></span></button>
+      <button type="button" class="core-button core-button-l" aria-label="Удалить · L" disabled><span class="core-icon-bin core-icon-10x" aria-hidden="true"></span></button>
+    </div>
+  </div>
 </div>
 ```
 

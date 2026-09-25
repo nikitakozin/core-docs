@@ -2,7 +2,7 @@
 
 [Открыть HTML](https://nikitakozin.github.io/core-docs/) · [Правила агента](AGENTS.md) · [Разработка и сборка](https://github.com/nikitakozin/core-docs#readme)
 
-42 главы и 82 примера. Проверенная версия, дата и хеши указаны в [манифесте](reference/source-manifest.json). Runtime использует изменяемый latest; изменения API и границы проверки — в [источниках и проверках](chapters/verification.md).
+42 главы и 87 примера. Проверенная версия, дата и хеши указаны в [манифесте](reference/source-manifest.json). Runtime использует изменяемый latest; изменения API и границы проверки — в [источниках и проверках](chapters/verification.md).
 
 ## Локально для агента
 

@@ -54,55 +54,158 @@
 
 `core-shadow-none/xs/s/m/l/xl` выбирают `--sh-*`; есть t/m-варианты. `core-backdrop-blur-Nx` доступен для 0, 1, 2, 3, 4, 6, 8, 12, 16; он размывает фон **за элементом**, а не сам элемент. Для видимого эффекта поверхность обычно должна быть полупрозрачной. Сложные маски, тени и backdrop-фильтры оценивайте по производительности на целевом устройстве, а не по количеству строк CSS.
 
-### E18. Семантические поверхности и цветной акцент
+### E18. Семантические поверхности текущей темы
 
-При переключении темы первый блок следует семантике; выбранный синий оттенок остаётся цветовым решением автора.
+Все образцы переключаются вместе с темой. Инверсным поверхностям соответствует инверсный цвет текста.
 
 ```html
-<div class="core-grid core-grid-3c m-core-grid-1c">
-  <div class="core-card core-bg-surface">Поверхность темы</div>
-  <div class="core-card core-bg-blue:100 core-color-blue:800">Синий оттенок</div>
-  <div class="core-card core-bg-accent core-color-black">Акцент</div>
+<div class="core-grid core-grid-2c m-core-grid-1c core-g-8x">
+  <div class="core-col core-g-8x">
+    <span class="core-text core-text-s core-text-mono">core-bg</span>
+    <div class="core-card core-border core-bg "><span class="core-text">Поверхность</span></div>
+  </div>
+  <div class="core-col core-g-8x">
+    <span class="core-text core-text-s core-text-mono">core-bg-surface</span>
+    <div class="core-card core-border core-bg-surface "><span class="core-text">Поверхность</span></div>
+  </div>
+  <div class="core-col core-g-8x">
+    <span class="core-text core-text-s core-text-mono">core-bg-surface-alt</span>
+    <div class="core-card core-border core-bg-surface-alt "><span class="core-text">Поверхность</span></div>
+  </div>
+  <div class="core-col core-g-8x">
+    <span class="core-text core-text-s core-text-mono">core-bg-surface-inverse</span>
+    <div class="core-card core-border core-bg-surface-inverse core-color-inverse"><span class="core-text">Поверхность</span></div>
+  </div>
+  <div class="core-col core-g-8x">
+    <span class="core-text core-text-s core-text-mono">core-bg-surface-inverse-alt</span>
+    <div class="core-card core-border core-bg-surface-inverse-alt core-color-inverse"><span class="core-text">Поверхность</span></div>
+  </div>
+  <div class="core-col core-g-8x">
+    <span class="core-text core-text-s core-text-mono">core-bg-accent</span>
+    <div class="core-card core-border core-bg-accent core-color-black"><span class="core-text">Поверхность</span></div>
+  </div>
 </div>
 ```
 
 <!-- demo:E18 -->
 
-### E19. Цветная кнопка со штатными состояниями
+### E19. Цветные кнопки со штатными состояниями
 
-Наведение и нажатие обрабатывает адаптер Core, а не дополнительный CSS мануала.
+Сравните обычное состояние, hover и клавиатурный focus. Цвет задан утилитами Core, а поведение остаётся поведением button.
 
 ```html
-<div class="core-row">
-  <button type="button" class="core-button core-bg-blue:700 core-color-white">Сохранить</button>
-  <button type="button" class="core-button core-bg-purple:100 core-color-purple:900 core-border-purple:300">Предпросмотр</button>
+<div class="core-row core-y-center core-g-6x">
+  <button type="button" class="core-button core-bg-blue:700 core-color-white"><span class="core-icon-check core-icon-8x" aria-hidden="true"></span> blue</button>
+  <button type="button" class="core-button core-bg-green:700 core-color-white"><span class="core-icon-check core-icon-8x" aria-hidden="true"></span> green</button>
+  <button type="button" class="core-button core-bg-red:700 core-color-white"><span class="core-icon-check core-icon-8x" aria-hidden="true"></span> red</button>
+  <button type="button" class="core-button core-bg-purple:700 core-color-white"><span class="core-icon-check core-icon-8x" aria-hidden="true"></span> purple</button>
 </div>
 ```
 
 <!-- demo:E19 -->
 
-### E20. Альфа фона и opacity контейнера — разные результаты
+### E20. Альфа фона и opacity всей карточки
 
-У правого блока opacity действует на всю отрисованную группу.
+Три одинаковые карточки лежат на одной серой подложке. Альфа меняет только фон, opacity — также текст и иконку.
 
 ```html
-<div class="core-row core-g-8x">
-  <div class="core-card core-bg-blue:500 core-bg-opacity:30 core-color-black">Полупрозрачный только фон</div>
-  <div class="core-card core-bg-blue:500 core-color-white core-muted-6x">Прозрачны фон и текст</div>
+<div class="core-grid core-grid-3c m-core-grid-1c core-g-8x">
+  <div class="core-col core-g-8x">
+    <span class="core-text core-text-s core-text-mono">Без прозрачности</span>
+    <div class="core-bg-grey:200 core-p-8x core-b-r-8x">
+      <div class="core-card core-bg-blue:500 core-color-black ">
+        <span class="core-icon-layers core-icon-12x" aria-hidden="true"></span>
+        <p class="core-text core-text-bold">Материалы</p>
+      </div>
+    </div>
+  </div>
+  <div class="core-col core-g-8x">
+    <span class="core-text core-text-s core-text-mono">core-bg-opacity:30</span>
+    <div class="core-bg-grey:200 core-p-8x core-b-r-8x">
+      <div class="core-card core-bg-blue:500 core-color-black core-bg-opacity:30">
+        <span class="core-icon-layers core-icon-12x" aria-hidden="true"></span>
+        <p class="core-text core-text-bold">Материалы</p>
+      </div>
+    </div>
+  </div>
+  <div class="core-col core-g-8x">
+    <span class="core-text core-text-s core-text-mono">core-muted-6x</span>
+    <div class="core-bg-grey:200 core-p-8x core-b-r-8x">
+      <div class="core-card core-bg-blue:500 core-color-black core-muted-6x">
+        <span class="core-icon-layers core-icon-12x" aria-hidden="true"></span>
+        <p class="core-text core-text-bold">Материалы</p>
+      </div>
+    </div>
+  </div>
 </div>
 ```
 
 <!-- demo:E20 -->
 
-### E21. Контур и тень как разные уровни выделения
+### E21. Шкала теней и толщины контура
 
-Последняя карточка явно задаёт и цвет, и толщину, и стиль границы.
+Одинаковые поверхности показывают тени none–xl, затем контуры 1/2/3x со сплошной и пунктирной линией.
 
 ```html
-<div class="core-row core-g-12x">
-  <div class="core-card core-bg core-border core-border-1x">Контур 1 px</div>
-  <div class="core-card core-bg core-shadow-m">Тень m</div>
-  <div class="core-card core-bg core-border-blue:400 core-border-2x core-border-dash">Контур 2 px</div>
+<div class="core-col core-g-8x core-p-8x">
+  <div class="core-col core-g-8x">
+    <h3 class="core-text core-text-bold">Тени</h3>
+    <div class="core-row core-y-center core-g-6x">
+      <div class="core-col core-g-8x">
+        <span class="core-text core-text-s core-text-mono">none</span>
+        <div class="core-card core-bg core-border core-shadow-none"><span class="core-text">Тень</span></div>
+      </div>
+      <div class="core-col core-g-8x">
+        <span class="core-text core-text-s core-text-mono">xs</span>
+        <div class="core-card core-bg core-border core-shadow-xs"><span class="core-text">Тень</span></div>
+      </div>
+      <div class="core-col core-g-8x">
+        <span class="core-text core-text-s core-text-mono">s</span>
+        <div class="core-card core-bg core-border core-shadow-s"><span class="core-text">Тень</span></div>
+      </div>
+      <div class="core-col core-g-8x">
+        <span class="core-text core-text-s core-text-mono">m</span>
+        <div class="core-card core-bg core-border core-shadow-m"><span class="core-text">Тень</span></div>
+      </div>
+      <div class="core-col core-g-8x">
+        <span class="core-text core-text-s core-text-mono">l</span>
+        <div class="core-card core-bg core-border core-shadow-l"><span class="core-text">Тень</span></div>
+      </div>
+      <div class="core-col core-g-8x">
+        <span class="core-text core-text-s core-text-mono">xl</span>
+        <div class="core-card core-bg core-border core-shadow-xl"><span class="core-text">Тень</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="core-col core-g-8x">
+    <h3 class="core-text core-text-bold">Контуры</h3>
+    <div class="core-row core-y-center core-g-6x">
+      <div class="core-col core-g-8x">
+        <span class="core-text core-text-s core-text-mono">1x · solid</span>
+        <div class="core-card core-bg core-border core-border-1x "><span class="core-text">Контур</span></div>
+      </div>
+      <div class="core-col core-g-8x">
+        <span class="core-text core-text-s core-text-mono">1x · dash</span>
+        <div class="core-card core-bg core-border core-border-1x core-border-dash"><span class="core-text">Контур</span></div>
+      </div>
+      <div class="core-col core-g-8x">
+        <span class="core-text core-text-s core-text-mono">2x · solid</span>
+        <div class="core-card core-bg core-border core-border-2x "><span class="core-text">Контур</span></div>
+      </div>
+      <div class="core-col core-g-8x">
+        <span class="core-text core-text-s core-text-mono">2x · dash</span>
+        <div class="core-card core-bg core-border core-border-2x core-border-dash"><span class="core-text">Контур</span></div>
+      </div>
+      <div class="core-col core-g-8x">
+        <span class="core-text core-text-s core-text-mono">3x · solid</span>
+        <div class="core-card core-bg core-border core-border-3x "><span class="core-text">Контур</span></div>
+      </div>
+      <div class="core-col core-g-8x">
+        <span class="core-text core-text-s core-text-mono">3x · dash</span>
+        <div class="core-card core-bg core-border core-border-3x core-border-dash"><span class="core-text">Контур</span></div>
+      </div>
+    </div>
+  </div>
 </div>
 ```
 
@@ -128,5 +231,376 @@
 ```
 
 <!-- demo:E81 -->
+
+### E84. Восемь цветовых шкал
+
+Каждый ряд — одно семейство с 10 ступенями. Подписи вынесены за цветные образцы; отдельная чёрная шкала сохранена в E81.
+
+```html
+<div class="core-col core-g-8x">
+  <div class="core-col core-g-8x">
+    <h3 class="core-text core-text-bold">core-bg-red:50…900</h3>
+    <div class="core-grid core-grid-5c m-core-grid-2c core-g-8x">
+      <div class="core-col core-g-8x">
+        <div class="core-bg-red:50 core-h-24x core-b-r-4x core-border" role="img" aria-label="core-bg-red:50"></div>
+        <span class="core-text core-text-s core-text-mono">50</span>
+      </div>
+      <div class="core-col core-g-8x">
+        <div class="core-bg-red:100 core-h-24x core-b-r-4x core-border" role="img" aria-label="core-bg-red:100"></div>
+        <span class="core-text core-text-s core-text-mono">100</span>
+      </div>
+      <div class="core-col core-g-8x">
+        <div class="core-bg-red:200 core-h-24x core-b-r-4x core-border" role="img" aria-label="core-bg-red:200"></div>
+        <span class="core-text core-text-s core-text-mono">200</span>
+      </div>
+      <div class="core-col core-g-8x">
+        <div class="core-bg-red:300 core-h-24x core-b-r-4x core-border" role="img" aria-label="core-bg-red:300"></div>
+        <span class="core-text core-text-s core-text-mono">300</span>
+      </div>
+      <div class="core-col core-g-8x">
+        <div class="core-bg-red:400 core-h-24x core-b-r-4x core-border" role="img" aria-label="core-bg-red:400"></div>
+        <span class="core-text core-text-s core-text-mono">400</span>
+      </div>
+      <div class="core-col core-g-8x">
+        <div class="core-bg-red:500 core-h-24x core-b-r-4x core-border" role="img" aria-label="core-bg-red:500"></div>
+        <span class="core-text core-text-s core-text-mono">500</span>
+      </div>
+      <div class="core-col core-g-8x">
+        <div class="core-bg-red:600 core-h-24x core-b-r-4x core-border" role="img" aria-label="core-bg-red:600"></div>
+        <span class="core-text core-text-s core-text-mono">600</span>
+      </div>
+      <div class="core-col core-g-8x">
+        <div class="core-bg-red:700 core-h-24x core-b-r-4x core-border" role="img" aria-label="core-bg-red:700"></div>
+        <span class="core-text core-text-s core-text-mono">700</span>
+      </div>
+      <div class="core-col core-g-8x">
+        <div class="core-bg-red:800 core-h-24x core-b-r-4x core-border" role="img" aria-label="core-bg-red:800"></div>
+        <span class="core-text core-text-s core-text-mono">800</span>
+      </div>
+      <div class="core-col core-g-8x">
+        <div class="core-bg-red:900 core-h-24x core-b-r-4x core-border" role="img" aria-label="core-bg-red:900"></div>
+        <span class="core-text core-text-s core-text-mono">900</span>
+      </div>
+    </div>
+  </div>
+  <div class="core-col core-g-8x">
+    <h3 class="core-text core-text-bold">core-bg-orange:50…900</h3>
+    <div class="core-grid core-grid-5c m-core-grid-2c core-g-8x">
+      <div class="core-col core-g-8x">
+        <div class="core-bg-orange:50 core-h-24x core-b-r-4x core-border" role="img" aria-label="core-bg-orange:50"></div>
+        <span class="core-text core-text-s core-text-mono">50</span>
+      </div>
+      <div class="core-col core-g-8x">
+        <div class="core-bg-orange:100 core-h-24x core-b-r-4x core-border" role="img" aria-label="core-bg-orange:100"></div>
+        <span class="core-text core-text-s core-text-mono">100</span>
+      </div>
+      <div class="core-col core-g-8x">
+        <div class="core-bg-orange:200 core-h-24x core-b-r-4x core-border" role="img" aria-label="core-bg-orange:200"></div>
+        <span class="core-text core-text-s core-text-mono">200</span>
+      </div>
+      <div class="core-col core-g-8x">
+        <div class="core-bg-orange:300 core-h-24x core-b-r-4x core-border" role="img" aria-label="core-bg-orange:300"></div>
+        <span class="core-text core-text-s core-text-mono">300</span>
+      </div>
+      <div class="core-col core-g-8x">
+        <div class="core-bg-orange:400 core-h-24x core-b-r-4x core-border" role="img" aria-label="core-bg-orange:400"></div>
+        <span class="core-text core-text-s core-text-mono">400</span>
+      </div>
+      <div class="core-col core-g-8x">
+        <div class="core-bg-orange:500 core-h-24x core-b-r-4x core-border" role="img" aria-label="core-bg-orange:500"></div>
+        <span class="core-text core-text-s core-text-mono">500</span>
+      </div>
+      <div class="core-col core-g-8x">
+        <div class="core-bg-orange:600 core-h-24x core-b-r-4x core-border" role="img" aria-label="core-bg-orange:600"></div>
+        <span class="core-text core-text-s core-text-mono">600</span>
+      </div>
+      <div class="core-col core-g-8x">
+        <div class="core-bg-orange:700 core-h-24x core-b-r-4x core-border" role="img" aria-label="core-bg-orange:700"></div>
+        <span class="core-text core-text-s core-text-mono">700</span>
+      </div>
+      <div class="core-col core-g-8x">
+        <div class="core-bg-orange:800 core-h-24x core-b-r-4x core-border" role="img" aria-label="core-bg-orange:800"></div>
+        <span class="core-text core-text-s core-text-mono">800</span>
+      </div>
+      <div class="core-col core-g-8x">
+        <div class="core-bg-orange:900 core-h-24x core-b-r-4x core-border" role="img" aria-label="core-bg-orange:900"></div>
+        <span class="core-text core-text-s core-text-mono">900</span>
+      </div>
+    </div>
+  </div>
+  <div class="core-col core-g-8x">
+    <h3 class="core-text core-text-bold">core-bg-yellow:50…900</h3>
+    <div class="core-grid core-grid-5c m-core-grid-2c core-g-8x">
+      <div class="core-col core-g-8x">
+        <div class="core-bg-yellow:50 core-h-24x core-b-r-4x core-border" role="img" aria-label="core-bg-yellow:50"></div>
+        <span class="core-text core-text-s core-text-mono">50</span>
+      </div>
+      <div class="core-col core-g-8x">
+        <div class="core-bg-yellow:100 core-h-24x core-b-r-4x core-border" role="img" aria-label="core-bg-yellow:100"></div>
+        <span class="core-text core-text-s core-text-mono">100</span>
+      </div>
+      <div class="core-col core-g-8x">
+        <div class="core-bg-yellow:200 core-h-24x core-b-r-4x core-border" role="img" aria-label="core-bg-yellow:200"></div>
+        <span class="core-text core-text-s core-text-mono">200</span>
+      </div>
+      <div class="core-col core-g-8x">
+        <div class="core-bg-yellow:300 core-h-24x core-b-r-4x core-border" role="img" aria-label="core-bg-yellow:300"></div>
+        <span class="core-text core-text-s core-text-mono">300</span>
+      </div>
+      <div class="core-col core-g-8x">
+        <div class="core-bg-yellow:400 core-h-24x core-b-r-4x core-border" role="img" aria-label="core-bg-yellow:400"></div>
+        <span class="core-text core-text-s core-text-mono">400</span>
+      </div>
+      <div class="core-col core-g-8x">
+        <div class="core-bg-yellow:500 core-h-24x core-b-r-4x core-border" role="img" aria-label="core-bg-yellow:500"></div>
+        <span class="core-text core-text-s core-text-mono">500</span>
+      </div>
+      <div class="core-col core-g-8x">
+        <div class="core-bg-yellow:600 core-h-24x core-b-r-4x core-border" role="img" aria-label="core-bg-yellow:600"></div>
+        <span class="core-text core-text-s core-text-mono">600</span>
+      </div>
+      <div class="core-col core-g-8x">
+        <div class="core-bg-yellow:700 core-h-24x core-b-r-4x core-border" role="img" aria-label="core-bg-yellow:700"></div>
+        <span class="core-text core-text-s core-text-mono">700</span>
+      </div>
+      <div class="core-col core-g-8x">
+        <div class="core-bg-yellow:800 core-h-24x core-b-r-4x core-border" role="img" aria-label="core-bg-yellow:800"></div>
+        <span class="core-text core-text-s core-text-mono">800</span>
+      </div>
+      <div class="core-col core-g-8x">
+        <div class="core-bg-yellow:900 core-h-24x core-b-r-4x core-border" role="img" aria-label="core-bg-yellow:900"></div>
+        <span class="core-text core-text-s core-text-mono">900</span>
+      </div>
+    </div>
+  </div>
+  <div class="core-col core-g-8x">
+    <h3 class="core-text core-text-bold">core-bg-green:50…900</h3>
+    <div class="core-grid core-grid-5c m-core-grid-2c core-g-8x">
+      <div class="core-col core-g-8x">
+        <div class="core-bg-green:50 core-h-24x core-b-r-4x core-border" role="img" aria-label="core-bg-green:50"></div>
+        <span class="core-text core-text-s core-text-mono">50</span>
+      </div>
+      <div class="core-col core-g-8x">
+        <div class="core-bg-green:100 core-h-24x core-b-r-4x core-border" role="img" aria-label="core-bg-green:100"></div>
+        <span class="core-text core-text-s core-text-mono">100</span>
+      </div>
+      <div class="core-col core-g-8x">
+        <div class="core-bg-green:200 core-h-24x core-b-r-4x core-border" role="img" aria-label="core-bg-green:200"></div>
+        <span class="core-text core-text-s core-text-mono">200</span>
+      </div>
+      <div class="core-col core-g-8x">
+        <div class="core-bg-green:300 core-h-24x core-b-r-4x core-border" role="img" aria-label="core-bg-green:300"></div>
+        <span class="core-text core-text-s core-text-mono">300</span>
+      </div>
+      <div class="core-col core-g-8x">
+        <div class="core-bg-green:400 core-h-24x core-b-r-4x core-border" role="img" aria-label="core-bg-green:400"></div>
+        <span class="core-text core-text-s core-text-mono">400</span>
+      </div>
+      <div class="core-col core-g-8x">
+        <div class="core-bg-green:500 core-h-24x core-b-r-4x core-border" role="img" aria-label="core-bg-green:500"></div>
+        <span class="core-text core-text-s core-text-mono">500</span>
+      </div>
+      <div class="core-col core-g-8x">
+        <div class="core-bg-green:600 core-h-24x core-b-r-4x core-border" role="img" aria-label="core-bg-green:600"></div>
+        <span class="core-text core-text-s core-text-mono">600</span>
+      </div>
+      <div class="core-col core-g-8x">
+        <div class="core-bg-green:700 core-h-24x core-b-r-4x core-border" role="img" aria-label="core-bg-green:700"></div>
+        <span class="core-text core-text-s core-text-mono">700</span>
+      </div>
+      <div class="core-col core-g-8x">
+        <div class="core-bg-green:800 core-h-24x core-b-r-4x core-border" role="img" aria-label="core-bg-green:800"></div>
+        <span class="core-text core-text-s core-text-mono">800</span>
+      </div>
+      <div class="core-col core-g-8x">
+        <div class="core-bg-green:900 core-h-24x core-b-r-4x core-border" role="img" aria-label="core-bg-green:900"></div>
+        <span class="core-text core-text-s core-text-mono">900</span>
+      </div>
+    </div>
+  </div>
+  <div class="core-col core-g-8x">
+    <h3 class="core-text core-text-bold">core-bg-blue:50…900</h3>
+    <div class="core-grid core-grid-5c m-core-grid-2c core-g-8x">
+      <div class="core-col core-g-8x">
+        <div class="core-bg-blue:50 core-h-24x core-b-r-4x core-border" role="img" aria-label="core-bg-blue:50"></div>
+        <span class="core-text core-text-s core-text-mono">50</span>
+      </div>
+      <div class="core-col core-g-8x">
+        <div class="core-bg-blue:100 core-h-24x core-b-r-4x core-border" role="img" aria-label="core-bg-blue:100"></div>
+        <span class="core-text core-text-s core-text-mono">100</span>
+      </div>
+      <div class="core-col core-g-8x">
+        <div class="core-bg-blue:200 core-h-24x core-b-r-4x core-border" role="img" aria-label="core-bg-blue:200"></div>
+        <span class="core-text core-text-s core-text-mono">200</span>
+      </div>
+      <div class="core-col core-g-8x">
+        <div class="core-bg-blue:300 core-h-24x core-b-r-4x core-border" role="img" aria-label="core-bg-blue:300"></div>
+        <span class="core-text core-text-s core-text-mono">300</span>
+      </div>
+      <div class="core-col core-g-8x">
+        <div class="core-bg-blue:400 core-h-24x core-b-r-4x core-border" role="img" aria-label="core-bg-blue:400"></div>
+        <span class="core-text core-text-s core-text-mono">400</span>
+      </div>
+      <div class="core-col core-g-8x">
+        <div class="core-bg-blue:500 core-h-24x core-b-r-4x core-border" role="img" aria-label="core-bg-blue:500"></div>
+        <span class="core-text core-text-s core-text-mono">500</span>
+      </div>
+      <div class="core-col core-g-8x">
+        <div class="core-bg-blue:600 core-h-24x core-b-r-4x core-border" role="img" aria-label="core-bg-blue:600"></div>
+        <span class="core-text core-text-s core-text-mono">600</span>
+      </div>
+      <div class="core-col core-g-8x">
+        <div class="core-bg-blue:700 core-h-24x core-b-r-4x core-border" role="img" aria-label="core-bg-blue:700"></div>
+        <span class="core-text core-text-s core-text-mono">700</span>
+      </div>
+      <div class="core-col core-g-8x">
+        <div class="core-bg-blue:800 core-h-24x core-b-r-4x core-border" role="img" aria-label="core-bg-blue:800"></div>
+        <span class="core-text core-text-s core-text-mono">800</span>
+      </div>
+      <div class="core-col core-g-8x">
+        <div class="core-bg-blue:900 core-h-24x core-b-r-4x core-border" role="img" aria-label="core-bg-blue:900"></div>
+        <span class="core-text core-text-s core-text-mono">900</span>
+      </div>
+    </div>
+  </div>
+  <div class="core-col core-g-8x">
+    <h3 class="core-text core-text-bold">core-bg-purple:50…900</h3>
+    <div class="core-grid core-grid-5c m-core-grid-2c core-g-8x">
+      <div class="core-col core-g-8x">
+        <div class="core-bg-purple:50 core-h-24x core-b-r-4x core-border" role="img" aria-label="core-bg-purple:50"></div>
+        <span class="core-text core-text-s core-text-mono">50</span>
+      </div>
+      <div class="core-col core-g-8x">
+        <div class="core-bg-purple:100 core-h-24x core-b-r-4x core-border" role="img" aria-label="core-bg-purple:100"></div>
+        <span class="core-text core-text-s core-text-mono">100</span>
+      </div>
+      <div class="core-col core-g-8x">
+        <div class="core-bg-purple:200 core-h-24x core-b-r-4x core-border" role="img" aria-label="core-bg-purple:200"></div>
+        <span class="core-text core-text-s core-text-mono">200</span>
+      </div>
+      <div class="core-col core-g-8x">
+        <div class="core-bg-purple:300 core-h-24x core-b-r-4x core-border" role="img" aria-label="core-bg-purple:300"></div>
+        <span class="core-text core-text-s core-text-mono">300</span>
+      </div>
+      <div class="core-col core-g-8x">
+        <div class="core-bg-purple:400 core-h-24x core-b-r-4x core-border" role="img" aria-label="core-bg-purple:400"></div>
+        <span class="core-text core-text-s core-text-mono">400</span>
+      </div>
+      <div class="core-col core-g-8x">
+        <div class="core-bg-purple:500 core-h-24x core-b-r-4x core-border" role="img" aria-label="core-bg-purple:500"></div>
+        <span class="core-text core-text-s core-text-mono">500</span>
+      </div>
+      <div class="core-col core-g-8x">
+        <div class="core-bg-purple:600 core-h-24x core-b-r-4x core-border" role="img" aria-label="core-bg-purple:600"></div>
+        <span class="core-text core-text-s core-text-mono">600</span>
+      </div>
+      <div class="core-col core-g-8x">
+        <div class="core-bg-purple:700 core-h-24x core-b-r-4x core-border" role="img" aria-label="core-bg-purple:700"></div>
+        <span class="core-text core-text-s core-text-mono">700</span>
+      </div>
+      <div class="core-col core-g-8x">
+        <div class="core-bg-purple:800 core-h-24x core-b-r-4x core-border" role="img" aria-label="core-bg-purple:800"></div>
+        <span class="core-text core-text-s core-text-mono">800</span>
+      </div>
+      <div class="core-col core-g-8x">
+        <div class="core-bg-purple:900 core-h-24x core-b-r-4x core-border" role="img" aria-label="core-bg-purple:900"></div>
+        <span class="core-text core-text-s core-text-mono">900</span>
+      </div>
+    </div>
+  </div>
+  <div class="core-col core-g-8x">
+    <h3 class="core-text core-text-bold">core-bg-pink:50…900</h3>
+    <div class="core-grid core-grid-5c m-core-grid-2c core-g-8x">
+      <div class="core-col core-g-8x">
+        <div class="core-bg-pink:50 core-h-24x core-b-r-4x core-border" role="img" aria-label="core-bg-pink:50"></div>
+        <span class="core-text core-text-s core-text-mono">50</span>
+      </div>
+      <div class="core-col core-g-8x">
+        <div class="core-bg-pink:100 core-h-24x core-b-r-4x core-border" role="img" aria-label="core-bg-pink:100"></div>
+        <span class="core-text core-text-s core-text-mono">100</span>
+      </div>
+      <div class="core-col core-g-8x">
+        <div class="core-bg-pink:200 core-h-24x core-b-r-4x core-border" role="img" aria-label="core-bg-pink:200"></div>
+        <span class="core-text core-text-s core-text-mono">200</span>
+      </div>
+      <div class="core-col core-g-8x">
+        <div class="core-bg-pink:300 core-h-24x core-b-r-4x core-border" role="img" aria-label="core-bg-pink:300"></div>
+        <span class="core-text core-text-s core-text-mono">300</span>
+      </div>
+      <div class="core-col core-g-8x">
+        <div class="core-bg-pink:400 core-h-24x core-b-r-4x core-border" role="img" aria-label="core-bg-pink:400"></div>
+        <span class="core-text core-text-s core-text-mono">400</span>
+      </div>
+      <div class="core-col core-g-8x">
+        <div class="core-bg-pink:500 core-h-24x core-b-r-4x core-border" role="img" aria-label="core-bg-pink:500"></div>
+        <span class="core-text core-text-s core-text-mono">500</span>
+      </div>
+      <div class="core-col core-g-8x">
+        <div class="core-bg-pink:600 core-h-24x core-b-r-4x core-border" role="img" aria-label="core-bg-pink:600"></div>
+        <span class="core-text core-text-s core-text-mono">600</span>
+      </div>
+      <div class="core-col core-g-8x">
+        <div class="core-bg-pink:700 core-h-24x core-b-r-4x core-border" role="img" aria-label="core-bg-pink:700"></div>
+        <span class="core-text core-text-s core-text-mono">700</span>
+      </div>
+      <div class="core-col core-g-8x">
+        <div class="core-bg-pink:800 core-h-24x core-b-r-4x core-border" role="img" aria-label="core-bg-pink:800"></div>
+        <span class="core-text core-text-s core-text-mono">800</span>
+      </div>
+      <div class="core-col core-g-8x">
+        <div class="core-bg-pink:900 core-h-24x core-b-r-4x core-border" role="img" aria-label="core-bg-pink:900"></div>
+        <span class="core-text core-text-s core-text-mono">900</span>
+      </div>
+    </div>
+  </div>
+  <div class="core-col core-g-8x">
+    <h3 class="core-text core-text-bold">core-bg-grey:50…900</h3>
+    <div class="core-grid core-grid-5c m-core-grid-2c core-g-8x">
+      <div class="core-col core-g-8x">
+        <div class="core-bg-grey:50 core-h-24x core-b-r-4x core-border" role="img" aria-label="core-bg-grey:50"></div>
+        <span class="core-text core-text-s core-text-mono">50</span>
+      </div>
+      <div class="core-col core-g-8x">
+        <div class="core-bg-grey:100 core-h-24x core-b-r-4x core-border" role="img" aria-label="core-bg-grey:100"></div>
+        <span class="core-text core-text-s core-text-mono">100</span>
+      </div>
+      <div class="core-col core-g-8x">
+        <div class="core-bg-grey:200 core-h-24x core-b-r-4x core-border" role="img" aria-label="core-bg-grey:200"></div>
+        <span class="core-text core-text-s core-text-mono">200</span>
+      </div>
+      <div class="core-col core-g-8x">
+        <div class="core-bg-grey:300 core-h-24x core-b-r-4x core-border" role="img" aria-label="core-bg-grey:300"></div>
+        <span class="core-text core-text-s core-text-mono">300</span>
+      </div>
+      <div class="core-col core-g-8x">
+        <div class="core-bg-grey:400 core-h-24x core-b-r-4x core-border" role="img" aria-label="core-bg-grey:400"></div>
+        <span class="core-text core-text-s core-text-mono">400</span>
+      </div>
+      <div class="core-col core-g-8x">
+        <div class="core-bg-grey:500 core-h-24x core-b-r-4x core-border" role="img" aria-label="core-bg-grey:500"></div>
+        <span class="core-text core-text-s core-text-mono">500</span>
+      </div>
+      <div class="core-col core-g-8x">
+        <div class="core-bg-grey:600 core-h-24x core-b-r-4x core-border" role="img" aria-label="core-bg-grey:600"></div>
+        <span class="core-text core-text-s core-text-mono">600</span>
+      </div>
+      <div class="core-col core-g-8x">
+        <div class="core-bg-grey:700 core-h-24x core-b-r-4x core-border" role="img" aria-label="core-bg-grey:700"></div>
+        <span class="core-text core-text-s core-text-mono">700</span>
+      </div>
+      <div class="core-col core-g-8x">
+        <div class="core-bg-grey:800 core-h-24x core-b-r-4x core-border" role="img" aria-label="core-bg-grey:800"></div>
+        <span class="core-text core-text-s core-text-mono">800</span>
+      </div>
+      <div class="core-col core-g-8x">
+        <div class="core-bg-grey:900 core-h-24x core-b-r-4x core-border" role="img" aria-label="core-bg-grey:900"></div>
+        <span class="core-text core-text-s core-text-mono">900</span>
+      </div>
+    </div>
+  </div>
+</div>
+```
+
+<!-- demo:E84 -->
 
 **Источник:** [Исходный Core CSS](https://cdn.sdelal.tech/core/latest/core.css).

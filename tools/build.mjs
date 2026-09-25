@@ -23,9 +23,12 @@ const button='core-button core-button-s';
 const headerSize='core-h-36x m-core-h-32x core-noshrink';
 const navStyle='--theme-btn-bg:transparent;--theme-btn-bg-hover:var(--color-surface-alt);--theme-btn-bg-active:var(--color-surface-alt);--theme-btn-color:var(--color-text-primary);--theme-btn-color-hover:var(--color-text-primary);--theme-btn-color-active:var(--color-text-primary);--theme-btn-border:1px solid transparent;--theme-btn-border-hover:1px solid transparent;--theme-btn-border-active:1px solid transparent;--theme-btn-shadow:none;--theme-btn-shadow-hover:none;--transition-interactive:0s';
 const widths=['auto',390,720,721,997,998,1200];
+// Core's light scope resets typography. Keep the active design's font and scale.
+const inverseStyle=['--font-primary','--font-primary-unitsPerEm','--font-primary-ascender','--font-primary-descender','--font-primary-sCapHeight','--font-primary-sxHeight','--font-primary-center-compensation','--font-primary-l-h-compensation','--f-s-base'].map(token=>`${token}:inherit`).join(';');
+const inverseScope=`data-docs-inverse style="${inverseStyle}"`;
 
 function codeBlock(text,lang='текст',embedded=false) {
- return `<div class="code-block core-col core-g-0x core-border core-crop ${embedded?'core-border-t':'core-b-r-4x core-m-t-6x core-m-b-8x'}">
+ return `<div class="code-block core-col core-g-0x core-border core-crop ${embedded?'core-border-t':'core-theme-dark core-bg core-color core-b-r-4x core-m-t-6x core-m-b-8x'}"${embedded?'':` ${inverseScope}`}>
 <div class="core-row core-nowrap core-y-center core-justify core-g-4x core-p-4x core-p-l-8x core-bg-surface core-border core-border-b"><span class="core-text core-text-xs core-text-mono">${esc(lang)}</span><button type="button" class="copy-button ${button}" aria-label="Копировать блок кода">Копировать</button></div>
 <div class="core-content"><pre class="core-m-t-0x core-m-b-0x core-b-r-0x core-p-8x"><code class="core-text-mono">${highlightCode(text,lang)}</code></pre></div>
 </div>`;
@@ -34,7 +37,7 @@ function demo(id) {
  const e=examples.find(e=>e.id===id);
  if(!e) throw new Error(`Unknown example ${id}`);
  if(e.css) throw new Error(`Custom CSS is not allowed: ${id}`);
- return `<div class="example core-col core-g-0x core-w-full core-border core-b-r-6x core-crop core-m-t-8x core-m-b-12x" data-example="${id}" data-width="auto">
+ return `<div class="example core-theme-dark core-bg core-color core-col core-g-0x core-w-full core-border core-b-r-6x core-crop core-m-t-8x core-m-b-12x" ${inverseScope} data-example="${id}" data-width="auto">
 <div class="demo-toolbar core-row core-y-center core-g-3x core-p-4x core-p-l-6x core-p-r-6x core-border core-border-b"><span class="core-text core-text-xs core-muted-2x">Ширина</span><div class="core-row core-g-2x" role="group" aria-label="Ширина примера ${id}">${widths.map(w=>`<button type="button" class="demo-width ${button} core-text-xs core-p-l-4x core-p-r-4x ${w==='auto'?'core-button-primary':'core-button-transparent'}" data-width="${w}" aria-pressed="${w==='auto'}">${w==='auto'?'Auto':w}</button>`).join('')}</div><output class="demo-metrics core-text core-text-xs core-muted-4x core-grow core-text-right"></output></div>
 <p class="demo-status core-text core-text-s core-p-8x" role="status">Откройте раздел для загрузки примера.</p>
 <div class="demo-error-actions core-p-8x core-hide"><button type="button" class="retry-demo ${button}">Повторить загрузку</button></div>

@@ -38,74 +38,265 @@
 
 `core-num` не доказывает поддержку валютной маски или локального форматирования. `core-file` не реализует загрузку на сервер. Семантические ограничения min/max/step/accept следует задавать отдельно.
 
-### E37. Поле с подписью и подсказкой
+### E37. Размеры input: пустое и заполненное
 
-id уникален внутри своего документа. Подпись и подсказка связаны с контролом, а не просто расположены рядом.
+Сравниваются XS/S/базовый/L. Подпись оборачивает каждое поле; placeholder дополняет, но не заменяет её.
 
 ```html
-<div class="core-col core-g-4x">
-  <label for="project-title">Название проекта</label>
-  <input id="project-title" name="title" class="core-input" autocomplete="off"
-         aria-describedby="project-title-help" placeholder="Например, сайт театра">
-  <p id="project-title-help" class="core-text core-text-s">Название видит вся команда.</p>
+<div class="core-col core-g-8x">
+  <div class="core-col core-g-8x">
+    <h3 class="core-text core-text-bold">XS · core-input-xs</h3>
+    <div class="core-grid core-grid-2c m-core-grid-1c core-g-8x">
+      <label class="core-col core-g-3x">
+        <span class="core-text core-text-s">Пустое</span>
+        <input class="core-input core-input-xs" placeholder="Название проекта">
+      </label>
+      <label class="core-col core-g-3x">
+        <span class="core-text core-text-s">Заполненное</span>
+        <input class="core-input core-input-xs" value="Сайт театра">
+      </label>
+    </div>
+  </div>
+  <div class="core-col core-g-8x">
+    <h3 class="core-text core-text-bold">S · core-input-s</h3>
+    <div class="core-grid core-grid-2c m-core-grid-1c core-g-8x">
+      <label class="core-col core-g-3x">
+        <span class="core-text core-text-s">Пустое</span>
+        <input class="core-input core-input-s" placeholder="Название проекта">
+      </label>
+      <label class="core-col core-g-3x">
+        <span class="core-text core-text-s">Заполненное</span>
+        <input class="core-input core-input-s" value="Сайт театра">
+      </label>
+    </div>
+  </div>
+  <div class="core-col core-g-8x">
+    <h3 class="core-text core-text-bold">M · base</h3>
+    <div class="core-grid core-grid-2c m-core-grid-1c core-g-8x">
+      <label class="core-col core-g-3x">
+        <span class="core-text core-text-s">Пустое</span>
+        <input class="core-input" placeholder="Название проекта">
+      </label>
+      <label class="core-col core-g-3x">
+        <span class="core-text core-text-s">Заполненное</span>
+        <input class="core-input" value="Сайт театра">
+      </label>
+    </div>
+  </div>
+  <div class="core-col core-g-8x">
+    <h3 class="core-text core-text-bold">L · core-input-l</h3>
+    <div class="core-grid core-grid-2c m-core-grid-1c core-g-8x">
+      <label class="core-col core-g-3x">
+        <span class="core-text core-text-s">Пустое</span>
+        <input class="core-input core-input-l" placeholder="Название проекта">
+      </label>
+      <label class="core-col core-g-3x">
+        <span class="core-text core-text-s">Заполненное</span>
+        <input class="core-input core-input-l" value="Сайт театра">
+      </label>
+    </div>
+  </div>
 </div>
 ```
 
 <!-- demo:E37 -->
 
-### E38. Нативные select, date и number
+### E38. Select, date и number: размерные ряды
 
-Нативные элементы остаются управляемыми браузером. Код не использует form.js или field.js.
+Типы сравниваются в одной строке для каждого размера. Последняя строка показывает нативный disabled, включая стрелку select.
 
 ```html
-<div class="core-grid core-grid-3c m-core-grid-1c">
-  <div class="core-col core-g-4x"><label for="stage">Этап</label><select id="stage" class="core-select"><option>Исследование</option><option>Дизайн</option></select></div>
-  <div class="core-col core-g-4x"><label for="deadline">Срок</label><input id="deadline" type="date" class="core-date"></div>
-  <div class="core-col core-g-4x"><label for="hours">Часы</label><input id="hours" type="number" min="0" step="0.5" value="12" class="core-num"></div>
+<div class="core-col core-g-8x">
+  <div class="core-col core-g-8x">
+    <h3 class="core-text core-text-bold">XS</h3>
+    <div class="core-grid core-grid-3c m-core-grid-1c core-g-8x">
+      <label class="core-col core-g-3x">
+        <span class="core-text core-text-s">Этап</span>
+        <select class="core-select core-select-xs"><option>Исследование</option><option>Дизайн</option></select>
+      </label>
+      <label class="core-col core-g-3x">
+        <span class="core-text core-text-s">Срок</span>
+        <input type="date" class="core-date core-date-xs" value="2026-10-01">
+      </label>
+      <label class="core-col core-g-3x">
+        <span class="core-text core-text-s">Часы</span>
+        <input type="number" class="core-num core-num-xs" min="0" step="0.5" value="12">
+      </label>
+    </div>
+  </div>
+  <div class="core-col core-g-8x">
+    <h3 class="core-text core-text-bold">S</h3>
+    <div class="core-grid core-grid-3c m-core-grid-1c core-g-8x">
+      <label class="core-col core-g-3x">
+        <span class="core-text core-text-s">Этап</span>
+        <select class="core-select core-select-s"><option>Исследование</option><option>Дизайн</option></select>
+      </label>
+      <label class="core-col core-g-3x">
+        <span class="core-text core-text-s">Срок</span>
+        <input type="date" class="core-date core-date-s" value="2026-10-01">
+      </label>
+      <label class="core-col core-g-3x">
+        <span class="core-text core-text-s">Часы</span>
+        <input type="number" class="core-num core-num-s" min="0" step="0.5" value="12">
+      </label>
+    </div>
+  </div>
+  <div class="core-col core-g-8x">
+    <h3 class="core-text core-text-bold">M</h3>
+    <div class="core-grid core-grid-3c m-core-grid-1c core-g-8x">
+      <label class="core-col core-g-3x">
+        <span class="core-text core-text-s">Этап</span>
+        <select class="core-select"><option>Исследование</option><option>Дизайн</option></select>
+      </label>
+      <label class="core-col core-g-3x">
+        <span class="core-text core-text-s">Срок</span>
+        <input type="date" class="core-date" value="2026-10-01">
+      </label>
+      <label class="core-col core-g-3x">
+        <span class="core-text core-text-s">Часы</span>
+        <input type="number" class="core-num" min="0" step="0.5" value="12">
+      </label>
+    </div>
+  </div>
+  <div class="core-col core-g-8x">
+    <h3 class="core-text core-text-bold">L</h3>
+    <div class="core-grid core-grid-3c m-core-grid-1c core-g-8x">
+      <label class="core-col core-g-3x">
+        <span class="core-text core-text-s">Этап</span>
+        <select class="core-select core-select-l"><option>Исследование</option><option>Дизайн</option></select>
+      </label>
+      <label class="core-col core-g-3x">
+        <span class="core-text core-text-s">Срок</span>
+        <input type="date" class="core-date core-date-l" value="2026-10-01">
+      </label>
+      <label class="core-col core-g-3x">
+        <span class="core-text core-text-s">Часы</span>
+        <input type="number" class="core-num core-num-l" min="0" step="0.5" value="12">
+      </label>
+    </div>
+  </div>
+  <div class="core-col core-g-8x">
+    <h3 class="core-text core-text-bold">Отключённые контролы</h3>
+    <div class="core-grid core-grid-3c m-core-grid-1c core-g-8x">
+      <label class="core-col core-g-3x">
+        <span class="core-text core-text-s">Этап</span>
+        <select class="core-select" disabled><option>Недоступно</option></select>
+      </label>
+      <label class="core-col core-g-3x">
+        <span class="core-text core-text-s">Срок</span>
+        <input type="date" class="core-date" value="2026-10-01" disabled>
+      </label>
+      <label class="core-col core-g-3x">
+        <span class="core-text core-text-s">Часы</span>
+        <input type="number" class="core-num" value="12" disabled>
+      </label>
+    </div>
+  </div>
 </div>
 ```
 
 <!-- demo:E38 -->
 
-### E39. Текстовая область и поле только для чтения
+### E39. Textarea, readonly и disabled
 
-readonly и disabled имеют разную HTML-семантику. Внешний вид readonly не объявлен отдельным Core-состоянием.
+Сравните размеры textarea, затем readonly и disabled. Readonly остаётся доступным для фокуса и выделения текста.
 
 ```html
-<div class="core-col core-g-8x">
-  <div class="core-col core-g-4x"><label for="description">Описание</label><textarea id="description" class="core-textarea" rows="3" placeholder="Контекст и ограничения"></textarea></div>
-  <div class="core-col core-g-4x"><label for="project-code">Код проекта</label><input id="project-code" class="core-input" value="PRJ-024" readonly></div>
+<div class="core-grid core-grid-2c m-core-grid-1c core-g-8x">
+  <label class="core-col core-g-3x">
+    <span class="core-text core-text-s">Textarea · XS</span>
+    <textarea class="core-textarea core-textarea-xs" rows="2" placeholder="Контекст и ограничения"></textarea>
+  </label>
+  <label class="core-col core-g-3x">
+    <span class="core-text core-text-s">Textarea · S</span>
+    <textarea class="core-textarea core-textarea-s" rows="2" placeholder="Контекст и ограничения"></textarea>
+  </label>
+  <label class="core-col core-g-3x">
+    <span class="core-text core-text-s">Textarea · M</span>
+    <textarea class="core-textarea" rows="2" placeholder="Контекст и ограничения"></textarea>
+  </label>
+  <label class="core-col core-g-3x">
+    <span class="core-text core-text-s">Textarea · L</span>
+    <textarea class="core-textarea core-textarea-l" rows="2" placeholder="Контекст и ограничения"></textarea>
+  </label>
+  <label class="core-col core-g-3x">
+    <span class="core-text core-text-s">Readonly input</span>
+    <input class="core-input" value="PRJ-024" readonly>
+  </label>
+  <label class="core-col core-g-3x">
+    <span class="core-text core-text-s">Disabled input</span>
+    <input class="core-input" value="Недоступно" disabled>
+  </label>
+  <label class="core-col core-g-3x">
+    <span class="core-text core-text-s">Readonly textarea</span>
+    <textarea class="core-textarea" rows="2" readonly>Согласованный контекст</textarea>
+  </label>
+  <label class="core-col core-g-3x">
+    <span class="core-text core-text-s">Disabled textarea</span>
+    <textarea class="core-textarea" rows="2" disabled>Редактирование недоступно</textarea>
+  </label>
 </div>
 ```
 
 <!-- demo:E39 -->
 
-### E40. Ошибка с явной семантикой и явным оформлением
+### E40. Ошибка в четырёх размерах поля
 
-Это рецепт, не встроенная validation-тема. Состояния контура заданы вместе; текст ошибки не зависит только от цвета.
+aria-invalid сообщает о состоянии, aria-describedby связывает подсказку. Контур настроен штатными токенами Core; текст ошибки остаётся видимым.
 
 ```html
-<div class="core-col core-g-4x">
-  <label for="email-error">Электронная почта</label>
-  <input id="email-error" type="email" class="core-input" value="team@"
-    aria-invalid="true" aria-describedby="email-message"
-    style="--theme-input-border: 1px solid #b42318;
-           --theme-input-border-hover: 1px solid #b42318;
-           --theme-input-border-focus: 1px solid #b42318">
-  <p id="email-message" class="core-text core-text-s">Введите полный адрес, например team@example.test.</p>
+<div class="core-grid core-grid-2c m-core-grid-1c core-g-8x">
+  <div class="core-col core-g-8x">
+    <label for="email-error-xs" class="core-text core-text-s">Email · XS</label>
+    <input id="email-error-xs" type="email" class="core-input core-input-xs" value="team@" aria-invalid="true" aria-describedby="email-error-xs-help" style="--theme-input-border:1px solid var(--color-danger);--theme-input-border-hover:1px solid var(--color-danger);--theme-input-border-focus:1px solid var(--color-danger)">
+    <p id="email-error-xs-help" class="core-text core-text-s">Укажите полный адрес: team@example.test.</p>
+  </div>
+  <div class="core-col core-g-8x">
+    <label for="email-error-s" class="core-text core-text-s">Email · S</label>
+    <input id="email-error-s" type="email" class="core-input core-input-s" value="team@" aria-invalid="true" aria-describedby="email-error-s-help" style="--theme-input-border:1px solid var(--color-danger);--theme-input-border-hover:1px solid var(--color-danger);--theme-input-border-focus:1px solid var(--color-danger)">
+    <p id="email-error-s-help" class="core-text core-text-s">Укажите полный адрес: team@example.test.</p>
+  </div>
+  <div class="core-col core-g-8x">
+    <label for="email-error-m" class="core-text core-text-s">Email · M</label>
+    <input id="email-error-m" type="email" class="core-input" value="team@" aria-invalid="true" aria-describedby="email-error-m-help" style="--theme-input-border:1px solid var(--color-danger);--theme-input-border-hover:1px solid var(--color-danger);--theme-input-border-focus:1px solid var(--color-danger)">
+    <p id="email-error-m-help" class="core-text core-text-s">Укажите полный адрес: team@example.test.</p>
+  </div>
+  <div class="core-col core-g-8x">
+    <label for="email-error-l" class="core-text core-text-s">Email · L</label>
+    <input id="email-error-l" type="email" class="core-input core-input-l" value="team@" aria-invalid="true" aria-describedby="email-error-l-help" style="--theme-input-border:1px solid var(--color-danger);--theme-input-border-hover:1px solid var(--color-danger);--theme-input-border-focus:1px solid var(--color-danger)">
+    <p id="email-error-l-help" class="core-text core-text-s">Укажите полный адрес: team@example.test.</p>
+  </div>
 </div>
 ```
 
 <!-- demo:E40 -->
 
-### E41. Выбор файла в оформленной обёртке
+### E41. Выбор файла: размеры и disabled
 
-Файл выбирается нативно, но никуда не отправляется. accept — подсказка выбора, не серверная проверка содержимого.
+Нативный file-input расположен внутри core-file. Можно выбрать локальный файл; пример ничего не загружает на сервер.
 
 ```html
-<div class="core-col core-g-4x">
-  <label for="brief-file">Бриф проекта</label>
-  <div class="core-file"><input id="brief-file" type="file" name="brief" accept=".pdf,.docx,.txt"></div>
+<div class="core-col core-g-8x">
+  <label class="core-col core-g-3x">
+    <span class="core-text core-text-s">Бриф · XS</span>
+    <div class="core-file core-file-xs"><input type="file" accept=".pdf,.docx,.txt" aria-label="Бриф · XS"></div>
+  </label>
+  <label class="core-col core-g-3x">
+    <span class="core-text core-text-s">Бриф · S</span>
+    <div class="core-file core-file-s"><input type="file" accept=".pdf,.docx,.txt" aria-label="Бриф · S"></div>
+  </label>
+  <label class="core-col core-g-3x">
+    <span class="core-text core-text-s">Бриф · M</span>
+    <div class="core-file"><input type="file" accept=".pdf,.docx,.txt" aria-label="Бриф · M"></div>
+  </label>
+  <label class="core-col core-g-3x">
+    <span class="core-text core-text-s">Бриф · L</span>
+    <div class="core-file core-file-l"><input type="file" accept=".pdf,.docx,.txt" aria-label="Бриф · L"></div>
+  </label>
+  <label class="core-col core-g-3x">
+    <span class="core-text core-text-s">Недоступный выбор</span>
+    <div class="core-file"><input type="file" disabled aria-label="Недоступный выбор файла"></div>
+  </label>
 </div>
 ```
 

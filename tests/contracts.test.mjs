@@ -13,8 +13,8 @@ test('CDN verification rejects bytes that differ from the manifest',async()=>{
 });
 test('complete canonical manual and unique examples', () => {
  const chapters=json('content/chapters.json'), examples=json('content/reference/examples.json').examples;
- assert.equal(chapters.length,42); assert.equal(examples.length,82);
- assert.equal(new Set(examples.map(e=>e.id)).size,82);
+ assert.equal(chapters.length,42); assert.equal(examples.length,87);
+ assert.equal(new Set(examples.map(e=>e.id)).size,87);
  for (const c of chapters) assert.ok(read(`docs/chapters/${c.id}.md`,'utf8').startsWith('# '));
  for (const e of examples) assert.ok(chapters.some(c=>c.id===e.chapter));
 });

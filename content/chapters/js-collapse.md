@@ -88,6 +88,59 @@ sync();
 
 <!-- demo:E76 -->
 
+### E85. Независимые блоки и аккордеон
+
+Два независимых переключателя и аккордеон с одним открытым пунктом. Код приложения синхронизирует aria-expanded и разрешает закрыть активный пункт повторным нажатием.
+
+```html
+<div id="e85" class="core-col core-g-8x">
+  <h3 class="core-text core-text-l core-text-bold">Независимые блоки</h3>
+  <div class="core-col core-g-4x">
+    <button id="e85-note-toggle" type="button" class="core-button" data-collapse-toggle="e85-note" aria-controls="e85-note" aria-expanded="true">Примечание</button>
+    <section id="e85-note" data-collapse class="core-card core-col" role="region" aria-labelledby="e85-note-toggle">
+      <p class="core-text">Этот блок можно оставить открытым вместе с материалами.</p>
+    </section>
+    <button id="e85-files-toggle" type="button" class="core-button" data-collapse-toggle="e85-files" aria-controls="e85-files" aria-expanded="false">Материалы</button>
+    <section id="e85-files" data-collapse class="core-card core-col core-hide" role="region" aria-labelledby="e85-files-toggle">
+      <p class="core-text">Бриф.pdf · Структура.md · Макеты.fig</p>
+    </section>
+  </div>
+  <h3 class="core-text core-text-l core-text-bold">Аккордеон</h3>
+  <div class="core-col core-g-4x">
+    <h4 class="core-text"><button id="e85-review-toggle" type="button" class="core-button core-w-full" data-accordion-toggle aria-controls="e85-review" aria-expanded="true">Согласование</button></h4>
+    <section id="e85-review" data-collapse data-collapse-group="e85-accordion" class="core-card core-col" role="region" aria-labelledby="e85-review-toggle">
+      <p class="core-text">Сначала согласуем содержание и структуру.</p>
+    </section>
+    <h4 class="core-text"><button id="e85-delivery-toggle" type="button" class="core-button core-w-full" data-accordion-toggle aria-controls="e85-delivery" aria-expanded="false">Передача</button></h4>
+    <section id="e85-delivery" data-collapse data-collapse-group="e85-accordion" class="core-card core-col core-hide" role="region" aria-labelledby="e85-delivery-toggle">
+      <p class="core-text">После согласования передадим исходники и инструкции.</p>
+    </section>
+  </div>
+</div>
+```
+
+```js
+import CollapseManager from 'https://cdn.sdelal.tech/core/latest/collapse.js';
+const collapse = new CollapseManager();
+const root = document.getElementById('e85');
+root.querySelectorAll('[data-accordion-toggle]').forEach(button => {
+  button.addEventListener('click', () => {
+    const id = button.getAttribute('aria-controls');
+    if (collapse.isShow(id)) collapse.hide(id);
+    else collapse.showOnly(id);
+  });
+});
+const sync = () => root.querySelectorAll('button[aria-controls]').forEach(button => {
+  button.setAttribute('aria-expanded', String(collapse.isShow(button.getAttribute('aria-controls'))));
+});
+const observer = new MutationObserver(sync);
+root.querySelectorAll('[data-collapse]').forEach(panel => observer.observe(panel, { attributes: true, attributeFilter: ['class'] }));
+sync();
+// При удалении iframe его document уничтожается вместе со слушателями и observer.
+```
+
+<!-- demo:E85 -->
+
 **Источник:** [collapse.js](https://cdn.sdelal.tech/core/latest/collapse.js), проверенная версия и SHA-256 — в [манифесте](../reference/source-manifest.json); при обновлении байты модуля не изменились.
 
 ## Совместимость с текущим CSS

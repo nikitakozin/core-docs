@@ -36,17 +36,51 @@
 
 Позиционирование использует transform. Вращение, mirror, анимация и sxHeight-компенсация также могут его назначать. Если нужно одновременно позиционировать и анимировать, разделите обязанности на два элемента: внешний отвечает за координаты, внутренний — за анимацию.
 
-### E54. Метка на верхнем краю карточки
+### E54. Карта краёв, углов и центра
 
-Метка — прямой ребёнок карточки. Дополнительное внешнее пространство выделено padding-классом, чтобы край был виден.
+Метки — прямые дети карточки. Два одинаковых стенда сравнивают малый и крупный радиус, а также толщину контура. Внешний padding оставляет место меткам на кромке.
 
 ```html
-<div class="core-p-16x">
-  <article class="core-card core-col core-border core-border-2x core-p-12x">
-    <span class="core-badge core-badge-accent core-abs core-abs-top-edge">Новый</span>
-    <h3 class="core-text core-text-l core-text-bold">Материалы клиента</h3>
-    <p class="core-text">Позиция метки учитывает кромку карточки.</p>
-  </article>
+<div class="core-col core-g-8x">
+  <div class="core-grid core-grid-2c m-core-grid-1c core-g-8x">
+    <div class="core-col core-g-8x">
+      <span class="core-text core-text-s core-text-mono">core-b-r-4x · border-1x</span>
+      <div class="core-p-12x">
+        <div class="core-card core-bg-surface core-border core-border-1x core-b-r-4x core-h-80x">
+          <span class="core-badge core-badge-xs core-badge-accent core-abs core-abs-top-left-corner" aria-label="core-abs-top-left-corner">TL</span>
+          <span class="core-badge core-badge-xs core-badge-accent core-abs core-abs-top-edge" aria-label="core-abs-top-edge">T</span>
+          <span class="core-badge core-badge-xs core-badge-accent core-abs core-abs-top-right-corner" aria-label="core-abs-top-right-corner">TR</span>
+          <span class="core-badge core-badge-xs core-badge-accent core-abs core-abs-right-edge" aria-label="core-abs-right-edge">R</span>
+          <span class="core-badge core-badge-xs core-badge-accent core-abs core-abs-bottom-right-corner" aria-label="core-abs-bottom-right-corner">BR</span>
+          <span class="core-badge core-badge-xs core-badge-accent core-abs core-abs-bottom-edge" aria-label="core-abs-bottom-edge">B</span>
+          <span class="core-badge core-badge-xs core-badge-accent core-abs core-abs-bottom-left-corner" aria-label="core-abs-bottom-left-corner">BL</span>
+          <span class="core-badge core-badge-xs core-badge-accent core-abs core-abs-left-edge" aria-label="core-abs-left-edge">L</span>
+          <span class="core-badge core-badge-xs core-badge-accent core-abs core-abs-center" aria-label="core-abs-center">C</span>
+        </div>
+      </div>
+    </div>
+    <div class="core-col core-g-8x">
+      <span class="core-text core-text-s core-text-mono">core-b-r-16x · border-3x</span>
+      <div class="core-p-12x">
+        <div class="core-card core-bg-surface core-border core-border-3x core-b-r-16x core-h-80x">
+          <span class="core-badge core-badge-xs core-badge-accent core-abs core-abs-top-left-corner" aria-label="core-abs-top-left-corner">TL</span>
+          <span class="core-badge core-badge-xs core-badge-accent core-abs core-abs-top-edge" aria-label="core-abs-top-edge">T</span>
+          <span class="core-badge core-badge-xs core-badge-accent core-abs core-abs-top-right-corner" aria-label="core-abs-top-right-corner">TR</span>
+          <span class="core-badge core-badge-xs core-badge-accent core-abs core-abs-right-edge" aria-label="core-abs-right-edge">R</span>
+          <span class="core-badge core-badge-xs core-badge-accent core-abs core-abs-bottom-right-corner" aria-label="core-abs-bottom-right-corner">BR</span>
+          <span class="core-badge core-badge-xs core-badge-accent core-abs core-abs-bottom-edge" aria-label="core-abs-bottom-edge">B</span>
+          <span class="core-badge core-badge-xs core-badge-accent core-abs core-abs-bottom-left-corner" aria-label="core-abs-bottom-left-corner">BL</span>
+          <span class="core-badge core-badge-xs core-badge-accent core-abs core-abs-left-edge" aria-label="core-abs-left-edge">L</span>
+          <span class="core-badge core-badge-xs core-badge-accent core-abs core-abs-center" aria-label="core-abs-center">C</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="core-col core-g-8x">
+    <span class="core-text core-text-s core-text-mono">T/R/B/L — края карточки</span>
+    <span class="core-text core-text-s core-text-mono">TL/TR/BL/BR — скруглённые углы</span>
+    <span class="core-text core-text-s core-text-mono">C → core-abs-center</span>
+  </div>
 </div>
 ```
 

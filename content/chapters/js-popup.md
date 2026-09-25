@@ -88,4 +88,50 @@ document.getElementById('settings').addEventListener('popup:activate', () => {
 
 <!-- demo:E80 -->
 
+### E87. Боковая панель
+
+Правая панель сохраняет ввод при закрытии. Core управляет открытием, Escape и ловушкой Tab; код приложения задаёт фокус и делает фон inert.
+
+```html
+<section id="e87-background" class="core-card core-col core-g-6x">
+  <h3 class="core-text core-text-l core-text-bold">Параметры проекта</h3>
+  <p class="core-text">Откройте боковую панель, измените название и закройте её.</p>
+  <button id="e87-open" type="button" class="core-button core-button-primary" data-popup-trigger="e87-panel" aria-haspopup="dialog" aria-controls="e87-panel">Открыть панель</button>
+</section>
+<div id="e87-panel" data-popup data-popup-silent class="core-popup-box">
+  <div class="core-popup-overlay" aria-hidden="true"></div>
+  <section class="core-popup core-popup-right core-card core-bg core-col core-g-8x" role="dialog" aria-modal="true" aria-labelledby="e87-title">
+    <h2 id="e87-title" class="core-text core-text-l core-text-bold">Настройки проекта</h2>
+    <label class="core-col core-g-2x" for="e87-name"><span class="core-text">Название</span><input id="e87-name" class="core-input" value="Сайт театра"></label>
+    <p class="core-text core-text-s">Ввод остаётся в поле после закрытия и повторного открытия.</p>
+    <button type="button" class="core-button core-button-primary" data-popup-close="e87-panel">Готово</button>
+  </section>
+</div>
+```
+
+```js
+import PopupManager from 'https://cdn.sdelal.tech/core/latest/popup.js';
+const popups = new PopupManager();
+const panel = document.getElementById('e87-panel');
+const background = document.getElementById('e87-background');
+const opener = document.getElementById('e87-open');
+let wasOpen = false;
+const sync = () => {
+  const opened = panel.classList.contains('opened');
+  background.inert = opened;
+  if (wasOpen && !opened) opener.focus();
+  wasOpen = opened;
+};
+const observer = new MutationObserver(sync);
+observer.observe(panel, { attributes: true, attributeFilter: ['class'] });
+panel.addEventListener('popup:activate', () => {
+  requestAnimationFrame(() => {
+    if (panel.classList.contains('opened')) document.getElementById('e87-name').focus();
+  });
+});
+sync();
+```
+
+<!-- demo:E87 -->
+
 **Источник:** [popup.js](https://cdn.sdelal.tech/core/latest/popup.js), проверенная версия и SHA-256 — в [манифесте](../reference/source-manifest.json); при обновлении байты модуля не изменились.

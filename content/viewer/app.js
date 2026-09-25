@@ -237,8 +237,17 @@ ${styles}</head>
     }));
     card.querySelector('.retry-demo').addEventListener('click',() => loadDemo(card));
   });
+  // ResizeObserver only collects reads. Updating the iframe changes its parent
+  // viewport height, so apply that geometry in the next animation frame.
+  const pendingAreas=new Set();let areaFrame=0;
   const areaObserver=new ResizeObserver(entries => {
-    entries.forEach(entry => layoutDemo(instances.get(entry.target.closest('.example').dataset.example)));
+    entries.forEach(entry=>pendingAreas.add(entry.target));
+    if(areaFrame)return;
+    areaFrame=requestAnimationFrame(()=>{
+      areaFrame=0;
+      pendingAreas.forEach(area=>layoutDemo(instances.get(area.closest('.example').dataset.example)));
+      pendingAreas.clear();
+    });
   });
   document.querySelectorAll('.demo-viewport').forEach(area => areaObserver.observe(area));
   function applyTheme() {

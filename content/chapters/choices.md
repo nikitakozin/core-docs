@@ -28,59 +28,139 @@ CSS скрывает сами input через прозрачность/пози
 
 Группа визуально оформленных radio не становится вкладками: для tabs потребовались бы другие роли, связи с панелями и клавиатурная логика. Не присваивайте роль tablist только потому, что сегменты похожи на вкладки.
 
-### E46. Checkbox с правильным соседством
+### E46. Checkbox: оформление и состояния
 
-Ввод и подпись идут непосредственно друг за другом; label оборачивает оба.
+Пустой, выбранный и два disabled-состояния показаны для обычного и primary-варианта. Каждый checkbox переключается независимо.
 
 ```html
-<label class="core-checkbox core-checkbox-primary">
-  <input type="checkbox" name="notify" value="1" checked>
-  <span class="core-checkbox-label">Уведомлять об изменениях проекта</span>
-</label>
+<div class="core-grid core-grid-2c m-core-grid-1c core-g-8x">
+  <div class="core-col core-g-8x">
+    <h3 class="core-text core-text-bold">Обычный checkbox</h3>
+    <div class="core-col core-g-8x">
+      <label class="core-checkbox"><input type="checkbox" name="notify-0"><span class="core-checkbox-label">Не выбран</span></label>
+      <label class="core-checkbox"><input type="checkbox" name="notify-1" checked><span class="core-checkbox-label">Выбран</span></label>
+      <label class="core-checkbox"><input type="checkbox" name="notify-2" disabled><span class="core-checkbox-label">Недоступен</span></label>
+      <label class="core-checkbox"><input type="checkbox" name="notify-3" checked disabled><span class="core-checkbox-label">Выбран и недоступен</span></label>
+    </div>
+  </div>
+  <div class="core-col core-g-8x">
+    <h3 class="core-text core-text-bold">primary</h3>
+    <div class="core-col core-g-8x">
+      <label class="core-checkbox core-checkbox-primary"><input type="checkbox" name="notify-0-primary"><span class="core-checkbox-label">Не выбран</span></label>
+      <label class="core-checkbox core-checkbox-primary"><input type="checkbox" name="notify-1-primary" checked><span class="core-checkbox-label">Выбран</span></label>
+      <label class="core-checkbox core-checkbox-primary"><input type="checkbox" name="notify-2-primary" disabled><span class="core-checkbox-label">Недоступен</span></label>
+      <label class="core-checkbox core-checkbox-primary"><input type="checkbox" name="notify-3-primary" checked disabled><span class="core-checkbox-label">Выбран и недоступен</span></label>
+    </div>
+  </div>
+</div>
 ```
 
 <!-- demo:E46 -->
 
-### E47. Нативная группа radio
+### E47. Radio: выбор, disabled и клавиатура
 
-Одинаковое имя access даёт взаимоисключающий выбор без Core JS.
+В каждой группе выбирается один вариант. Стрелки переключают доступные radio; disabled пропускается.
 
 ```html
-<fieldset class="core-col core-g-6x">
-  <legend class="core-text core-text-bold">Доступ к документу</legend>
-  <label class="core-radio"><input type="radio" name="access" value="team" checked><span class="core-radio-label">Вся команда</span></label>
-  <label class="core-radio"><input type="radio" name="access" value="selected"><span class="core-radio-label">Выбранные участники</span></label>
-</fieldset>
+<div class="core-grid core-grid-2c m-core-grid-1c core-g-8x">
+  <fieldset class="core-col core-g-6x">
+    <legend class="core-text core-text-bold">Доступ к документу</legend>
+    <label class="core-radio"><input type="radio" name="access-0" value="0" checked><span class="core-radio-label">Вся команда</span></label>
+    <label class="core-radio"><input type="radio" name="access-0" value="1"><span class="core-radio-label">Выбранные участники</span></label>
+    <label class="core-radio"><input type="radio" name="access-0" value="2" disabled><span class="core-radio-label">Закрытый архив</span></label>
+  </fieldset>
+  <fieldset class="core-col core-g-6x">
+    <legend class="core-text core-text-bold">Недоступная группа</legend>
+    <label class="core-radio"><input type="radio" name="access-1" value="0" checked disabled><span class="core-radio-label">Чтение</span></label>
+    <label class="core-radio"><input type="radio" name="access-1" value="1" disabled><span class="core-radio-label">Редактирование</span></label>
+  </fieldset>
+</div>
 ```
 
 <!-- demo:E47 -->
 
-### E48. Сегментированный выбор вида
+### E48. Сегментированный выбор XS/S/M/L
 
-Выбор radio работает; переключение настоящего списка/доски должно реализовать приложение.
+Четыре независимые группы с текстом и иконками. На мобильном остаются иконки; имена вариантов сохранены через aria-label. Третий сегмент отключён.
 
 ```html
-<fieldset class="core-col core-g-4x">
-  <legend class="core-text">Представление материалов</legend>
-  <div class="core-radio-group core-radio-group-m">
-    <label class="core-button-radio"><input type="radio" name="view" value="list" checked><span class="core-radio-label">Список</span></label>
-    <label class="core-button-radio"><input type="radio" name="view" value="cards"><span class="core-radio-label">Карточки</span></label>
-    <label class="core-button-radio"><input type="radio" name="view" value="board"><span class="core-radio-label">Доска</span></label>
-  </div>
-</fieldset>
+<div class="core-col core-g-8x">
+  <fieldset class="core-col core-g-4x">
+    <legend class="core-text core-text-bold">Представление · XS</legend>
+    <div class="core-radio-group core-radio-group-xs">
+      <label class="core-button-radio"><input type="radio" name="view-xs" value="list" aria-label="Список" checked><span class="core-radio-label"><span class="core-icon-layers core-icon-6x" aria-hidden="true"></span> <span class="m-core-hide">Список</span></span></label>
+      <label class="core-button-radio"><input type="radio" name="view-xs" value="cards" aria-label="Карточки"><span class="core-radio-label"><span class="core-icon-54 core-icon-6x" aria-hidden="true"></span> <span class="m-core-hide">Карточки</span></span></label>
+      <label class="core-button-radio"><input type="radio" name="view-xs" value="archive" aria-label="Архив" disabled><span class="core-radio-label"><span class="core-icon-lock-locked core-icon-6x" aria-hidden="true"></span> <span class="m-core-hide">Архив</span></span></label>
+    </div>
+  </fieldset>
+  <fieldset class="core-col core-g-4x">
+    <legend class="core-text core-text-bold">Представление · S</legend>
+    <div class="core-radio-group core-radio-group-s">
+      <label class="core-button-radio"><input type="radio" name="view-s" value="list" aria-label="Список" checked><span class="core-radio-label"><span class="core-icon-layers core-icon-6x" aria-hidden="true"></span> <span class="m-core-hide">Список</span></span></label>
+      <label class="core-button-radio"><input type="radio" name="view-s" value="cards" aria-label="Карточки"><span class="core-radio-label"><span class="core-icon-54 core-icon-6x" aria-hidden="true"></span> <span class="m-core-hide">Карточки</span></span></label>
+      <label class="core-button-radio"><input type="radio" name="view-s" value="archive" aria-label="Архив" disabled><span class="core-radio-label"><span class="core-icon-lock-locked core-icon-6x" aria-hidden="true"></span> <span class="m-core-hide">Архив</span></span></label>
+    </div>
+  </fieldset>
+  <fieldset class="core-col core-g-4x">
+    <legend class="core-text core-text-bold">Представление · M</legend>
+    <div class="core-radio-group core-radio-group-m">
+      <label class="core-button-radio"><input type="radio" name="view-m" value="list" aria-label="Список" checked><span class="core-radio-label"><span class="core-icon-layers core-icon-6x" aria-hidden="true"></span> <span class="m-core-hide">Список</span></span></label>
+      <label class="core-button-radio"><input type="radio" name="view-m" value="cards" aria-label="Карточки"><span class="core-radio-label"><span class="core-icon-54 core-icon-6x" aria-hidden="true"></span> <span class="m-core-hide">Карточки</span></span></label>
+      <label class="core-button-radio"><input type="radio" name="view-m" value="archive" aria-label="Архив" disabled><span class="core-radio-label"><span class="core-icon-lock-locked core-icon-6x" aria-hidden="true"></span> <span class="m-core-hide">Архив</span></span></label>
+    </div>
+  </fieldset>
+  <fieldset class="core-col core-g-4x">
+    <legend class="core-text core-text-bold">Представление · L</legend>
+    <div class="core-radio-group core-radio-group-l">
+      <label class="core-button-radio"><input type="radio" name="view-l" value="list" aria-label="Список" checked><span class="core-radio-label"><span class="core-icon-layers core-icon-6x" aria-hidden="true"></span> <span class="m-core-hide">Список</span></span></label>
+      <label class="core-button-radio"><input type="radio" name="view-l" value="cards" aria-label="Карточки"><span class="core-radio-label"><span class="core-icon-54 core-icon-6x" aria-hidden="true"></span> <span class="m-core-hide">Карточки</span></span></label>
+      <label class="core-button-radio"><input type="radio" name="view-l" value="archive" aria-label="Архив" disabled><span class="core-radio-label"><span class="core-icon-lock-locked core-icon-6x" aria-hidden="true"></span> <span class="m-core-hide">Архив</span></span></label>
+    </div>
+  </fieldset>
+</div>
 ```
 
 <!-- demo:E48 -->
 
-### E49. Независимый фильтр как checkbox-кнопка
+### E49. Checkbox-кнопки: размеры и состояния
 
-Это переключаемое состояние формы, не обычная push-button.
+Каждый фильтр независим. Для каждого размера видны unchecked, checked и disabled; состояние задано нативным input.
 
 ```html
-<label class="core-button-checkbox core-button-checkbox-s">
-  <input type="checkbox" name="mine" value="1">
-  <span class="core-checkbox-label">Только мои материалы</span>
-</label>
+<div class="core-col core-g-8x">
+  <div class="core-col core-g-8x">
+    <h3 class="core-text core-text-bold">XS</h3>
+    <div class="core-row core-y-center core-g-6x">
+      <label class="core-button-checkbox core-button-checkbox-xs"><input type="checkbox" name="filter-xs-0"><span class="core-checkbox-label"><span class="core-icon-avatar core-icon-6x" aria-hidden="true"></span> Мои</span></label>
+      <label class="core-button-checkbox core-button-checkbox-xs"><input type="checkbox" name="filter-xs-1" checked><span class="core-checkbox-label"><span class="core-icon-check core-icon-6x" aria-hidden="true"></span> Готовые</span></label>
+      <label class="core-button-checkbox core-button-checkbox-xs"><input type="checkbox" name="filter-xs-2" disabled><span class="core-checkbox-label"><span class="core-icon-lock-locked core-icon-6x" aria-hidden="true"></span> Закрытые</span></label>
+    </div>
+  </div>
+  <div class="core-col core-g-8x">
+    <h3 class="core-text core-text-bold">S</h3>
+    <div class="core-row core-y-center core-g-6x">
+      <label class="core-button-checkbox core-button-checkbox-s"><input type="checkbox" name="filter-s-0"><span class="core-checkbox-label"><span class="core-icon-avatar core-icon-6x" aria-hidden="true"></span> Мои</span></label>
+      <label class="core-button-checkbox core-button-checkbox-s"><input type="checkbox" name="filter-s-1" checked><span class="core-checkbox-label"><span class="core-icon-check core-icon-6x" aria-hidden="true"></span> Готовые</span></label>
+      <label class="core-button-checkbox core-button-checkbox-s"><input type="checkbox" name="filter-s-2" disabled><span class="core-checkbox-label"><span class="core-icon-lock-locked core-icon-6x" aria-hidden="true"></span> Закрытые</span></label>
+    </div>
+  </div>
+  <div class="core-col core-g-8x">
+    <h3 class="core-text core-text-bold">M</h3>
+    <div class="core-row core-y-center core-g-6x">
+      <label class="core-button-checkbox core-button-checkbox-m"><input type="checkbox" name="filter-m-0"><span class="core-checkbox-label"><span class="core-icon-avatar core-icon-6x" aria-hidden="true"></span> Мои</span></label>
+      <label class="core-button-checkbox core-button-checkbox-m"><input type="checkbox" name="filter-m-1" checked><span class="core-checkbox-label"><span class="core-icon-check core-icon-6x" aria-hidden="true"></span> Готовые</span></label>
+      <label class="core-button-checkbox core-button-checkbox-m"><input type="checkbox" name="filter-m-2" disabled><span class="core-checkbox-label"><span class="core-icon-lock-locked core-icon-6x" aria-hidden="true"></span> Закрытые</span></label>
+    </div>
+  </div>
+  <div class="core-col core-g-8x">
+    <h3 class="core-text core-text-bold">L</h3>
+    <div class="core-row core-y-center core-g-6x">
+      <label class="core-button-checkbox core-button-checkbox-l"><input type="checkbox" name="filter-l-0"><span class="core-checkbox-label"><span class="core-icon-avatar core-icon-6x" aria-hidden="true"></span> Мои</span></label>
+      <label class="core-button-checkbox core-button-checkbox-l"><input type="checkbox" name="filter-l-1" checked><span class="core-checkbox-label"><span class="core-icon-check core-icon-6x" aria-hidden="true"></span> Готовые</span></label>
+      <label class="core-button-checkbox core-button-checkbox-l"><input type="checkbox" name="filter-l-2" disabled><span class="core-checkbox-label"><span class="core-icon-lock-locked core-icon-6x" aria-hidden="true"></span> Закрытые</span></label>
+    </div>
+  </div>
+</div>
 ```
 
 <!-- demo:E49 -->

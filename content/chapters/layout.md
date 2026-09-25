@@ -117,36 +117,71 @@ core-grow и core-shrink расположены на текстовой коло
 
 <!-- demo:E06 -->
 
-### E07. Неравные колонки: содержание и боковая панель
+### E07. Неравные колонки и сравнение пропорций
 
-Ссылки демонстрационные; внутри iframe переход к ним не загружает приложение.
+Первая композиция показывает содержание и боковую панель. Ниже те же блоки с отношениями 1:1, 2:1 и 3:1; на мобильном они становятся одной колонкой.
 
 ```html
-<div class="core-col" style="--grid: 3fr 1fr">
-<div class="core-grid m-core-grid-1c core-g-12x">
-  <article class="core-content core-card">
-    <h2>Обновление проекта</h2>
-    <p>Основной текст занимает три доли доступной ширины.</p>
-  </article>
-  <aside class="core-card core-col">
-    <strong class="core-text core-text-bold">Материалы</strong>
-    <a class="core-link" href="#brief">Бриф проекта</a>
-    <a class="core-link" href="#decisions">Принятые решения</a>
-  </aside>
-</div>
+<div class="core-col core-g-8x">
+  <div class="core-col" style="--grid: 3fr 1fr">
+  <div class="core-grid m-core-grid-1c core-g-12x">
+    <article class="core-content core-card">
+      <h2>Обновление проекта</h2>
+      <p>Основной текст занимает три доли доступной ширины.</p>
+    </article>
+    <aside class="core-card core-col">
+      <strong class="core-text core-text-bold">Материалы</strong>
+      <a class="core-link" href="#brief">Бриф проекта</a>
+      <a class="core-link" href="#decisions">Принятые решения</a>
+    </aside>
+  </div>
+  </div>
+  <div class="core-col core-g-8x">
+    <span class="core-text core-text-s core-text-mono">1fr 1fr</span>
+    <div class="core-col" style="--grid:1fr 1fr"><div class="core-grid m-core-grid-1c core-g-4x">
+      <div class="core-card core-shrink">Содержание</div>
+      <div class="core-card core-shrink">Материалы</div>
+    </div></div>
+  </div>
+  <div class="core-col core-g-8x">
+    <span class="core-text core-text-s core-text-mono">2fr 1fr</span>
+    <div class="core-col" style="--grid:2fr 1fr"><div class="core-grid m-core-grid-1c core-g-4x">
+      <div class="core-card core-shrink">Содержание</div>
+      <div class="core-card core-shrink">Материалы</div>
+    </div></div>
+  </div>
+  <div class="core-col core-g-8x">
+    <span class="core-text core-text-s core-text-mono">3fr 1fr</span>
+    <div class="core-col" style="--grid:3fr 1fr"><div class="core-grid m-core-grid-1c core-g-4x">
+      <div class="core-card core-shrink">Содержание</div>
+      <div class="core-card core-shrink">Материалы</div>
+    </div></div>
+  </div>
 </div>
 ```
 
 <!-- demo:E07 -->
 
-### E08. Оси остаются физическими при смене потока
+### E08. Физические оси в строке и колонке
 
-Адаптивное основание сбрасывает рабочие настройки осей; нужные мобильные значения повторены явно. Высота 160 px задана только для демонстрации.
+Смена потока не меняет смысл физических осей x/y. Одинаковые элементы выровнены по центру в обоих направлениях.
 
 ```html
-<div class="core-card core-row m-core-col core-x-center core-y-center m-core-x-center m-core-y-center core-h-80x">
-  <span class="core-badge">Первый</span>
-  <span class="core-badge core-badge-primary">Второй</span>
+<div class="core-grid core-grid-2c m-core-grid-1c core-g-8x">
+  <div class="core-col core-g-8x">
+    <span class="core-text core-text-s core-text-mono">core-row</span>
+    <div class="core-card core-row core-x-center core-y-center core-h-80x">
+      <span class="core-badge">Первый</span>
+      <span class="core-badge">Второй</span>
+    </div>
+  </div>
+  <div class="core-col core-g-8x">
+    <span class="core-text core-text-s core-text-mono">core-col</span>
+    <div class="core-card core-col core-x-center core-y-center core-h-80x">
+      <span class="core-badge">Первый</span>
+      <span class="core-badge">Второй</span>
+    </div>
+  </div>
 </div>
 ```
 
