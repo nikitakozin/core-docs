@@ -1,4 +1,5 @@
 import {readFileSync as read, writeFileSync as write, rmSync, mkdirSync, cpSync} from 'node:fs';
+import {execFileSync} from 'node:child_process';
 import {Marked, Renderer} from 'marked';
 import {highlightCode} from './highlight.mjs';
 import {buildReferences} from './references.mjs';
@@ -9,6 +10,7 @@ mkdirSync('docs',{recursive:true});
 for(const name of ['README.md','AGENTS.md','chapters.json','chapters','reference'])
  cpSync(`content/${name}`,`docs/${name}`,{recursive:true});
 await buildReferences();
+execFileSync('python3',['tools/package-agent.py'],{stdio:'inherit',timeout:30000});
 
 const json=path=>JSON.parse(read(path,'utf8'));
 const esc=value=>String(value).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;');
@@ -63,6 +65,7 @@ for(const [index,c] of chapters.entries()) {
  };
  renderer.link=function({href,title,tokens}) {
   let target=href;const file=href?.split('/').pop()?.split('#')[0],found=chapters.find(x=>`${x.id}.md`===file);
+  if(href==='https://nikitakozin.github.io/core-docs/core-agent.zip')return `<a class="core-button core-button-primary" href="core-agent.zip" download="core-agent-v${version}-${updatedDate}.zip">${this.parser.parseInline(tokens)}</a>`;
   if(found)target='#'+found.id;else if(href==='../README.md')target='#overview';else if(href?.startsWith('../'))target=href.slice(3);
   return `<a class="core-link" href="${esc(target)}"${title?` title="${esc(title)}"`:''}>${this.parser.parseInline(tokens)}</a>`;
  };
@@ -110,7 +113,7 @@ for(const [index,c] of chapters.entries()) {
  const item=`<div class="nav-item core-col core-g-0x" data-chapter="${c.id}"><a class="nav-link core-button core-h-unset core-text-left core-row core-nowrap core-y-center core-g-3x core-text core-text-s core-p-5x core-b-r-3x core-w-full" style="${navStyle}" data-chapter="${c.id}" href="#${c.id}"><span class="core-grow core-shrink">${esc(c.navTitle)}</span><span class="nav-chevron core-icon-chevron-right core-icon-6x" aria-hidden="true"></span></a><div class="nav-submenu core-col core-g-0x core-p-l-8x core-p-b-6x core-hide">${headings.map(h=>`<a class="nav-sublink core-button core-row core-h-unset core-w-full core-text-left core-text core-text-xs core-color core-p-4x" style="${navStyle}" data-target="${h.id}" href="#${h.id}"><span class="nav-label core-col core-w-full core-shrink core-border core-border-l core-border-transparent core-p-l-4x core-muted-2x">${esc(h.title)}</span></a>`).join('')}</div></div>`;
  if(!groups.has(c.group))groups.set(c.group,[]);groups.get(c.group).push(item);
 }
-const navigation=[...groups].map(([name,items])=>`<section class="nav-group core-m-b-10x"><h2 class="core-text core-text-xs core-text-upper core-text-bold core-color core-muted-4x core-p-5x core-m-b-2x">${esc(name)}</h2>${items.join('\n')}</section>`).join('\n');
+const navigation=[...groups].map(([name,items])=>`<section class="nav-group core-m-b-10x"><h2 class="core-text core-text-xs core-text-upper core-text-bold core-color core-muted-4x core-p-4x core-m-b-2x">${esc(name)}</h2>${items.join('\n')}</section>`).join('\n');
 const data=JSON.stringify({version,chapters,examples,searchSections}).replaceAll('<','\\u003c');
 const themeRuntime=read('content/viewer/themes.js','utf8');
 const app=read('content/viewer/app.js','utf8').replaceAll('</script','<\\/script');
@@ -126,16 +129,16 @@ const html=`<!doctype html>
 <div id="sidebar-slot" class="core-z-0 core-w-140x core-noshrink t-core-hide">
 <aside id="sidebar" class="core-bg core-color core-col core-g-0x core-w-140x core-h-100dvh core-fix core-fix-top-left">
 <div class="${headerSize} core-row core-nowrap core-y-center core-g-6x core-p-8x core-p-l-10x core-p-r-10x core-border core-border-b"><a class="core-row core-nowrap core-y-center core-g-5x core-grow core-color core-text core-text-xl core-text-bold" href="#overview"><img class="core-w-16x core-h-16x core-noshrink core-bg-black" src="https://sdelal.tech/favicon.ico" width="32" height="32" alt="">Core</a><button id="menu-close" type="button" class="${button} core-hide t-core-show" aria-label="Закрыть меню"><span class="core-icon-close core-icon-7x" aria-hidden="true"></span></button></div>
-<nav id="chapter-nav" aria-label="Разделы руководства" class="core-grow core-shrink core-h-0x core-h-scroll core-p-6x core-p-t-10x">${navigation}</nav>
-<footer class="core-col core-g-3x core-p-10x core-border core-border-t"><a class="${button} core-text-xs core-w-full core-g-3x core-m-b-5x" href="AGENTS.md">Документация для агента <span class="core-icon-arrow-right core-icon-6x" aria-hidden="true"></span></a><span class="core-text core-text-xs core-muted-4x">Core v${version}</span><span class="core-text core-text-xs core-muted-4x">Документация от <time datetime="${updatedDate}">${updatedLabel}</time></span></footer>
+<nav id="chapter-nav" aria-label="Разделы руководства" class="core-grow core-shrink core-h-0x core-h-scroll core-p-6x core-p-t-12x">${navigation}</nav>
+<footer class="core-col core-g-3x core-p-10x core-border core-border-t"><a class="${button} core-text-xs core-w-full core-g-3x core-m-b-5x" href="#agent-workflow">Документация для агента <span class="core-icon-arrow-right core-icon-6x" aria-hidden="true"></span></a><span class="core-text core-text-xs core-muted-4x">Core v${version}</span><span class="core-text core-text-xs core-muted-4x">Документация от <time datetime="${updatedDate}">${updatedLabel}</time></span></footer>
 </aside></div>
 <div id="workspace" class="core-z-0 core-grow core-shrink">
-<header class="topbar ${headerSize} core-sticky core-row core-nowrap core-y-center core-g-6x m-core-g-3x core-p-8x core-p-l-20x core-p-r-20x m-core-p-6x m-core-p-l-8x m-core-p-r-8x core-bg core-border core-border-b">
+<header class="topbar ${headerSize} core-sticky core-row core-nowrap core-y-center core-g-6x m-core-g-3x core-p-8x core-p-l-10x core-p-r-20x m-core-p-6x m-core-p-l-8x m-core-p-r-8x core-bg core-border core-border-b">
 <button id="menu-button" type="button" class="${button} core-hide t-core-show" aria-controls="mobile-menu" aria-expanded="false" aria-label="Открыть разделы">Разделы</button>
 <div class="core-input-box core-input-box-s core-w-160x core-shrink m-core-grow" role="search"><span class="core-icon-search core-icon-7x" aria-hidden="true"></span><input id="search" type="search" class="core-input core-shrink" placeholder="Поиск…" aria-label="Поиск по руководству" autocomplete="off"><span class="core-row core-nowrap core-y-center core-noshrink core-p-r-5x m-core-hide"><kbd class="core-kbd core-text-xs core-muted-4x">⌘ K</kbd></span></div>
 <div class="core-row core-nowrap core-x-end core-y-center core-g-4x m-core-g-3x core-grow"><select id="theme-select" class="core-select core-select-s core-w-48x" aria-label="Тема оформления"><option value="core">Core</option><option value="nk" selected>NK</option><option value="ss">SS</option><option value="nkui" disabled>NKUI · скоро</option></select><button id="theme-toggle" type="button" class="${button}" aria-pressed="false"><span class="core-text" aria-hidden="true">◐</span><span class="theme-label m-core-hide">Тёмная тема</span></button></div>
 </header>
-<main id="main-content" tabindex="-1" class="core-section core-text m-core-text-s core-g-0x core-m-w-l core-p-20x m-core-p-8x m-core-p-t-14x" style="--f-s-s:0.875rem;--l-h-m:1.45em">
+<main id="main-content" tabindex="-1" class="core-section core-text m-core-text-s core-g-0x core-m-w-l core-p-20x core-p-l-10x core-p-t-16x m-core-p-8x m-core-p-t-14x" style="--f-s-s:0.875rem;--l-h-m:1.45em">
 <p id="shell-status" class="core-text core-text-s core-p-6x" role="status">Загрузка оформления с CDN…</p>
 <section id="search-results" class="core-hide" aria-label="Результаты поиска"></section>${pages.join('\n')}
 </main></div></div>

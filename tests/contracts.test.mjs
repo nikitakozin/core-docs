@@ -5,7 +5,7 @@ import {createHash} from 'node:crypto';
 import {fetchBytes, fetchVerified} from '../tools/cdn.mjs';
 const json = path => JSON.parse(read(path,'utf8'));
 test('Pages artifact contains only public documentation',()=>{
- assert.deepEqual(readdirSync('docs').sort(),['AGENTS.md','README.md','chapters','chapters.json','index.html','reference']);
+ assert.deepEqual(readdirSync('docs').sort(),['AGENTS.md','README.md','chapters','chapters.json','core-agent.zip','index.html','reference']);
  assert.equal(readdirSync('docs/chapters').filter(name=>name.endsWith('.md')).length,42);
 });
 test('CDN verification rejects bytes that differ from the manifest',async()=>{
