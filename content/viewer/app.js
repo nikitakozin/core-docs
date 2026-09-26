@@ -229,12 +229,18 @@ ${styles}</head>
       if (anchorLock && instance.card.closest('.chapter').id===activeId) requestAnimationFrame(positionAnchor);
     }
   });
+  const hoverPointer=matchMedia('(hover: hover)');
   document.querySelectorAll('.example').forEach(card => {
-    card.querySelectorAll('.demo-width').forEach(button=>button.addEventListener('click',()=>{
+    const selectWidth=button=>{
+      if(card.dataset.width===button.dataset.width)return;
       releaseAnchor();card.dataset.width=button.dataset.width;
       card.querySelectorAll('.demo-width').forEach(item=>{const active=item===button;item.classList.toggle('core-button-primary',active);item.classList.toggle('core-button-transparent',!active);item.setAttribute('aria-pressed',String(active));});
       layoutDemo(instances.get(card.dataset.example));
-    }));
+    };
+    card.querySelectorAll('.demo-width').forEach(button=>{
+      button.addEventListener('pointerenter',event=>{if(event.pointerType==='mouse'&&hoverPointer.matches)selectWidth(button);});
+      button.addEventListener('click',()=>selectWidth(button));
+    });
     card.querySelector('.retry-demo').addEventListener('click',() => loadDemo(card));
   });
   // ResizeObserver only collects reads. Updating the iframe changes its parent
