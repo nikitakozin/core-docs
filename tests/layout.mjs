@@ -1,4 +1,5 @@
 import {checkViewer} from './viewer.mjs';
+import {checkChrome} from './chrome.mjs';
 import {chromium} from 'playwright';
 import {readFileSync as read, writeFileSync as write, mkdirSync} from 'node:fs';
 import {resolve} from 'node:path';
@@ -86,6 +87,7 @@ try {
  await page.locator('#search').fill('core-icon');
  await page.locator('#skip-link').focus();await page.keyboard.press('Enter');
  check('skip link reaches visible search content',await page.locator('#main-content').evaluate(e=>e===document.activeElement)&&await page.locator('#search-results').isVisible());
+ await checkChrome(page,check);
  await checkViewer(page,check);
  mkdirSync('test-results',{recursive:true});
  write('test-results/layout.json',JSON.stringify({passed:checks.length-failures.length,total:checks.length,failures,checks},null,2)+'\n');
